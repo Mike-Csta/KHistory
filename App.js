@@ -118,12 +118,19 @@ export default function App() {
       </Animated.View>
       <View style={styles.barcodebox}>
         <View style={styles.border}></View>
-        <View style={styles.border1}></View>
-        <View style={styles.border2}></View>
-        <View style={styles.border3}></View>
+        <View style={styles.border1}>
+          <View style={styles.border1s}></View>
+        </View>
+        <View style={styles.border2}>
+          <View style={styles.border2s}></View>
+        </View>
+        <View style={styles.border3}>
+          <View style={styles.border3s}></View>
+        </View>
+
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
+          style={{ aspectRatio: 0.5, width: "100%" }}
         />
       </View>
       <Text style={styles.maintext2}>Zeskanuj Kod</Text>
@@ -156,61 +163,97 @@ const styles = StyleSheet.create({
   },
   barcodebox: {
     position: "absolute",
-    top: 270,
+    top: "25%",
     alignItems: "center",
     justifyContent: "center",
-    height: 220,
-    width: 220,
+    aspectRatio: 1,
+    width: "50%",
     transform: [{ scale: 1.8 }],
-
-    overflow: "hidden",
     borderRadius: 30,
+    overflow: "hidden",
+    borderRadius: 40,
   },
   border: {
     position: "absolute",
-    width: 175,
-    height: 175,
+    width: "87%",
+    aspectRatio: 1,
     zIndex: 10,
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 30,
+    borderRadius: 35,
     opacity: 0.2,
   },
   border1: {
     position: "absolute",
-    left: 35,
-    top: 35,
-    width: 55,
-    height: 55,
+    left: "14%",
+    top: "14%",
+    width: "26%",
+    aspectRatio: 1,
     zIndex: 10,
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 21,
+    borderRadius: 15,
     opacity: 0.07,
   },
   border2: {
     position: "absolute",
-    right: 35,
-    top: 35,
-    width: 55,
-    height: 55,
+    right: "14%",
+    top: "14%",
+    width: "26%",
+    aspectRatio: 1,
     zIndex: 10,
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 21,
+    borderRadius: 15,
     opacity: 0.07,
   },
   border3: {
     position: "absolute",
-    left: 35,
-    bottom: 35,
-    width: 55,
-    height: 55,
+    left: "14%",
+    bottom: "14%",
+    width: "26%",
+    aspectRatio: 1,
     zIndex: 10,
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 21,
+    borderRadius: 15,
     opacity: 0.07,
+  },
+  border1s: {
+    position: "absolute",
+    left: "16%",
+    top: "16%",
+    width: "66%",
+    aspectRatio: 1,
+    zIndex: 10,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 11,
+    opacity: 0.4,
+  },
+  border2s: {
+    position: "absolute",
+    right: "17%",
+    top: "16%",
+    width: "66%",
+    aspectRatio: 1,
+    zIndex: 10,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 11,
+    opacity: 0.4,
+  },
+  border3s: {
+    position: "absolute",
+    left: "16%",
+    bottom: "17%",
+    width: "66%",
+    aspectRatio: 1,
+    zIndex: 10,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 11,
+    opacity: 0.4,
   },
   image: {
     top: 0,
