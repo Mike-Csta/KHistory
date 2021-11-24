@@ -95,6 +95,11 @@ export default function App() {
   // Return the View
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.image2}
+        source={require("./kaliszTemplateLogo.png")}
+      />
+      <Image style={styles.image3} source={require("./kaliszMapa2.png")} />
       <Animated.View style={contentStyle()}>
         <TouchableHighlight
           style={{ height: "40%", zIndex: 100 }}
@@ -133,7 +138,6 @@ export default function App() {
           style={{ aspectRatio: 0.5, width: "100%" }}
         />
       </View>
-      <Text style={styles.maintext2}>Zeskanuj Kod</Text>
     </View>
   );
 }
@@ -141,7 +145,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#121212",
+    backgroundColor: "#15161a",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -260,6 +264,18 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     zIndex: 100,
+  },
+  image2: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    opacity: 0.13,
+  },
+  image3: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    bottom: "0%",
   },
   naglowek: {
     top: 25,
