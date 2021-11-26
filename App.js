@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import {
   Text,
   View,
@@ -95,6 +96,16 @@ export default function App() {
   // Return the View
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Image style={styles.image4} source={require("./hlogo.png")} />
+        <Text style={styles.header_text}>POZNAJ HISTORIE KALISZA</Text>
+      </View>
+      <Image style={styles.image5} source={require("./qlogo.png")} />
+      <Text style={styles.zeskanuj_text}>
+        <Text style={styles.zeskanuj_text_color}>Z</Text>ESKANUJ{" "}
+        <Text style={styles.zeskanuj_text_color}>K</Text>OD
+      </Text>
+
       <Image
         style={styles.image2}
         source={require("./kaliszTemplateLogo.png")}
@@ -157,6 +168,16 @@ const styles = StyleSheet.create({
     color: "white",
     opacity: 0.1,
   },
+  zeskanuj_text: {
+    position: "absolute",
+    bottom: "27%",
+    fontSize: 37,
+    color: "#454545",
+    letterSpacing: 5,
+  },
+  zeskanuj_text_color: {
+    color: "#912D2A",
+  },
   maintext2: {
     position: "absolute",
     bottom: 0,
@@ -165,9 +186,42 @@ const styles = StyleSheet.create({
     color: "white",
     opacity: 0.3,
   },
+  header: {
+    position: "absolute",
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+    flexDirection: "row",
+    height: "100%",
+    width: "100%",
+    top: "8.2%",
+  },
+  header_text: {
+    // position: "absolute",
+    top: "4.35%",
+    color: "white",
+    fontSize: 15,
+    letterSpacing: 5,
+    marginRight: "2.4%",
+  },
+  image4: {
+    // position: "absolute",
+    width: "13%",
+    aspectRatio: 1,
+    top: "0%",
+    marginRight: "5%",
+  },
+  image5: {
+    position: "absolute",
+    width: "5%",
+    height: "2.4%",
+    // aspectRatio: 1,
+    bottom: "22%",
+    opacity: 0.123,
+  },
   barcodebox: {
     position: "absolute",
-    top: "25%",
+    top: "27%",
     alignItems: "center",
     justifyContent: "center",
     aspectRatio: 1,
@@ -277,6 +331,7 @@ const styles = StyleSheet.create({
     height: "100%",
     bottom: "0%",
   },
+
   naglowek: {
     top: 25,
     color: "white",
