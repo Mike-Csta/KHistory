@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import {
   Text,
   View,
@@ -95,6 +96,21 @@ export default function App() {
   // Return the View
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Image style={styles.image4} source={require("./hlogo.png")} />
+        <Text style={styles.header_text}>POZNAJ HISTORIE KALISZA</Text>
+      </View>
+      <Image style={styles.image5} source={require("./qlogo.png")} />
+      <Text style={styles.zeskanuj_text}>
+        <Text style={styles.zeskanuj_text_color}>Z</Text>ESKANUJ{" "}
+        <Text style={styles.zeskanuj_text_color}>K</Text>OD
+      </Text>
+
+      <Image
+        style={styles.image2}
+        source={require("./kaliszTemplateLogo.png")}
+      />
+      <Image style={styles.image3} source={require("./kaliszMapa2.png")} />
       <Animated.View style={contentStyle()}>
         <TouchableHighlight
           style={{ height: "40%", zIndex: 100 }}
@@ -118,15 +134,21 @@ export default function App() {
       </Animated.View>
       <View style={styles.barcodebox}>
         <View style={styles.border}></View>
-        <View style={styles.border1}></View>
-        <View style={styles.border2}></View>
-        <View style={styles.border3}></View>
+        <View style={styles.border1}>
+          <View style={styles.border1s}></View>
+        </View>
+        <View style={styles.border2}>
+          <View style={styles.border2s}></View>
+        </View>
+        <View style={styles.border3}>
+          <View style={styles.border3s}></View>
+        </View>
+
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
+          style={{ aspectRatio: 0.5, width: "100%" }}
         />
       </View>
-      <Text style={styles.maintext2}>Zeskanuj Kod</Text>
     </View>
   );
 }
@@ -134,7 +156,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#121212",
+    backgroundColor: "#15161a",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -146,6 +168,16 @@ const styles = StyleSheet.create({
     color: "white",
     opacity: 0.1,
   },
+  zeskanuj_text: {
+    position: "absolute",
+    bottom: "27%",
+    fontSize: 37,
+    color: "#454545",
+    letterSpacing: 5,
+  },
+  zeskanuj_text_color: {
+    color: "#912D2A",
+  },
   maintext2: {
     position: "absolute",
     bottom: 0,
@@ -154,63 +186,132 @@ const styles = StyleSheet.create({
     color: "white",
     opacity: 0.3,
   },
+  header: {
+    position: "absolute",
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+    flexDirection: "row",
+    height: "100%",
+    width: "100%",
+    top: "8.2%",
+  },
+  header_text: {
+    // position: "absolute",
+    top: "4.35%",
+    color: "white",
+    fontSize: 15,
+    letterSpacing: 5,
+    marginRight: "2.4%",
+  },
+  image4: {
+    // position: "absolute",
+    width: "13%",
+    aspectRatio: 1,
+    top: "0%",
+    marginRight: "5%",
+  },
+  image5: {
+    position: "absolute",
+    width: "5%",
+    height: "2.4%",
+    // aspectRatio: 1,
+    bottom: "22%",
+    opacity: 0.123,
+  },
   barcodebox: {
     position: "absolute",
-    top: 270,
+    top: "27%",
     alignItems: "center",
     justifyContent: "center",
-    height: 220,
-    width: 220,
+    aspectRatio: 1,
+    width: "50%",
     transform: [{ scale: 1.8 }],
-
-    overflow: "hidden",
     borderRadius: 30,
+    overflow: "hidden",
+    borderRadius: 40,
   },
   border: {
     position: "absolute",
-    width: 175,
-    height: 175,
+    width: "87%",
+    aspectRatio: 1,
     zIndex: 10,
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 30,
+    borderRadius: 35,
     opacity: 0.2,
   },
   border1: {
     position: "absolute",
-    left: 35,
-    top: 35,
-    width: 55,
-    height: 55,
+    left: "14%",
+    top: "14%",
+    width: "26%",
+    aspectRatio: 1,
     zIndex: 10,
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 21,
+    borderRadius: 15,
     opacity: 0.07,
   },
   border2: {
     position: "absolute",
-    right: 35,
-    top: 35,
-    width: 55,
-    height: 55,
+    right: "14%",
+    top: "14%",
+    width: "26%",
+    aspectRatio: 1,
     zIndex: 10,
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 21,
+    borderRadius: 15,
     opacity: 0.07,
   },
   border3: {
     position: "absolute",
-    left: 35,
-    bottom: 35,
-    width: 55,
-    height: 55,
+    left: "14%",
+    bottom: "14%",
+    width: "26%",
+    aspectRatio: 1,
     zIndex: 10,
     borderColor: "white",
     borderWidth: 1,
-    borderRadius: 21,
+    borderRadius: 15,
     opacity: 0.07,
+  },
+  border1s: {
+    position: "absolute",
+    left: "16%",
+    top: "16%",
+    width: "66%",
+    aspectRatio: 1,
+    zIndex: 10,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 11,
+    opacity: 0.4,
+  },
+  border2s: {
+    position: "absolute",
+    right: "17%",
+    top: "16%",
+    width: "66%",
+    aspectRatio: 1,
+    zIndex: 10,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 11,
+    opacity: 0.4,
+  },
+  border3s: {
+    position: "absolute",
+    left: "16%",
+    bottom: "17%",
+    width: "66%",
+    aspectRatio: 1,
+    zIndex: 10,
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 11,
+    opacity: 0.4,
   },
   image: {
     top: 0,
@@ -218,6 +319,19 @@ const styles = StyleSheet.create({
     height: "100%",
     zIndex: 100,
   },
+  image2: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    opacity: 0.13,
+  },
+  image3: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    bottom: "0%",
+  },
+
   naglowek: {
     top: 25,
     color: "white",
