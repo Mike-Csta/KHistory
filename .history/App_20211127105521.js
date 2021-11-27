@@ -1,53 +1,61 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef } from "react";
 
-import { Text, View, StyleSheet, Button, Animated, Image, TouchableHighlight } from "react-native"
-import { BarCodeScanner } from "expo-barcode-scanner"
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Animated,
+  Image,
+  TouchableHighlight,
+} from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 export default function App() {
-  const [hasPermission, setHasPermission] = useState(null)
-  const [scanned, setScanned] = useState(false)
-  const [text, setText] = useState("Not yet scanned")
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  const [text, setText] = useState("Not yet scanned");
 
   const askForCameraPermission = () => {
-    ;(async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync()
-      setHasPermission(status === "granted")
-    })()
-  }
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === "granted");
+    })();
+  };
 
   // Request Camera Permission
   useEffect(() => {
-    askForCameraPermission()
-  }, [])
+    askForCameraPermission();
+  }, []);
 
-  const wysuwanie = useRef(new Animated.Value(-800)).current
+  const wysuwanie = useRef(new Animated.Value(-800)).current;
 
   const fadeIn = () => {
     Animated.timing(wysuwanie, {
       toValue: 0,
       duration: 300,
       useNativeDriver: false,
-    }).start()
-  }
+    }).start();
+  };
 
   const fadeOut = () => {
     Animated.timing(wysuwanie, {
       toValue: -800,
       duration: 300,
       useNativeDriver: false,
-    }).start()
-  }
+    }).start();
+  };
 
   // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true)
-    setText(data)
-    fadeIn()
+    setScanned(true);
+    setText(data);
+    fadeIn();
 
     setTimeout(() => {
-      setScanned(false)
-    }, 500)
-  }
+      setScanned(false);
+    }, 500);
+  };
 
   const contentStyle = function () {
     return {
@@ -60,10 +68,10 @@ export default function App() {
       transition: "all 1s",
       bottom: wysuwanie,
       overflow: "hidden",
-    }
-  }
+    };
+  };
 
-  setTimeout(() => {}, 1000)
+  setTimeout(() => {}, 1000);
 
   // Check permissions and return the screens
   if (hasPermission === null) {
@@ -71,15 +79,18 @@ export default function App() {
       <View style={styles.container}>
         <Text>Requesting for camera permission</Text>
       </View>
-    )
+    );
   }
   if (hasPermission === false) {
     return (
       <View style={styles.container}>
         <Text style={{ margin: 10 }}>No access to camera</Text>
-        <Button title={"Allow Camera"} onPress={() => askForCameraPermission()} />
+        <Button
+          title={"Allow Camera"}
+          onPress={() => askForCameraPermission()}
+        />
       </View>
-    )
+    );
   }
 
   // Return the View
@@ -91,20 +102,33 @@ export default function App() {
       </View>
       <Image style={styles.image5} source={require("./qlogo.png")} />
       <Text style={styles.zeskanuj_text}>
-        <Text style={styles.zeskanuj_text_color}>Z</Text>ESKANUJ <Text style={styles.zeskanuj_text_color}>K</Text>OD
+        <Text style={styles.zeskanuj_text_color}>Z</Text>ESKANUJ{" "}
+        <Text style={styles.zeskanuj_text_color}>K</Text>OD
       </Text>
 
-      <Image style={styles.image2} source={require("./kaliszTemplateLogo.png")} />
+      <Image
+        style={styles.image2}
+        source={require("./kaliszTemplateLogo.png")}
+      />
       <Image style={styles.image3} source={require("./kaliszMapa2.png")} />
       <Animated.View style={contentStyle()}>
-        <TouchableHighlight style={{ height: "40%", zIndex: 100 }} onPress={fadeOut}>
+        <TouchableHighlight
+          style={{ height: "40%", zIndex: 100 }}
+          onPress={fadeOut}
+        >
           <Image style={styles.image} source={require("./dom.jpg")} />
         </TouchableHighlight>
         <Text style={styles.naglowek}> Wieżowiec Burdż Chalifa </Text>
         <Text style={styles.tresc}>
-          Wieżowiec Burdż Chalifa zaprojektowany został przez przedsiębiorstwo architektoniczne Skidmore, Owings and Merrill, które projektowało także budynki Willis Tower oraz 1 World Trade Center. Ogólny jego wygląd nawiązuje do kwiatu pustyni z
-          rodzaju Hymenocallis[8] oraz architektury islamu (różne ornamenty). Budowla składa się z centralnego rdzenia oraz trzech „ramion”, które w miarę zwiększania się wysokości są coraz mniejsze, co nadaje jej smukłość. Na samym szczycie
-          centralny rdzeń przechodzi w iglicę. Najniższe piętra przeznaczono na hotel, którego wystrojem zajął się Giorgio Armani.
+          Wieżowiec Burdż Chalifa zaprojektowany został przez przedsiębiorstwo
+          architektoniczne Skidmore, Owings and Merrill, które projektowało
+          także budynki Willis Tower oraz 1 World Trade Center. Ogólny jego
+          wygląd nawiązuje do kwiatu pustyni z rodzaju Hymenocallis[8] oraz
+          architektury islamu (różne ornamenty). Budowla składa się z
+          centralnego rdzenia oraz trzech „ramion”, które w miarę zwiększania
+          się wysokości są coraz mniejsze, co nadaje jej smukłość. Na samym
+          szczycie centralny rdzeń przechodzi w iglicę. Najniższe piętra
+          przeznaczono na hotel, którego wystrojem zajął się Giorgio Armani.
         </Text>
         <Text style={styles.maintext}>{text} </Text>
       </Animated.View>
@@ -120,10 +144,13 @@ export default function App() {
           <View style={styles.border3s}></View>
         </View>
 
-        <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={{ aspectRatio: 0.5, width: "100%" }} />
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={{ aspectRatio: 0.5, width: "100%" }}
+        />
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -326,4 +353,4 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
   },
-})
+});
