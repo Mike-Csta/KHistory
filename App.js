@@ -1,7 +1,12 @@
+
 import React, { useState, useEffect, useRef } from "react"
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize"
 import { Text, View, StyleSheet, Button, Animated, Image, TouchableHighlight } from "react-native"
 import { BarCodeScanner } from "expo-barcode-scanner"
+
+
+
+
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null)
@@ -78,6 +83,7 @@ export default function App() {
       </View>
       <Image style={styles.image5} source={require("./qlogo.png")} />
       <Text style={styles.zeskanuj_text}>
+
         <Text style={styles.zeskanuj_text_color}>Z</Text>ESKANUJ <Text style={styles.zeskanuj_text_color}>K</Text>OD
       </Text>
 
@@ -102,8 +108,8 @@ export default function App() {
         <View style={styles.border3}>
           <View style={styles.border3s}></View>
         </View>
-
         <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={{ aspectRatio: 0.5, width: "100%" }} />
+
       </View>
     </View>
   )
@@ -127,7 +133,9 @@ const styles = StyleSheet.create({
   zeskanuj_text: {
     position: "absolute",
     bottom: "27%",
+
     fontSize: RFValue(37, 1000),
+
     color: "#454545",
     letterSpacing: 5,
   },
@@ -156,7 +164,9 @@ const styles = StyleSheet.create({
     // position: "absolute",
     top: "4.35%",
     color: "white",
+
     fontSize: RFValue(15, 1000),
+
     letterSpacing: 5,
     marginRight: "2.4%",
   },
