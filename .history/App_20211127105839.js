@@ -1,18 +1,12 @@
-
 import React, { useState, useEffect, useRef } from "react"
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize"
+
 import { Text, View, StyleSheet, Button, Animated, Image, TouchableHighlight } from "react-native"
 import { BarCodeScanner } from "expo-barcode-scanner"
-
-
-
-
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null)
   const [scanned, setScanned] = useState(false)
   const [text, setText] = useState("Not yet scanned")
-  const [type, setType] = useState("No Type")
 
   const askForCameraPermission = () => {
     ;(async () => {
@@ -21,26 +15,38 @@ export default function App() {
     })()
   }
 
+  // Request Camera Permission
   useEffect(() => {
     askForCameraPermission()
   }, [])
 
   const wysuwanie = useRef(new Animated.Value(-800)).current
 
-  const fade = (value = 0) => {
+  const fadeIn = () => {
     Animated.timing(wysuwanie, {
-      toValue: value,
+      toValue: 0,
       duration: 300,
       useNativeDriver: false,
     }).start()
-    if (value == -800) setScanned(false)
   }
 
+  const fadeOut = () => {
+    Animated.timing(wysuwanie, {
+      toValue: -800,
+      duration: 300,
+      useNativeDriver: false,
+    }).start()
+  }
+
+  // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true)
     setText(data)
-    setType(type)
-    fade()
+    fadeIn()
+
+    setTimeout(() => {
+      setScanned(false)
+    }, 500)
   }
 
   const contentStyle = function () {
@@ -59,6 +65,7 @@ export default function App() {
 
   setTimeout(() => {}, 1000)
 
+  // Check permissions and return the screens
   if (hasPermission === null) {
     return (
       <View style={styles.container}>
@@ -75,6 +82,7 @@ export default function App() {
     )
   }
 
+  // Return the View
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -83,19 +91,22 @@ export default function App() {
       </View>
       <Image style={styles.image5} source={require("./qlogo.png")} />
       <Text style={styles.zeskanuj_text}>
-
         <Text style={styles.zeskanuj_text_color}>Z</Text>ESKANUJ <Text style={styles.zeskanuj_text_color}>K</Text>OD
       </Text>
 
       <Image style={styles.image2} source={require("./kaliszTemplateLogo.png")} />
       <Image style={styles.image3} source={require("./kaliszMapa2.png")} />
       <Animated.View style={contentStyle()}>
-        <TouchableHighlight style={{ height: "40%", zIndex: 100 }} onPress={() => fade(-800)}>
+        <TouchableHighlight style={{ height: "40%", zIndex: 100 }} onPress={fadeOut}>
           <Image style={styles.image} source={require("./dom.jpg")} />
         </TouchableHighlight>
         <Text style={styles.naglowek}> Wieżowiec Burdż Chalifa </Text>
-        <Text style={styles.tresc}>{text}</Text>
-        <Text style={styles.maintext}>{type} </Text>
+        <Text style={styles.tresc}>
+          Wieżowiec Burdż Chalifa zaprojektowany został przez przedsiębiorstwo architektoniczne Skidmore, Owings and Merrill, które projektowało także budynki Willis Tower oraz 1 World Trade Center. Ogólny jego wygląd nawiązuje do kwiatu pustyni z
+          rodzaju Hymenocallis[8] oraz architektury islamu (różne ornamenty). Budowla składa się z centralnego rdzenia oraz trzech „ramion”, które w miarę zwiększania się wysokości są coraz mniejsze, co nadaje jej smukłość. Na samym szczycie
+          centralny rdzeń przechodzi w iglicę. Najniższe piętra przeznaczono na hotel, którego wystrojem zajął się Giorgio Armani.
+        </Text>
+        <Text style={styles.maintext}>{text} </Text>
       </Animated.View>
       <View style={styles.barcodebox}>
         <View style={styles.border}></View>
@@ -108,8 +119,8 @@ export default function App() {
         <View style={styles.border3}>
           <View style={styles.border3s}></View>
         </View>
-        <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={{ aspectRatio: 0.5, width: "100%" }} />
 
+        <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={{ aspectRatio: 0.5, width: "100%" }} />
       </View>
     </View>
   )
@@ -125,7 +136,7 @@ const styles = StyleSheet.create({
   maintext: {
     position: "absolute",
     bottom: 0,
-    fontSize: RFValue(16, 1000),
+    fontSize: 16,
     margin: 20,
     color: "white",
     opacity: 0.1,
@@ -133,9 +144,7 @@ const styles = StyleSheet.create({
   zeskanuj_text: {
     position: "absolute",
     bottom: "27%",
-
-    fontSize: RFValue(37, 1000),
-
+    fontSize: 37,
     color: "#454545",
     letterSpacing: 5,
   },
@@ -145,7 +154,7 @@ const styles = StyleSheet.create({
   maintext2: {
     position: "absolute",
     bottom: 0,
-    fontSize: RFValue(16, 1000),
+    fontSize: 16,
     margin: 20,
     color: "white",
     opacity: 0.3,
@@ -164,9 +173,7 @@ const styles = StyleSheet.create({
     // position: "absolute",
     top: "4.35%",
     color: "white",
-
-    fontSize: RFValue(15, 1000),
-
+    fontSize: 15,
     letterSpacing: 5,
     marginRight: "2.4%",
   },
@@ -301,14 +308,14 @@ const styles = StyleSheet.create({
   naglowek: {
     top: 25,
     color: "white",
-    fontSize: RFValue(30, 1000),
+    fontSize: 30,
     justifyContent: "center",
     textAlign: "center",
   },
   tresc: {
     top: 50,
     color: "#888",
-    fontSize: RFValue(18, 1000),
+    fontSize: 18,
     textAlign: "justify",
     marginLeft: 20,
     marginRight: 20,
