@@ -1,47 +1,55 @@
-
-import React, { useState, useEffect, useRef } from "react"
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize"
-import { Text, View, StyleSheet, Button, Animated, Image, TouchableHighlight } from "react-native"
-import { BarCodeScanner } from "expo-barcode-scanner"
-
-
-
-
+import React, { useState, useEffect, useRef } from "react";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { getStatusBarHeight } from "react-native-status-bar-height";
+import {
+  responsiveNumber,
+  responsiveLetterSpacing,
+} from "react-native-responsive-number";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Animated,
+  Image,
+  TouchableHighlight,
+} from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
 
 export default function App() {
-  const [hasPermission, setHasPermission] = useState(null)
-  const [scanned, setScanned] = useState(false)
-  const [text, setText] = useState("Not yet scanned")
-  const [type, setType] = useState("No Type")
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  const [text, setText] = useState("Not yet scanned");
+  const [type, setType] = useState("No Type");
 
   const askForCameraPermission = () => {
-    ;(async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync()
-      setHasPermission(status === "granted")
-    })()
-  }
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === "granted");
+    })();
+  };
 
   useEffect(() => {
-    askForCameraPermission()
-  }, [])
+    askForCameraPermission();
+  }, []);
 
-  const wysuwanie = useRef(new Animated.Value(-800)).current
+  const wysuwanie = useRef(new Animated.Value(-800)).current;
 
   const fade = (value = 0) => {
     Animated.timing(wysuwanie, {
       toValue: value,
       duration: 300,
       useNativeDriver: false,
-    }).start()
-    if (value == -800) setScanned(false)
-  }
+    }).start();
+    if (value == -800) setScanned(false);
+  };
 
   const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true)
-    setText(data)
-    setType(type)
-    fade()
-  }
+    setScanned(true);
+    setText(data);
+    setType(type);
+    fade();
+  };
 
   const contentStyle = function () {
     return {
@@ -54,73 +62,161 @@ export default function App() {
       transition: "all 1s",
       bottom: wysuwanie,
       overflow: "hidden",
-    }
-  }
+    };
+  };
 
-  setTimeout(() => {}, 1000)
+  setTimeout(() => {}, 1000);
 
   if (hasPermission === null) {
     return (
       <View style={styles.container}>
         <Text>Requesting for camera permission</Text>
       </View>
-    )
+    );
   }
   if (hasPermission === false) {
     return (
       <View style={styles.container}>
         <Text style={{ margin: 10 }}>No access to camera</Text>
-        <Button title={"Allow Camera"} onPress={() => askForCameraPermission()} />
+        <Button
+          title={"Allow Camera"}
+          onPress={() => askForCameraPermission()}
+        />
       </View>
-    )
+    );
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Image style={styles.image4} source={require("./hlogo.png")} />
-        <Text style={styles.header_text}>POZNAJ HISTORIE KALISZA</Text>
+      {/* heder */}
+      <View style={styles.header_wrap}>
+        <View style={styles.header}>
+          <View style={styles.header_left}>
+            <Image style={styles.image4} source={require("./hlogo.png")} />
+          </View>
+          <View style={styles.header_right}>
+            <View style={styles.header_right_wrap}>
+              <Text style={styles.header_text}>POZNAJ HISTORIE KALISZA</Text>
+            </View>
+          </View>
+        </View>
       </View>
-      <Image style={styles.image5} source={require("./qlogo.png")} />
-      <Text style={styles.zeskanuj_text}>
+      {/* heder */}
 
-        <Text style={styles.zeskanuj_text_color}>Z</Text>ESKANUJ <Text style={styles.zeskanuj_text_color}>K</Text>OD
-      </Text>
+      {/* skaner*/}
+      <View style={styles.barcodebox_container}>
+        <View style={styles.barcodebox}>
+          <View style={styles.border}></View>
+          <View style={styles.border1}>
+            <View style={styles.border1s}></View>
+          </View>
+          <View style={styles.border2}>
+            <View style={styles.border2s}></View>
+          </View>
+          <View style={styles.border3}>
+            <View style={styles.border3s}></View>
+          </View>
+          <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            style={{ aspectRatio: 0.5, width: "100%" }}
+          />
+        </View>
+      </View>
 
-      <Image style={styles.image2} source={require("./kaliszTemplateLogo.png")} />
-      <Image style={styles.image3} source={require("./kaliszMapa2.png")} />
+      {/* skaner */}
+
+      {/* napis zeskanuj tekst i znak zapytania */}
+      <View style={styles.zeskanuj_text_container}>
+        <View style={styles.zeskanuj_top}>
+          <Text style={styles.zeskanuj_text}>
+            <Text style={styles.zeskanuj_text_color}>Z</Text>ESKANUJ{" "}
+            <Text style={styles.zeskanuj_text_color}>K</Text>OD
+          </Text>
+        </View>
+        <View style={styles.zeskanuj_bottom}>
+          <Image style={styles.image5} source={require("./qlogo.png")} />
+        </View>
+      </View>
+      {/* napis zeskanuj tekst i znak zapytania */}
+
+      {/* rozwijana lista */}
+
       <Animated.View style={contentStyle()}>
-        <TouchableHighlight style={{ height: "40%", zIndex: 100 }} onPress={() => fade(-800)}>
+        <TouchableHighlight
+          style={{ height: "40%", zIndex: 100 }}
+          onPress={() => fade(-800)}
+        >
           <Image style={styles.image} source={require("./dom.jpg")} />
         </TouchableHighlight>
+
         <Text style={styles.naglowek}> Wieżowiec Burdż Chalifa </Text>
         <Text style={styles.tresc}>{text}</Text>
         <Text style={styles.maintext}>{type} </Text>
       </Animated.View>
-      <View style={styles.barcodebox}>
-        <View style={styles.border}></View>
-        <View style={styles.border1}>
-          <View style={styles.border1s}></View>
-        </View>
-        <View style={styles.border2}>
-          <View style={styles.border2s}></View>
-        </View>
-        <View style={styles.border3}>
-          <View style={styles.border3s}></View>
-        </View>
-        <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={{ aspectRatio: 0.5, width: "100%" }} />
 
-      </View>
+      {/* gotowe< */}
+
+      <Image
+        style={styles.image2}
+        source={require("./kaliszTemplateLogo.png")}
+      />
+
+      <Image style={styles.image3} source={require("./kaliszMapa2.png")} />
+
+      {/* >gotowe */}
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: "flex",
+    position: "relative",
+    width: "100%",
+    height: "100%",
     backgroundColor: "#15161a",
+    textAlign: "center",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+
+  header_wrap: {
+    width: "100%",
+    marginTop: getStatusBarHeight() + responsiveNumber(10),
+    marginBottom: responsiveNumber(20),
+  },
+
+  header: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+    flexDirection: "row",
+    // opacity: 0,
+    zIndex: 2,
+    // backgroundColor: "blue",
+  },
+  barcodebox_container: {
+    // flex: 3,
+    // backgroundColor: "red",
+    // justifyContent: "center",
+    // textAlign: "center",
+    // alignItems: "center",
+    zIndex: 3,
+  },
+  barcodebox: {
     alignItems: "center",
     justifyContent: "center",
+    aspectRatio: 1,
+    // width: responsiveNumber(200),
+    // transform: [{ scale: 1.8 }],
+    // width: "93%",
+    width: "92%",
+    borderRadius: 30,
+    overflow: "hidden",
+    borderRadius: 40,
+    // opacity: 0
   },
   maintext: {
     position: "absolute",
@@ -130,73 +226,89 @@ const styles = StyleSheet.create({
     color: "white",
     opacity: 0.1,
   },
+  zeskanuj_text_container: {
+    // backgroundColor: "green",
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    position: "relative",
+    zIndex: 2,
+    // opacity: 0
+    width: "100%",
+    flex: 1,
+    marginBottom: "15%",
+  },
   zeskanuj_text: {
-    position: "absolute",
-    bottom: "27%",
-
     fontSize: RFValue(37, 1000),
-
     color: "#454545",
-    letterSpacing: 5,
+    letterSpacing: responsiveLetterSpacing(120, 37),
   },
   zeskanuj_text_color: {
     color: "#912D2A",
   },
-  maintext2: {
-    position: "absolute",
-    bottom: 0,
-    fontSize: RFValue(16, 1000),
-    margin: 20,
-    color: "white",
-    opacity: 0.3,
+
+  zeskanuj_top: {
+    // backgroundColor:"red",
   },
-  header: {
-    position: "absolute",
+  zeskanuj_bottom: {
+    // backgroundColor:"blue",
+  },
+
+  image5: {
+    width: responsiveNumber(20),
+    height: responsiveNumber(20),
+    marginTop: responsiveNumber(15),
+    opacity: 0.123,
+  },
+
+  header_left: {
+    position: "relative",
     display: "flex",
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "row",
-    height: "100%",
-    width: "100%",
-    top: "8.2%",
+    flex: 1,
+    // backgroundColor:"blue",
+    marginLeft: "17%",
   },
+  header_right: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+    flexDirection: "column",
+    flex: 3,
+    // backgroundColor:"red",
+    marginRight: "17%",
+  },
+  header_right_wrap: {
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+    flexDirection: "row",
+  },
+
   header_text: {
-    // position: "absolute",
-    top: "4.35%",
     color: "white",
-
     fontSize: RFValue(15, 1000),
-
-    letterSpacing: 5,
-    marginRight: "2.4%",
+    // letterSpacing: 5,
+    letterSpacing: responsiveLetterSpacing(180, 15),
+    // marginRight: "2.4%",
+    // flex: 1,
+    justifyContent: "center",
+    textAlign: "center",
   },
+
   image4: {
     // position: "absolute",
-    width: "13%",
+    // width: "1%",
     aspectRatio: 1,
-    top: "0%",
-    marginRight: "5%",
+    flex: 0.65,
+    // marginRight: "5%",
   },
-  image5: {
-    position: "absolute",
-    width: "5%",
-    height: "2.4%",
-    // aspectRatio: 1,
-    bottom: "22%",
-    opacity: 0.123,
-  },
-  barcodebox: {
-    position: "absolute",
-    top: "27%",
-    alignItems: "center",
-    justifyContent: "center",
-    aspectRatio: 1,
-    width: "50%",
-    transform: [{ scale: 1.8 }],
-    borderRadius: 30,
-    overflow: "hidden",
-    borderRadius: 40,
-  },
+
   border: {
     position: "absolute",
     width: "87%",
@@ -319,4 +431,4 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
   },
-})
+});
