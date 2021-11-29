@@ -1,6 +1,6 @@
 {
   "name": "khistory",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "icon": "./1.png",
   "main": "node_modules/expo/AppEntry.js",
   "slug": "KaliszApp",
@@ -20,16 +20,11 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "~42.0.0",
-    "expo-barcode-scanner": "~10.2.2",
-    "expo-status-bar": "^1.0.4",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
-    "react-native-web": "~0.13.12"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "expo": "^42.0.0",
+    "expo-barcode-scanner": "~11.1.2",
+    "react": "^17.0.2",
+    "react-native": "^0.63.4",
+    "react-native-responsive-fontsize": "^0.5.1"
   },
   "private": true
 }

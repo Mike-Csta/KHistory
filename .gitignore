@@ -8,8 +8,6 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-
-# macOS
 .DS_Store
 er.name
-.history/
+.history
