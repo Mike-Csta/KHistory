@@ -26,7 +26,8 @@
     "react-native": "^0.63.4",
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-responsive-number": "^0.1.0",
-    "react-native-status-bar-height": "^2.6.0"
+    "react-native-status-bar-height": "^2.6.0",
+    "react-native-webview": "11.6.2"
   },
   "private": true
 }
