@@ -20,22 +20,14 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-navigation/material-top-tabs": "^6.0.6",
-    "@react-navigation/native": "^6.0.6",
+
     "expo": "^42.0.0",
     "expo-barcode-scanner": "~11.1.2",
-    "install": "^0.13.0",
-    "npm": "^8.1.4",
     "react": "^17.0.2",
+    "react-live-clock": "^5.6.1",
     "react-native": "^0.63.4",
-    "react-native-gesture-handler": "^2.0.0",
-    "react-native-pager-view": "5.0.12",
-    "react-native-responsive-fontsize": "^0.5.1",
-    "react-native-responsive-number": "^0.1.0",
-    "react-native-status-bar-height": "^2.6.0",
-    "react-native-tab-view": "^3.1.1",
-    "react-native-webview": "11.6.2",
-    "react-navigation": "^4.4.4"
+    "react-native-responsive-fontsize": "^0.5.1"
+
   },
   "private": true
 }

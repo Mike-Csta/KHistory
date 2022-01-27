@@ -10,4 +10,4 @@ npm-debug.*
 web-build/
 .DS_Store
 er.name
-.history
+.history/
