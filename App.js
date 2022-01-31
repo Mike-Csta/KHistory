@@ -1,7 +1,9 @@
+
 import React from "react"
 import { StatusBar } from "expo-status-bar"
 import Homepage from "./Pages/Homepage/Homepage"
 import { View, Text, StyleSheet, Image } from "react-native"
+
 
 export default function App() {
   return (
