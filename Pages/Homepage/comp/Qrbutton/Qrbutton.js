@@ -1,11 +1,14 @@
+
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
+
 
 const Qrbutton = () => {
   return (
     <View style={style.main}>
       <Text>Qrbutton Modułu</Text>
     </View>
+
   );
 };
 
@@ -14,3 +17,4 @@ const style = StyleSheet.create({
 });
 
 export default Qrbutton;
+
