@@ -29,15 +29,17 @@
     "expo": "^42.0.0",
     "expo-app-loading": "1.1.2",
     "expo-barcode-scanner": "~11.1.2",
+    "expo-blur": "~9.0.3",
     "expo-font": "~9.2.1",
     "expo-status-bar": "^1.2.0",
     "react": "^16.13.1",
     "react-live-clock": "^5.6.1",
     "react-native": "^0.63.4",
+    "react-native-linear-gradient": "^2.5.6",
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-responsive-number": "^0.1.0",
-    "react-native-status-bar-height": "^2.6.0",
-    "expo-blur": "~9.0.3"
+    "react-native-shadow-2": "^6.0.2",
+    "react-native-status-bar-height": "^2.6.0"
   },
   "private": true
 }

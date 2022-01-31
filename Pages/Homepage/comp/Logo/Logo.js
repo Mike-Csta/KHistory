@@ -38,7 +38,7 @@ const style = StyleSheet.create({
   main: {
     display: "flex",
     width: "100%",
-    height: RFValue(125, 1000),
+    height: responsiveNumber(80),
     // backgroundColor: "#444",
     flexDirection: "row",
     textAlign: "center",
