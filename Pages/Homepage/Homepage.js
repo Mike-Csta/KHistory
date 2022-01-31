@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -9,10 +10,13 @@ import Qrbutton from "./comp/Qrbutton/Qrbutton";
 import Custom_Buttons from "./comp/Custom_Buttons/Custom_Buttons";
 import background from "../../src/background.jpg";
 
+
 const Homepage = () => {
   return (
     <View style={style.main}>
+
       <Image style={style.background} source={background} />
+
       <View style={style.status_bar_container}>
         <View style={style.margin_left}></View>
         <View style={style.center}>
@@ -25,6 +29,7 @@ const Homepage = () => {
         <View style={style.margin_right}></View>
       </View>
     </View>
+
   );
 };
 
@@ -68,3 +73,4 @@ const style = StyleSheet.create({
 });
 
 export default Homepage;
+

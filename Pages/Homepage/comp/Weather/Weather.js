@@ -1,3 +1,4 @@
+
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -54,9 +55,11 @@ const Weather = () => {
   );
 };
 
+
 const style = StyleSheet.create({
   main: {
     width: "100%",
+
     height: responsiveNumber(115),
     // backgroundColor: "gray",
     flexDirection: "row",
@@ -90,11 +93,13 @@ const style = StyleSheet.create({
   weather_container: {
     display: "flex",
     flex: 4,
+
     // backgroundColor: "yellow",
     flexDirection: "row",
     justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
+
   },
   weather_Background: {
     display: "flex",
@@ -180,3 +185,4 @@ const style = StyleSheet.create({
 });
 
 export default Weather;
+
