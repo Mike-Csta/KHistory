@@ -20,14 +20,24 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/baloo-bhaijaan": "^0.0.2",
+    "@expo-google-fonts/baloo-bhaijaan-2": "^0.2.2",
+    "@expo-google-fonts/baloo-bhaina-2": "^0.2.2",
+    "@expo-google-fonts/baloo-thambi-2": "^0.2.2",
+    "@expo-google-fonts/inter": "^0.2.2",
+    "@react-native-community/blur": "^3.6.0",
     "expo": "^42.0.0",
+    "expo-app-loading": "1.1.2",
     "expo-barcode-scanner": "~11.1.2",
+    "expo-font": "~9.2.1",
     "expo-status-bar": "^1.2.0",
     "react": "^16.13.1",
     "react-live-clock": "^5.6.1",
     "react-native": "^0.63.4",
     "react-native-responsive-fontsize": "^0.5.1",
-    "react-native-status-bar-height": "^2.6.0"
+    "react-native-responsive-number": "^0.1.0",
+    "react-native-status-bar-height": "^2.6.0",
+    "expo-blur": "~9.0.3"
   },
   "private": true
 }
