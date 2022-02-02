@@ -1,22 +1,26 @@
-import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-
-import sun from "../../../../src/sun.png";
-import wykres from "../../../../src/Path3_3.png";
-import poziomo2 from "../../../../src/poziomo2.png";
-import O2 from "../../../../src/O2.png";
+import React from 'react'
+import { View, Text, StyleSheet, Image } from 'react-native'
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
+import { WeatherApi } from './api'
+import sun from '../../../../src/sun.png'
+import wykres from '../../../../src/Path3_3.png'
+import poziomo2 from '../../../../src/poziomo2.png'
+import O2 from '../../../../src/O2.png'
 import {
   responsiveNumber,
   responsiveLetterSpacing,
-} from "react-native-responsive-number";
+} from 'react-native-responsive-number'
 
-import { BlurView } from "expo-blur";
+import { BlurView } from 'expo-blur'
 const Weather = () => {
   return (
     <View style={style.main}>
       <View style={style.O2_container}>
-        <BlurView intensity={30} tint="default" style={style.O2_Background}>
+        <BlurView
+          intensity={30}
+          tint="default"
+          style={style.O2_Background}
+        >
           {/* <View style={style.O2_level}></View> */}
           <Image source={poziomo2} style={style.poziomo2} />
           <Image source={O2} style={style.O2img} />
@@ -33,7 +37,9 @@ const Weather = () => {
               <Image source={sun} style={style.weather_icon} />
             </View>
             <View style={style.weather_left_bottom}>
-              <Text style={style.stopnie}>25°C</Text>
+              <Text style={style.stopnie}>
+                <WeatherApi />
+              </Text>
             </View>
           </View>
           <View style={style.weather_right}>
@@ -51,67 +57,71 @@ const Weather = () => {
         </BlurView>
       </View>
     </View>
-  );
-};
+  )
+}
 
 const style = StyleSheet.create({
   main: {
-    width: "100%",
+    width: '100%',
 
     height: responsiveNumber(115),
     // backgroundColor: "gray",
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   O2_container: {
     flex: 1,
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
-    flexDirection: "row",
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   O2_Background: {
     flex: 0.8,
-    width: "95%",
-    height: "100%",
+    width: '95%',
+    height: '100%',
     borderRadius: responsiveNumber(17),
-    overflow: "hidden",
-    justifyContent: "flex-end",
-    alignItems: "center",
+    overflow: 'hidden',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   O2_level: {
-    backgroundColor: "green",
-    width: "100%",
-    height: "20%",
+    backgroundColor: 'green',
+    width: '100%',
+    height: '20%',
     borderRadius: responsiveNumber(17),
-    bottom: "0%",
+    bottom: '0%',
   },
   poziomo2: { top: responsiveNumber(70), opacity: 0.8 },
 
-  O2img: { height: "19%", aspectRatio: 1, marginBottom: responsiveNumber(10) },
+  O2img: {
+    height: '19%',
+    aspectRatio: 1,
+    marginBottom: responsiveNumber(10),
+  },
   weather_container: {
-    display: "flex",
+    display: 'flex',
     flex: 4,
 
     // backgroundColor: "yellow",
-    flexDirection: "row",
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
   },
   weather_Background: {
-    display: "flex",
-    flexDirection: "row",
-    width: "95%",
-    height: "100%",
+    display: 'flex',
+    flexDirection: 'row',
+    width: '95%',
+    height: '100%',
     borderRadius: responsiveNumber(10),
-    backgroundColor: "red",
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
   },
   weather_left: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
 
     flex: 1,
     marginTop: responsiveNumber(10),
@@ -120,52 +130,52 @@ const style = StyleSheet.create({
   weather_left_top: { flex: 1 },
   weather_left_bottom: {
     flex: 0.5,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: responsiveNumber(6),
   },
   weather_right: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
 
     flex: 3.3,
   },
   weather_right_top: {
     flex: 0.05,
     marginTop: responsiveNumber(10),
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   weather_right_center: {
     flex: 1,
     marginBottom: responsiveNumber(22),
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   weather_right_bottom: {
-    position: "relative",
+    position: 'relative',
     flex: 0.5,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   kalisz: {
-    color: "white",
+    color: 'white',
     fontSize: responsiveNumber(10),
     letterSpacing: responsiveLetterSpacing(50, 27),
     marginTop: responsiveNumber(12),
   },
   slonecznie: {
-    color: "white",
+    color: 'white',
     fontSize: RFValue(28),
     letterSpacing: responsiveLetterSpacing(53, 27),
   },
   stopnie: {
-    color: "white",
+    color: 'white',
     fontSize: RFValue(20),
     letterSpacing: responsiveLetterSpacing(53, 27),
   },
   powietrze: {
-    color: "white",
+    color: 'white',
     fontSize: RFValue(10),
     letterSpacing: responsiveLetterSpacing(53, 12),
     marginBottom: responsiveNumber(37),
@@ -175,10 +185,10 @@ const style = StyleSheet.create({
     height: responsiveNumber(65),
   },
   weather_wykres: {
-    position: "absolute",
+    position: 'absolute',
     bottom: responsiveNumber(-6),
     opacity: 0.4,
   },
-});
+})
 
-export default Weather;
+export default Weather
