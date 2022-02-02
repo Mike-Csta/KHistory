@@ -43,7 +43,7 @@ const style = StyleSheet.create({
     display: "flex",
     position: "relative",
     width: "100%",
-    backgroundColor: "#232022",
+    backgroundColor: "#282422",
   },
   status_bar_container: {
     marginTop: getStatusBarHeight(),
@@ -96,7 +96,8 @@ const style = StyleSheet.create({
     width: "120%",
     height: 100 + getStatusBarHeight() + "%",
     aspectRatio: 1,
-    // rotation: -90,
+
+    transform: [{ scaleX: 1 }, { rotate: "180deg" }],
   },
 });
 
