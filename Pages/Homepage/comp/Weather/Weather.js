@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
-import { WeatherApi } from './api'
+// import { WeatherApi } from './api'
 import sun from '../../../../src/sun.png'
 import wykres from '../../../../src/Path3_3.png'
 import poziomo2 from '../../../../src/poziomo2.png'
@@ -12,7 +12,32 @@ import {
 } from 'react-native-responsive-number'
 
 import { BlurView } from 'expo-blur'
+
 const Weather = () => {
+  let [temp, setTemp] = useState('0.0')
+  let [weatherState, setWeatherState] = useState('')
+
+  // Thunderstorm, Drizzle, Rain, Snow, Mist, Smoke, Haze, Dust, Fog, Sand, Dust, Ash, Squall, Tornado, Clear, Clouds
+  // Burza z piorunami, Mżawka, Deszcz, Śnieg, Mgła, Dym, Mgiełka, Pył, Mgła, Piasek, Pył, Popiół, Szkwał, Tornado, Czysto, Chmury
+
+  const CallApi = async () => {
+    let request = await fetch(
+      // 'https://api.openweathermap.org/data/2.5/weather?q=Kalisz&units=metric&appid=851a0d240becabfe5a8e6d2b6a24c324',
+      'http://khistory.pl/test.json',
+    )
+    let json = await request.json()
+    // setTemp(Math.round(json.main.temp * 10) / 10)
+    // setMain(json.main)
+    setTemp(Math.round(json.main.temp))
+    setWeatherState(json.weather[0].main)
+
+    console.log(json.main.temp)
+  }
+
+  useEffect(() => {
+    CallApi()
+  }, [])
+
   return (
     <View style={style.main}>
       <View style={style.O2_container}>
@@ -37,9 +62,7 @@ const Weather = () => {
               <Image source={sun} style={style.weather_icon} />
             </View>
             <View style={style.weather_left_bottom}>
-              <Text style={style.stopnie}>
-                <WeatherApi />
-              </Text>
+              <Text style={style.stopnie}>{temp}°C</Text>
             </View>
           </View>
           <View style={style.weather_right}>
@@ -47,7 +70,7 @@ const Weather = () => {
               <Text style={style.kalisz}>KALISZ</Text>
             </View>
             <View style={style.weather_right_center}>
-              <Text style={style.slonecznie}>Słonecznie</Text>
+              <Text style={style.slonecznie}>{weatherState}</Text>
             </View>
             <View style={style.weather_right_bottom}>
               <Image source={wykres} style={style.weather_wykres} />
@@ -172,7 +195,7 @@ const style = StyleSheet.create({
   stopnie: {
     color: 'white',
     fontSize: RFValue(20),
-    letterSpacing: responsiveLetterSpacing(53, 27),
+    letterSpacing: responsiveLetterSpacing(0, 20),
   },
   powietrze: {
     color: 'white',

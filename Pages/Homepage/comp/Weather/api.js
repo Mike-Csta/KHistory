@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Button, Animated } from 'react-native'
 
-const WeatherApi = () => {
-  let [WeatherJ, setWeatherJ] = useState('0.00')
+const WeatherApi = (props) => {
+  let [WeatherJ, setWeatherJ] = useState({ pogoda: '0.00', stan: 'Clear' })
 
   const getWeather = async () => {
     let weather = await fetch(
@@ -14,6 +14,7 @@ const WeatherApi = () => {
   }
 
   getWeather()
-  return <Text>{WeatherJ + '°C'}</Text>
+  if (props.typ == 'pogoda') return <Text>{WeatherJ + '°C'}</Text>
+  else if (props.typ == 'stan') return <Text>{WeatherJ}</Text>
 }
 export { WeatherApi }
