@@ -58,7 +58,7 @@ const style = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: RFValue(20),
+    fontSize: RFValue(18),
     letterSpacing: responsiveLetterSpacing(210, 20),
     opacity: 0.93,
   },
