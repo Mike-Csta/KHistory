@@ -38,7 +38,7 @@ const Homepage = () => {
   );
 };
 
-const style = StyleSheet.create({
+const style1 = StyleSheet.create({
   main: {
     display: "flex",
     position: "relative",
@@ -74,8 +74,10 @@ const style = StyleSheet.create({
   center_center: {
     position: "relative",
     display: "flex",
-    flexDirection: "column",
+    marginTop: responsiveNumber(22),
     flex: 0.9,
+    // bottom: 10,
+    // backgroundColor: "red",
   },
   center_bottom: {
     position: "relative",
@@ -100,5 +102,81 @@ const style = StyleSheet.create({
     transform: [{ scaleX: 1 }, { rotate: "180deg" }],
   },
 });
+
+const style2 = StyleSheet.create({
+  main: {
+    display: "flex",
+    position: "relative",
+    width: "100%",
+    backgroundColor: "#282422",
+  },
+  status_bar_container: {
+    marginTop: getStatusBarHeight(),
+    display: "flex",
+    flexDirection: "row",
+    height: "100%",
+    justifyContent: "space-between",
+    // backgroundColor: '#FFBBFF',
+  },
+
+  margin_left: {
+    width: RFValue(11, 1000),
+    // backgroundColor: "red"
+  },
+  center: {
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    flex: 20,
+    // justifyContent: "space-between",
+    justifyContent: "flex-end",
+  },
+  center_top: {
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+  },
+  center_center: {
+    position: "relative",
+    display: "flex",
+    marginTop: responsiveNumber(22),
+    flex: 0.4,
+    // bottom: 10,
+    // backgroundColor: "red",
+  },
+  center_bottom: {
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
+    marginBottom: getStatusBarHeight() * 3.14,
+  },
+  margin_right: {
+    width: RFValue(11, 1000),
+    //  backgroundColor: "blue"
+  },
+  background: {
+    position: "absolute",
+    opacity: 0.1,
+    top: 0,
+    resizeMode: "cover",
+    width: "120%",
+    height: 100 + getStatusBarHeight() + "%",
+    aspectRatio: 1,
+
+    transform: [{ scaleX: 1 }, { rotate: "180deg" }],
+  },
+});
+
+let style = style1;
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+console.log(windowWidth, windowHeight);
+
+if (windowHeight / windowWidth > 1.8) {
+  style = style1;
+} else {
+  style = style2;
+}
 
 export default Homepage;
