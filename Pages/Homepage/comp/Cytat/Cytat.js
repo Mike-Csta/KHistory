@@ -48,7 +48,7 @@ const style1 = StyleSheet.create({
     lineHeight: responsiveNumber(23),
     fontSize: responsiveNumber(15),
     letterSpacing: responsiveLetterSpacing(80, 15),
-    maxHeight: responsiveNumber(80),
+    // maxHeight: responsiveNumber(80),
     // backgroundColor: "red",
   },
   line: {
@@ -88,7 +88,7 @@ const style2 = StyleSheet.create({
     lineHeight: responsiveNumber(20),
     fontSize: responsiveNumber(10),
     letterSpacing: responsiveLetterSpacing(80, 15),
-    maxHeight: responsiveNumber(80),
+    // maxHeight: responsiveNumber(80),
     // backgroundColor: "red",
   },
   line: {
