@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
+import AppLoading from 'expo-app-loading'
 // import { WeatherApi } from './api'
-import sun from '../../../../src/sun.png'
+import ico from '../../../../src/sun.png'
 import wykres from '../../../../src/Path3_3.png'
 import poziomo2 from '../../../../src/poziomo2.png'
 import O2 from '../../../../src/O2.png'
@@ -16,27 +17,77 @@ import { BlurView } from 'expo-blur'
 const Weather = () => {
   let [temp, setTemp] = useState('0.0')
   let [weatherState, setWeatherState] = useState('')
+  let [weatherStateICO, setWeatherStateICO] = useState(
+    '//cdn.weatherapi.com/weather/64x64/night/296.png',
+  )
+  let [airCond, setAirCond] = useState('1')
+  let [airLevel, setAirLevel] = useState('1')
+  let [ready, setReady] = useState(false)
 
   // Thunderstorm, Drizzle, Rain, Snow, Mist, Smoke, Haze, Dust, Fog, Sand, Dust, Ash, Squall, Tornado, Clear, Clouds
   // Burza z piorunami, Mżawka, Deszcz, Śnieg, Mgła, Dym, Mgiełka, Pył, Mgła, Piasek, Pył, Popiół, Szkwał, Tornado, Czysto, Chmury
 
   const CallApi = async () => {
+    setReady(false)
     let request = await fetch(
       // 'https://api.openweathermap.org/data/2.5/weather?q=Kalisz&units=metric&appid=851a0d240becabfe5a8e6d2b6a24c324',
-      'http://khistory.pl/test.json',
+      // 'http://khistory.pl/test2.json',
+      'http://api.weatherapi.com/v1/current.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&aqi=yes',
     )
     let json = await request.json()
     // setTemp(Math.round(json.main.temp * 10) / 10)
     // setMain(json.main)
-    setTemp(Math.round(json.main.temp))
-    setWeatherState(json.weather[0].main)
+    setTemp(Math.round(json.current.temp_c))
+    // setTemp(Math.round(json.main.temp))
+    setWeatherState(json.current.condition.text)
+    setAirLevel(json.current.air_quality.gb_defra_index)
+    setAirCond(json.current.air_quality.us_epa_index)
+    setWeatherStateICO(json.current.condition.icon)
 
-    console.log(json.main.temp)
+    switch (airCond) {
+      case '1':
+        setAirCond('Dobry')
+        break
+      case '2':
+        setAirCond('Średni')
+        break
+      case '3':
+        setAirCond('Zły')
+        break
+      case '4':
+        setAirCond('Zły')
+        break
+      case '5':
+        setAirCond('Bardzo Zły')
+        break
+      case '6':
+        setAirCond('Ekstremalnie Zły')
+        break
+      default:
+        setAirCond('ERROR ')
+        break
+    }
+
+    setAirLevel(airLevel * 10 + 35)
+
+    setReady(true)
+    // console.log(json.main.temp)
   }
 
   useEffect(() => {
     CallApi()
   }, [])
+
+  console.log('powietrze: ' + airCond)
+  console.log('level to: ' + airLevel)
+
+  console.log(ready)
+
+  let test = parseInt(70)
+
+  if (ready == false) {
+    return <AppLoading />
+  }
 
   return (
     <View style={style.main}>
@@ -47,7 +98,12 @@ const Weather = () => {
           style={style.O2_Background}
         >
           {/* <View style={style.O2_level}></View> */}
-          <Image source={poziomo2} style={style.poziomo2} />
+          <Image
+            source={poziomo2}
+            style={{
+              top: responsiveNumber(airLevel),
+            }}
+          />
           <Image source={O2} style={style.O2img} />
         </BlurView>
       </View>
@@ -59,7 +115,11 @@ const Weather = () => {
         >
           <View style={style.weather_left}>
             <View style={style.weather_left_top}>
-              <Image source={sun} style={style.weather_icon} />
+              <Image
+                source={{ uri: 'http:' + weatherStateICO }}
+                style={style.weather_icon}
+              />
+              {/* <Image source={ico} style={style.weather_icon} /> */}
             </View>
             <View style={style.weather_left_bottom}>
               <Text style={style.stopnie}>{temp}°C</Text>
@@ -74,7 +134,7 @@ const Weather = () => {
             </View>
             <View style={style.weather_right_bottom}>
               <Image source={wykres} style={style.weather_wykres} />
-              <Text style={style.powietrze}>Stan Powietrza Dobry</Text>
+              <Text style={style.powietrze}>Stan Powietrza {airCond}</Text>
             </View>
           </View>
         </BlurView>
@@ -114,7 +174,8 @@ const style = StyleSheet.create({
     borderRadius: responsiveNumber(17),
     bottom: '0%',
   },
-  poziomo2: { top: responsiveNumber(70), opacity: 0.8 },
+  // od 45 do 145
+  poziomo2: { opacity: 0.8 },
 
   O2img: {
     height: '19%',

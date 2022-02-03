@@ -2,19 +2,24 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Button, Animated } from 'react-native'
 
 const WeatherApi = (props) => {
-  let [WeatherJ, setWeatherJ] = useState({ pogoda: '0.00', stan: 'Clear' })
+  let [temp, setTemp] = useState('0.00')
+  let [air, setAir] = useState('0.00')
+  let [weatherState, setWeatherState] = useState('Clear')
 
   const getWeather = async () => {
-    let weather = await fetch(
+    let request = await fetch(
       'https://api.openweathermap.org/data/2.5/weather?q=Kalisz&units=metric&appid=851a0d240becabfe5a8e6d2b6a24c324',
     )
-    let json = await weather.json()
+    let json = await request.json()
     console.log(json.main.temp)
-    setWeatherJ(Math.round(json.main.temp * 10) / 10)
+    setTemp(Math.round(json.main.temp * 10) / 10)
   }
 
-  getWeather()
-  if (props.typ == 'pogoda') return <Text>{WeatherJ + '°C'}</Text>
-  else if (props.typ == 'stan') return <Text>{WeatherJ}</Text>
+  if (props.typ == 'pogoda') {
+    getWeather()
+    return <Text>{temp + '°C'}</Text>
+  } else if (props.typ == 'stan') {
+    return <Text>{temp}</Text>
+  }
 }
 export { WeatherApi }
