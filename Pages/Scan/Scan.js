@@ -14,15 +14,17 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <Header />
-      <Skaner />
+      <Skaner style={styles.skaner} />
       <Zeskanuj />
 
-      {/* tło */}
       <Image
         style={styles.image2}
-        source={require("./src/kaliszTemplateLogo.png")}
+        source={require("../../src/kaliszTemplateLogo.png")}
       />
-      <Image style={styles.image3} source={require("./src/kaliszMapa2.png")} />
+      <Image
+        style={styles.image3}
+        source={require("../../src/kaliszMapa2.png")}
+      />
     </View>
   );
 };
@@ -38,6 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     flexDirection: "column",
+    overflow: "hidden",
   },
 
   image2: {

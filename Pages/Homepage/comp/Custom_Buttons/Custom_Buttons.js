@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import {
   responsiveNumber,
@@ -10,25 +10,31 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import bus from "../../../../src/bus.png";
 import news from "../../../../src/news.png";
 
-const Custom_Buttons = () => {
+const Custom_Buttons = (props) => {
   return (
     <View style={style.main}>
-      <View style={style.left}>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate("Web")}
+        style={style.left}
+      >
         <View style={style.top}>
           <Image source={bus} style={style.image}></Image>
         </View>
         <View style={style.bottom}>
           <Text style={style.text}>ROZKŁAD JAZDY</Text>
         </View>
-      </View>
-      <View style={style.right}>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate("Web2")}
+        style={style.right}
+      >
         <View style={style.top}>
           <Image source={news} style={style.image}></Image>
         </View>
         <View style={style.bottom}>
           <Text style={style.text}>WIADOMOŚCI</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -18,7 +18,10 @@ const Zeskanuj = () => {
         </Text>
       </View>
       <View style={styles.zeskanuj_bottom}>
-        <Image style={styles.image5} source={require("../src/qlogo.png")} />
+        <Image
+          style={styles.image5}
+          source={require("../../../src/qlogo.png")}
+        />
       </View>
     </View>
   );

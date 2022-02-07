@@ -13,7 +13,10 @@ const Header = () => {
     <View style={styles.header_wrap}>
       <View style={styles.header}>
         <View style={styles.header_left}>
-          <Image style={styles.image4} source={require("../src/hlogo.png")} />
+          <Image
+            style={styles.image4}
+            source={require("../../../src/hlogo.png")}
+          />
         </View>
         <View style={styles.header_right}>
           <View style={styles.header_right_wrap}>

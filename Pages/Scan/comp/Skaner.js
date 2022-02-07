@@ -30,7 +30,9 @@ const Skaner = () => {
   };
 
   useEffect(() => {
-    askForCameraPermission();
+    setTimeout(() => {
+      askForCameraPermission();
+    }, 300);
   }, []);
 
   const wysuwanie = useRef(new Animated.Value(-800)).current;
@@ -64,12 +66,10 @@ const Skaner = () => {
     fade();
   };
 
-  setTimeout(() => {}, 1000);
-
   if (hasPermission === null) {
     return (
-      <View style={styles.container}>
-        <Text>Requesting for camera permission</Text>
+      <View style={styles.req}>
+        <Text style={{ color: "white" }}></Text>
       </View>
     );
   }
@@ -113,7 +113,10 @@ const Skaner = () => {
           style={{ height: "40%", zIndex: 100 }}
           onPress={() => fade(-800)}
         >
-          <Image style={styles.image} source={require("../src/dom.jpg")} />
+          <Image
+            style={styles.image}
+            source={require("../../../src/dom.jpg")}
+          />
         </TouchableHighlight>
 
         <Text style={styles.naglowek}> Wieżowiec Burdż Chalifa </Text>
@@ -126,6 +129,17 @@ const Skaner = () => {
 
 const styles = StyleSheet.create({
   barcodebox_container: {
+    zIndex: 3,
+  },
+  req: {
+    alignItems: "center",
+    justifyContent: "center",
+    aspectRatio: 1,
+    width: "92%",
+    borderRadius: 30,
+    overflow: "hidden",
+    borderRadius: 40,
+    backgroundColor: "#111",
     zIndex: 3,
   },
   barcodebox: {

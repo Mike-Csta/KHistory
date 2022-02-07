@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import Logo from "./comp/Logo/Logo";
@@ -8,28 +15,30 @@ import Cytat from "./comp/Cytat/Cytat";
 import Qrbutton from "./comp/Qrbutton/Qrbutton";
 import Custom_Buttons from "./comp/Custom_Buttons/Custom_Buttons";
 import background from "../../src/background.jpg";
+import { StatusBar } from "expo-status-bar";
 import {
   responsiveNumber,
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
-const Homepage = () => {
+const Homepage = ({ navigation }) => {
   return (
     <View style={style.main}>
+      <StatusBar style="light" />
       <Image style={style.background} source={background} />
-
       <View style={style.status_bar_container}>
         <View style={style.margin_left}></View>
         <View style={style.center}>
           <View style={style.center_top}>
             <Logo />
+
             <Weather />
           </View>
           <View style={style.center_center}>
             <Cytat />
           </View>
           <View style={style.center_bottom}>
-            <Qrbutton />
-            <Custom_Buttons />
+            <Qrbutton navigation={navigation} />
+            <Custom_Buttons navigation={navigation} />
           </View>
         </View>
         <View style={style.margin_right}></View>
@@ -84,7 +93,7 @@ const style1 = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     flex: 1,
-    marginBottom: getStatusBarHeight() * 3.14,
+    marginBottom: getStatusBarHeight() * 2.26,
   },
   margin_right: {
     width: RFValue(11, 1000),
@@ -149,7 +158,7 @@ const style2 = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     flex: 1,
-    marginBottom: getStatusBarHeight() * 3.14,
+    marginBottom: getStatusBarHeight() * 2.26,
   },
   margin_right: {
     width: RFValue(11, 1000),

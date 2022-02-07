@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import {
   responsiveNumber,
@@ -8,9 +8,9 @@ import {
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import scan from "../../../../src/scan.png";
 
-const Qrbutton = () => {
+const Qrbutton = (props) => {
   return (
-    <View style={style.main}>
+    <TouchableOpacity onPress={() => props.navigation.navigate("Scan")}>
       <View style={style.centerTop}></View>
       <View style={style.center}>
         <View style={style.left}>
@@ -20,7 +20,7 @@ const Qrbutton = () => {
           <Text style={style.text}>KOD PRZYSTANKU</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -43,6 +43,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     borderRadius: responsiveNumber(22),
     opacity: 1,
+
     // height: responsiveNumber(90),
   },
   center: {
