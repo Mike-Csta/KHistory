@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import AppLoading from "expo-app-loading";
 // import { WeatherApi } from './api'
-import ico from "../../../../src/sun.png";
+import sun from "../../../../src/sun.png";
 import wykres from "../../../../src/Path3_3.png";
 import poziomo2 from "../../../../src/poziomo2.png";
 import O2 from "../../../../src/O2.png";
@@ -89,7 +89,50 @@ const Weather = () => {
   let test = parseInt(70);
 
   if (ready == false) {
-    return <AppLoading />;
+    return (
+      <View style={style.main}>
+        <View style={style.O2_container}>
+          <BlurView intensity={30} tint="default" style={style.O2_Background}>
+            {/* <View style={style.O2_level}></View> */}
+            <Image
+              source={poziomo2}
+              style={{
+                top: responsiveNumber(70),
+              }}
+            />
+            <Image source={O2} style={style.O2img} />
+          </BlurView>
+        </View>
+        <View style={style.weather_container}>
+          <BlurView
+            intensity={30}
+            tint="default"
+            style={style.weather_Background}
+          >
+            <View style={style.weather_left}>
+              <View style={style.weather_left_top}>
+                {/* <Image source={ico} style={style.weather_icon} /> */}
+              </View>
+              <View style={style.weather_left_bottom}>
+                <Text style={style.stopnie}>10°C</Text>
+              </View>
+            </View>
+            <View style={style.weather_right}>
+              <View style={style.weather_right_top}>
+                <Text style={style.kalisz}>KALISZ</Text>
+              </View>
+              <View style={style.weather_right_center}>
+                <Text style={style.slonecznie}>{weatherState}</Text>
+              </View>
+              <View style={style.weather_right_bottom}>
+                <Image source={wykres} style={style.weather_wykres} />
+                <Text style={style.powietrze}>Stan Powietrza Dobry</Text>
+              </View>
+            </View>
+          </BlurView>
+        </View>
+      </View>
+    );
   }
 
   return (

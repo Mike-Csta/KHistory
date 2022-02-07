@@ -10,7 +10,7 @@
   },
   "android": {
     "package": "com.yourcompany.yourappname",
-    "versionCode": 1
+    "versionCode": 3
   },
   "scripts": {
     "start": "expo start",

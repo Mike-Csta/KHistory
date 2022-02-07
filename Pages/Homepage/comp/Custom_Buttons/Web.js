@@ -41,6 +41,15 @@ const Web = () => {
     }).start();
   };
 
+  const wysuwanie2 = useRef(new Animated.Value(0)).current;
+  const fade8 = (value = 1) => {
+    Animated.timing(wysuwanie2, {
+      toValue: value,
+      duration: 70,
+      useNativeDriver: false,
+    }).start();
+  };
+
   const indeks = useRef(new Animated.Value(-100)).current;
   const fade7 = (value = 49) => {
     Animated.timing(indeks, {
@@ -74,7 +83,7 @@ const Web = () => {
       textAlign: "center",
       bottom: responsiveNumber(65) + getStatusBarHeight() * 2.22,
       zIndex: indeks,
-
+      opacity: wysuwanie2,
       marginTop: getStatusBarHeight() - responsiveNumber(73),
     };
   };
@@ -90,6 +99,7 @@ const Web = () => {
       display: "flex",
       flexDirection: "row",
       zIndex: indeks,
+      opacity: wysuwanie2,
     };
   };
   //>loading
@@ -200,6 +210,9 @@ const Web = () => {
     setTimeout(() => {
       fade7();
     }, 1500);
+    setTimeout(() => {
+      fade8();
+    }, 600);
     fade2();
     // fade4();
   }, []);
