@@ -214,9 +214,15 @@ const Web = () => {
   setInterval(() => {
     setTajm(`${godzina}:${minuta < 10 ? "0" + minuta : minuta}`);
   }, 5000);
-  const [linkText, setLinkText] = useState("https://kalisz.naszemiasto.pl/");
-  const [changeText, onChangeText] = useState("https://kalisz.naszemiasto.pl/");
-  const [link, setLink] = useState("https://kalisz.naszemiasto.pl/");
+  const [linkText, setLinkText] = useState(
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  );
+  const [changeText, onChangeText] = useState(
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  );
+  const [link, setLink] = useState(
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  );
 
   const onSearch = () => {
     setLink(changeText);
