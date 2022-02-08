@@ -57,7 +57,7 @@ const Web = () => {
     return {
       marginTop: getStatusBarHeight(),
       width: "100%",
-      height: "100%",
+      height: Dimensions.get("window").height - responsiveNumber(50),
       backgroundColor: "black",
       display: "flex",
       justifyContent: "space-between",
@@ -356,8 +356,6 @@ const styles1 = StyleSheet.create({
   },
   margin: {},
   container2: {
-    flex: 1,
-
     // aspectRatio: 1,
   },
 });

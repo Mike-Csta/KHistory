@@ -20,6 +20,7 @@ import {
   responsiveNumber,
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
+
 const Homepage = ({ navigation }) => {
   return (
     <View style={style.main}>
@@ -53,6 +54,7 @@ const style1 = StyleSheet.create({
     position: "relative",
     width: "100%",
     backgroundColor: "#282422",
+    height: Dimensions.get("window").height + getStatusBarHeight(),
   },
   status_bar_container: {
     marginTop: getStatusBarHeight(),
@@ -93,7 +95,7 @@ const style1 = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     flex: 1,
-    marginBottom: getStatusBarHeight() * 2.26,
+    marginBottom: responsiveNumber(40),
   },
   margin_right: {
     width: RFValue(11, 1000),
