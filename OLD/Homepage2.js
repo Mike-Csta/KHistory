@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native"
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize"
-import { getStatusBarHeight } from "react-native-status-bar-height"
-import MyClock from "./MyClock"
-import ButtonC from "./Button"
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { getStatusBarHeight } from "react-native-status-bar-height";
+import MyClock from "./MyClock";
+import ButtonC from "./Button";
 
 const Homepage = () => {
   return (
@@ -32,8 +32,8 @@ const Homepage = () => {
 
             <View style={style.cytat}>
               <Text style={text.cytat_text}>
-                "Pjenkne poezje poetów z Kalisz nikt nie wie kim jest ten
-                kto to napisał, jeszcze, dzisiaj"
+                "Pjenkne poezje poetów z Kalisz nikt nie wie kim jest ten kto to
+                napisał, jeszcze, dzisiaj"
               </Text>
 
               <Text style={text.cytat_autor}>~Mike Csta</Text>
@@ -73,8 +73,8 @@ const Homepage = () => {
         {/* <WebView source={{ uri: "https://kalisz.trapeze.fi/vm/main#" }} /> */}
       </View>
     </View>
-  )
-}
+  );
+};
 
 const text = StyleSheet.create({
   cytat_text: {
@@ -87,7 +87,7 @@ const text = StyleSheet.create({
     textAlign: "center",
     fontSize: RFValue(20, 1000),
   },
-})
+});
 
 const style = StyleSheet.create({
   container: {
@@ -202,6 +202,6 @@ const style = StyleSheet.create({
     flex: 4,
     height: "100%",
   },
-})
+});
 
-export default Homepage
+export default Homepage;
