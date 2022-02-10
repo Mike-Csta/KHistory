@@ -120,17 +120,17 @@ const Weather = () => {
         setWeatherStateICO(json.current.condition.icon)
     }
 
-    switch (json.current.air_quality['us-epa-index']) {
-      // switch (4) {
+    // switch (json.current.air_quality['us-epa-index']) {
+    switch (1) {
       case 1:
         setAirCond('Dobry')
-        setAirLevel(55)
+        setAirLevel(75)
         setAirColor('green')
 
         break
       case 2:
         setAirCond('Średni')
-        setAirLevel(80)
+        setAirLevel(90)
         setAirColor('green')
 
         break
