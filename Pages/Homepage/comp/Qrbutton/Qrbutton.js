@@ -23,7 +23,7 @@ const Qrbutton = (props) => {
       <View style={style.center}>
         <TouchableOpacity
           style={style.t1}
-          onPress={() => props.navigation.navigate("Scan")}
+          onPress={() => props.navigation.navigate("PeopleAndHis")}
         >
           <View style={style.left}>
             <Image source={lih} style={style.image}></Image>
@@ -44,7 +44,7 @@ const Qrbutton = (props) => {
               <Image source={scan} style={style.image_2}></Image>
             </View>
             <View style={style.right_2_bottom}>
-              <Text style={style.text_3}>PRZYSTENKU</Text>
+              <Text style={style.text_3}>PRZYSTANKU</Text>
             </View>
           </View>
         </TouchableOpacity>

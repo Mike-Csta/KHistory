@@ -1,6 +1,7 @@
 import { useFonts } from "expo-font";
 import React, { useEffect } from "react";
 import Scan from "./Pages/Scan/Scan";
+import PeopleAndHis from "./Pages/PeopleAndHis/PeopleAndHis";
 import Homepage from "./Pages/Homepage/Homepage";
 import { View, Text, StyleSheet, Image } from "react-native";
 import AppLoading from "expo-app-loading";
@@ -37,6 +38,7 @@ export default function App() {
         >
           <Stack.Screen name="Home" component={Homepage} />
           <Stack.Screen name="Scan" component={Scan} />
+          <Stack.Screen name="PeopleAndHis" component={PeopleAndHis} />
           <Stack.Screen name="Web" component={Web} />
           <Stack.Screen name="Web2" component={Web2} />
         </Stack.Navigator>
