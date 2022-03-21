@@ -1,5 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import React, { useState, useEffect, useRef } from 'react'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  Animated,
+} from 'react-native'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import AppLoading from 'expo-app-loading'
 // import { WeatherApi } from './api'
@@ -14,9 +22,90 @@ import {
 
 import { BlurView } from 'expo-blur'
 
+function getStatus(code) {
+  switch (code) {
+    case 1273:
+    case 1276:
+    case 1279:
+    case 1282:
+      //burza z deszczem
+      return 'Burza z Deszczem'
+    case 1087:
+      //burza
+      return 'Burza'
+    case 1063:
+    case 1150:
+    case 1153:
+    case 1168:
+    case 1171:
+    case 1180:
+    case 1183:
+    case 1186:
+    case 1189:
+    case 1192:
+    case 1195:
+    case 1198:
+    case 1201:
+    case 1240:
+    case 1243:
+    case 1246:
+      //deszcz
+      return 'Deszcz'
+
+    case 1066:
+    case 1069:
+    case 1072:
+    case 1114:
+    case 1117:
+    case 1204:
+    case 1207:
+    case 1210:
+    case 1213:
+    case 1216:
+    case 1219:
+    case 1222:
+    case 1225:
+    case 1237:
+    case 1249:
+    case 1252:
+    case 1255:
+    case 1258:
+    case 1261:
+    case 1264:
+      //śnieg
+      return 'Śnieg'
+
+    case 1030:
+    case 1147:
+    case 1135:
+      //mgła
+      return 'Mgła'
+
+    case 1000:
+      //słonecznie
+      return 'Słonecznie'
+
+    case 1003:
+    case 1006:
+    case 1009:
+      //pochmurno
+      return 'Pochmurno'
+
+    default:
+      //nieznany lub błąd
+      return 'ERROR'
+  }
+}
+
 const Weather = () => {
   let [temp, setTemp] = useState('0.0')
   let [weatherState, setWeatherState] = useState('')
+  let [weatherState3Days, setWeatherState3Days] = useState(['', '', ''])
+  let [weatherState3DaysICO, setWeatherState3DaysICO] = useState([
+    '//cdn.weatherapi.com/weather/64x64/night/296.png',
+    '//cdn.weatherapi.com/weather/64x64/night/296.png',
+    '//cdn.weatherapi.com/weather/64x64/night/296.png',
+  ])
   let [weatherStateICO, setWeatherStateICO] = useState(
     '//cdn.weatherapi.com/weather/64x64/night/296.png',
   )
@@ -32,96 +121,23 @@ const Weather = () => {
     setReady(false)
     let request = await fetch(
       // 'https://api.openweathermap.org/data/2.5/weather?q=Kalisz&units=metric&appid=851a0d240becabfe5a8e6d2b6a24c324',
-      // 'http://khistory.pl/test2.json',
-      'http://api.weatherapi.com/v1/current.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&aqi=yes',
+      'http://khistory.pl/forecast.json',
+      // "http://api.weatherapi.com/v1/current.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&aqi=yes"
+      // 'http://api.weatherapi.com/v1/forecast.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&days=3&aqi=yes&alerts=no',
     )
     let json = await request.json()
     setTemp(Math.round(json.current.temp_c))
 
-    switch (json.current.condition.code) {
-      case 1273:
-      case 1276:
-      case 1279:
-      case 1282:
-        //burza z deszczem
-        setWeatherState('Burza z Deszczem')
-        setWeatherStateICO(json.current.condition.icon)
-        break
-      case 1087:
-        //burza
-        setWeatherState('Burza')
-        setWeatherStateICO(json.current.condition.icon)
-        break
-      case 1063:
-      case 1150:
-      case 1153:
-      case 1168:
-      case 1171:
-      case 1180:
-      case 1183:
-      case 1186:
-      case 1189:
-      case 1192:
-      case 1195:
-      case 1198:
-      case 1201:
-      case 1240:
-      case 1243:
-      case 1246:
-        //deszcz
-        setWeatherState('Deszcz')
-        setWeatherStateICO(json.current.condition.icon)
-        break
-      case 1066:
-      case 1069:
-      case 1072:
-      case 1114:
-      case 1117:
-      case 1204:
-      case 1207:
-      case 1210:
-      case 1213:
-      case 1216:
-      case 1219:
-      case 1222:
-      case 1225:
-      case 1237:
-      case 1249:
-      case 1252:
-      case 1255:
-      case 1258:
-      case 1261:
-      case 1264:
-        //śnieg
-        setWeatherState('Śnieg')
-        setWeatherStateICO(json.current.condition.icon)
-        break
-      case 1030:
-      case 1147:
-      case 1135:
-        //mgła
-        setWeatherState('Mgła')
-        setWeatherStateICO(json.current.condition.icon)
-        break
-      case 1000:
-        //słonecznie
-        setWeatherState('Słonecznie')
-        setWeatherStateICO(json.current.condition.icon)
-        break
-      case 1003:
-      case 1006:
-      case 1009:
-        //pochmurno
-        setWeatherState('Pochmurno')
-        break
-      default:
-        //nieznany lub błąd
-        setWeatherState('Error')
-        setWeatherStateICO(json.current.condition.icon)
-    }
+    setWeatherState(getStatus(json.current.condition.code))
+    setWeatherStateICO(json.current.condition.icon)
+    setWeatherState3Days([
+      weatherState,
+      getStatus(json.forecast.forecastday[1].day.condition.code),
+      getStatus(json.forecast.forecastday[2].day.condition.code),
+    ])
 
-    // switch (json.current.air_quality['us-epa-index']) {
-    switch (1) {
+    switch (json.current.air_quality['us-epa-index']) {
+      // switch (1) {
       case 1:
         setAirCond('Dobry')
         setAirLevel(75)
@@ -179,6 +195,73 @@ const Weather = () => {
 
   console.log(ready)
 
+  let [daysState, setDaysState] = useState(true)
+
+  const wysuwanie = useRef(new Animated.Value(-80)).current
+  const opacity = useRef(new Animated.Value(0)).current
+
+  const fade = (value = 0) => {
+    Animated.timing(wysuwanie, {
+      toValue: value,
+      duration: 300,
+      useNativeDriver: false,
+    }).start()
+  }
+
+  const fade1 = (value = 1) => {
+    Animated.timing(opacity, {
+      toValue: value,
+      duration: 200,
+      useNativeDriver: false,
+    }).start()
+  }
+
+  const fade_b = (value = -80) => {
+    Animated.timing(wysuwanie, {
+      toValue: value,
+      duration: 300,
+      useNativeDriver: false,
+    }).start()
+  }
+
+  const fade1_b = (value = 0) => {
+    Animated.timing(opacity, {
+      toValue: value,
+      duration: 200,
+      useNativeDriver: false,
+    }).start()
+  }
+
+  const days_weather = function () {
+    return {
+      position: 'absolute',
+      display: 'flex',
+      flexDirection: 'row',
+      width: '100%',
+      height: '100%',
+      top: 0,
+      opacity: opacity,
+      marginTop: wysuwanie,
+      borderRadius: responsiveNumber(10),
+      backgroundColor: '#434040',
+      overflow: 'hidden',
+      justifyContent: 'center',
+      textAlign: 'center',
+      alignItems: 'center',
+    }
+  }
+
+  const wys = () => {
+    fade()
+    fade1()
+    setDaysState(!daysState)
+  }
+  const wys_b = () => {
+    fade_b()
+    fade1_b()
+    setDaysState(!daysState)
+  }
+
   if (ready == false) {
     return (
       <View style={style.main}>
@@ -210,7 +293,7 @@ const Weather = () => {
                 {/* <Image source={ico} style={style.weather_icon} /> */}
               </View>
               <View style={style.weather_left_bottom}>
-                <Text style={style.stopnie}>10°C</Text>
+                <Text style={style.stopnie}>14°C</Text>
               </View>
             </View>
             <View style={style.weather_right}>
@@ -239,7 +322,6 @@ const Weather = () => {
           tint="default"
           style={style.O2_Background}
         >
-          {/* <View style={style.O2_level}></View> */}
           <Image
             source={poziomo2}
             style={{
@@ -251,10 +333,55 @@ const Weather = () => {
         </BlurView>
       </View>
       <View style={style.weather_container}>
+        {/* 3 days */}
+        <TouchableOpacity
+          style={style.weather_Background3}
+          onPress={daysState ? wys : wys_b}
+        >
+          <Animated.View
+            intensity={30}
+            tint="default"
+            style={days_weather()}
+          >
+            {/* dzien 1 */}
+            <View style={days.left}>
+              <Text style={days.dzien}>DZISIAJ</Text>
+              <Image
+                source={{ uri: 'http:' + weatherStateICO }}
+                style={style.weather_icon}
+              />
+              <Text style={days.stan}>{weatherState3Days[0]}</Text>
+              <Text style={days.stopnie}>{temp}°C</Text>
+            </View>
+            {/* dzien 2 */}
+            <View style={days.center}>
+              <Text style={days.dzien}>JUTRO</Text>
+              <Image
+                source={{ uri: 'http:' + weatherStateICO }}
+                style={style.weather_icon}
+              />
+              <Text style={days.stan}>{weatherState3Days[1]}</Text>
+              <Text style={days.stopnie}>{temp}°C</Text>
+            </View>
+            {/* dzien 3 */}
+            <View style={days.right}>
+              <Text style={days.dzien}>POJUTRZE</Text>
+              <Image
+                source={{ uri: 'http:' + weatherStateICO }}
+                style={style.weather_icon}
+              />
+              <Text style={days.stan}>{weatherState3Days[2]}</Text>
+              <Text style={days.stopnie}>{temp}°C</Text>
+            </View>
+            {/*  */}
+          </Animated.View>
+        </TouchableOpacity>
+        {/* 3 days */}
+
         <BlurView
           intensity={30}
           tint="default"
-          style={style.weather_Background}
+          style={style.weather_Background2}
         >
           <View style={style.weather_left}>
             <View style={style.weather_left_top}>
@@ -262,7 +389,6 @@ const Weather = () => {
                 source={{ uri: 'http:' + weatherStateICO }}
                 style={style.weather_icon}
               />
-              {/* <Image source={ico} style={style.weather_icon} /> */}
             </View>
             <View style={style.weather_left_bottom}>
               <Text style={style.stopnie}>{temp}°C</Text>
@@ -328,7 +454,7 @@ const style = StyleSheet.create({
   weather_container: {
     display: 'flex',
     flex: 4,
-
+    position: 'relative',
     // backgroundColor: "yellow",
     flexDirection: 'row',
     justifyContent: 'center',
@@ -341,9 +467,39 @@ const style = StyleSheet.create({
     width: '95%',
     height: '100%',
     borderRadius: responsiveNumber(10),
-    backgroundColor: 'red',
+
     justifyContent: 'center',
     textAlign: 'center',
+    alignItems: 'center',
+
+    alignItems: 'center',
+  },
+  weather_Background2: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '95%',
+    height: '100%',
+    borderRadius: responsiveNumber(10),
+
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+
+    alignItems: 'center',
+  },
+  weather_Background3: {
+    position: 'absolute',
+    display: 'flex',
+    flexDirection: 'row',
+    top: 0,
+    width: '95%',
+    height: '120%',
+    borderRadius: responsiveNumber(10),
+    overflow: 'hidden',
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+    zIndex: 2,
     alignItems: 'center',
   },
   weather_left: {
@@ -415,6 +571,46 @@ const style = StyleSheet.create({
     position: 'absolute',
     bottom: responsiveNumber(-6),
     opacity: 0.4,
+  },
+})
+
+const days = StyleSheet.create({
+  left: {
+    flex: 1,
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+    display: 'flex',
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+    display: 'flex',
+  },
+  right: {
+    flex: 1,
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+    display: 'flex',
+  },
+  dzien: {
+    color: 'white',
+    fontSize: RFValue(9),
+    letterSpacing: responsiveLetterSpacing(0, 9),
+    opacity: 0.8,
+  },
+  stan: {
+    color: 'white',
+    fontSize: RFValue(15),
+    letterSpacing: responsiveLetterSpacing(0, 15),
+  },
+  stopnie: {
+    color: 'white',
+    fontSize: RFValue(15),
+    letterSpacing: responsiveLetterSpacing(0, 15),
   },
 })
 
