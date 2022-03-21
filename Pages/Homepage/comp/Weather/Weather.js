@@ -22,6 +22,7 @@ import {
 
 import { BlurView } from 'expo-blur'
 
+//Burza z deszczem = 0, Burza = 1, Deszcz = 2, Śnieg = 3, Mgła = 4, Słonecznie = 5, Pochmurno = 6, ERROR = 404
 function getStatus(code) {
   switch (code) {
     case 1273:
@@ -29,10 +30,10 @@ function getStatus(code) {
     case 1279:
     case 1282:
       //burza z deszczem
-      return 'Burza z Deszczem'
+      return { Status: 'Burza z Deszczem', Kod: 0 }
     case 1087:
       //burza
-      return 'Burza'
+      return { Status: 'Burza', Kod: 1 }
     case 1063:
     case 1150:
     case 1153:
@@ -50,8 +51,7 @@ function getStatus(code) {
     case 1243:
     case 1246:
       //deszcz
-      return 'Deszcz'
-
+      return { Status: 'Deszcz', Kod: 2 }
     case 1066:
     case 1069:
     case 1072:
@@ -73,49 +73,40 @@ function getStatus(code) {
     case 1261:
     case 1264:
       //śnieg
-      return 'Śnieg'
-
+      return { Status: 'Śnieg', Kod: 3 }
     case 1030:
     case 1147:
     case 1135:
       //mgła
-      return 'Mgła'
-
+      return { Status: 'Mgła', Kod: 4 }
     case 1000:
       //słonecznie
-      return 'Słonecznie'
-
+      return { Status: 'Słonecznie', Kod: 5 }
     case 1003:
     case 1006:
     case 1009:
       //pochmurno
-      return 'Pochmurno'
-
+      return { Status: 'Pochmurno', Kod: 6 }
     default:
       //nieznany lub błąd
-      return 'ERROR'
+      return { Status: 'ERROR', Kod: 404 }
   }
 }
 
 const Weather = () => {
   let [temp, setTemp] = useState('0.0')
-  let [weatherState, setWeatherState] = useState('')
-  let [weatherState3Days, setWeatherState3Days] = useState(['', '', ''])
-  let [weatherState3DaysICO, setWeatherState3DaysICO] = useState([
+  let [weatherState, setWeatherState] = useState(['', '', ''])
+  let [weatherStateICO, setWeatherStateICO] = useState([
     '//cdn.weatherapi.com/weather/64x64/night/296.png',
     '//cdn.weatherapi.com/weather/64x64/night/296.png',
     '//cdn.weatherapi.com/weather/64x64/night/296.png',
   ])
-  let [weatherStateICO, setWeatherStateICO] = useState(
-    '//cdn.weatherapi.com/weather/64x64/night/296.png',
-  )
   let [airCond, setAirCond] = useState('1')
   let [airColor, setAirColor] = useState('green')
   let [airLevel, setAirLevel] = useState(10)
   let [ready, setReady] = useState(false)
 
-  // Thunderstorm, Drizzle, Rain, Snow, Mist, Smoke, Haze, Dust, Fog, Sand, Dust, Ash, Squall, Tornado, Clear, Clouds
-  // Burza z piorunami, Mżawka, Deszcz, Śnieg, Mgła, Dym, Mgiełka, Pył, Mgła, Piasek, Pył, Popiół, Szkwał, Tornado, Czysto, Chmury
+  //Burza z deszczem = 0, Burza = 1, Deszcz = 2, Śnieg = 3, Mgła = 4, Słonecznie = 5, Pochmurno = 6, ERROR = 404
 
   const CallApi = async () => {
     setReady(false)
@@ -128,12 +119,15 @@ const Weather = () => {
     let json = await request.json()
     setTemp(Math.round(json.current.temp_c))
 
-    setWeatherState(getStatus(json.current.condition.code))
-    setWeatherStateICO(json.current.condition.icon)
-    setWeatherState3Days([
-      weatherState,
-      getStatus(json.forecast.forecastday[1].day.condition.code),
-      getStatus(json.forecast.forecastday[2].day.condition.code),
+    setWeatherState([
+      getStatus(json.current.condition.code).Status,
+      getStatus(json.forecast.forecastday[1].day.condition.code).Status,
+      getStatus(json.forecast.forecastday[2].day.condition.code).Status,
+    ])
+    setWeatherStateICO([
+      json.current.condition.icon,
+      json.forecast.forecastday[1].day.condition.icon,
+      json.forecast.forecastday[2].day.condition.icon,
     ])
 
     switch (json.current.air_quality['us-epa-index']) {
@@ -190,10 +184,6 @@ const Weather = () => {
     CallApi()
   }, [])
   // setAirLevel(1 * 10 + 35)
-  console.log('powietrze: ' + airCond)
-  console.log('level to: ' + airLevel)
-
-  console.log(ready)
 
   let [daysState, setDaysState] = useState(true)
 
@@ -347,30 +337,30 @@ const Weather = () => {
             <View style={days.left}>
               <Text style={days.dzien}>DZISIAJ</Text>
               <Image
-                source={{ uri: 'http:' + weatherStateICO }}
+                source={{ uri: 'http:' + weatherStateICO[0] }}
                 style={style.weather_icon}
               />
-              <Text style={days.stan}>{weatherState3Days[0]}</Text>
+              <Text style={days.stan}>{weatherState[0]}</Text>
               <Text style={days.stopnie}>{temp}°C</Text>
             </View>
             {/* dzien 2 */}
             <View style={days.center}>
               <Text style={days.dzien}>JUTRO</Text>
               <Image
-                source={{ uri: 'http:' + weatherStateICO }}
+                source={{ uri: 'http:' + weatherStateICO[1] }}
                 style={style.weather_icon}
               />
-              <Text style={days.stan}>{weatherState3Days[1]}</Text>
+              <Text style={days.stan}>{weatherState[1]}</Text>
               <Text style={days.stopnie}>{temp}°C</Text>
             </View>
             {/* dzien 3 */}
             <View style={days.right}>
               <Text style={days.dzien}>POJUTRZE</Text>
               <Image
-                source={{ uri: 'http:' + weatherStateICO }}
+                source={{ uri: 'http:' + weatherStateICO[2] }}
                 style={style.weather_icon}
               />
-              <Text style={days.stan}>{weatherState3Days[2]}</Text>
+              <Text style={days.stan}>{weatherState[2]}</Text>
               <Text style={days.stopnie}>{temp}°C</Text>
             </View>
             {/*  */}
@@ -386,7 +376,7 @@ const Weather = () => {
           <View style={style.weather_left}>
             <View style={style.weather_left_top}>
               <Image
-                source={{ uri: 'http:' + weatherStateICO }}
+                source={{ uri: 'http:' + weatherStateICO[0] }}
                 style={style.weather_icon}
               />
             </View>
@@ -399,7 +389,7 @@ const Weather = () => {
               <Text style={style.kalisz}>KALISZ</Text>
             </View>
             <View style={style.weather_right_center}>
-              <Text style={style.slonecznie}>{weatherState}</Text>
+              <Text style={style.slonecznie}>{weatherState[0]}</Text>
             </View>
             <View style={style.weather_right_bottom}>
               <Image source={wykres} style={style.weather_wykres} />
