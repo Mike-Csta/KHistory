@@ -21,10 +21,7 @@ import {
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
 
-let cytatNr = Math.floor(Math.random() * 5 + 1);
-
 const Homepage = ({ navigation }) => {
-  // console.log(cytatNr)
   return (
     <View style={style.main}>
       <StatusBar style="light" />
@@ -38,10 +35,10 @@ const Homepage = ({ navigation }) => {
             <Weather />
           </View>
           <View style={style.center_center}>
-            <Cytat numer={cytatNr} />
+            <Cytat />
           </View>
           <View style={style.center_bottom}>
-            <Qrbutton navigation={navigation} numer={cytatNr} />
+            <Qrbutton navigation={navigation} />
             <Custom_Buttons navigation={navigation} />
           </View>
         </View>

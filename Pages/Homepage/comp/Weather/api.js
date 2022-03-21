@@ -11,7 +11,7 @@ const WeatherApi = (props) => {
       'https://api.openweathermap.org/data/2.5/weather?q=Kalisz&units=metric&appid=851a0d240becabfe5a8e6d2b6a24c324',
     )
     let json = await request.json()
-    console.log(json.main.temp)
+    // console.log(json.main.temp)
     setTemp(Math.round(json.main.temp * 10) / 10)
   }
 
