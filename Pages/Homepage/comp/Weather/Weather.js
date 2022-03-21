@@ -11,9 +11,12 @@ import {
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import AppLoading from "expo-app-loading";
 // import { WeatherApi } from './api'
+
 import wykres from "../../../../src/Path3_3.png";
 import poziomo2 from "../../../../src/poziomo2GRAY.png";
 import O2 from "../../../../src/O2.png";
+
+
 import {
   responsiveNumber,
   responsiveLetterSpacing,
@@ -38,10 +41,12 @@ function getStatus(code) {
     case 1279:
     case 1282:
       //burza z deszczem
+
       return { Status: "Burza z Deszczem", Ikona: burzaZDeszczem };
     case 1087:
       //burza
       return { Status: "Burza", Ikona: burza };
+
     case 1063:
     case 1150:
     case 1153:
@@ -59,7 +64,9 @@ function getStatus(code) {
     case 1243:
     case 1246:
       //deszcz
+
       return { Status: "Deszcz", Ikona: deszcz };
+
     case 1066:
     case 1069:
     case 1072:
@@ -81,27 +88,35 @@ function getStatus(code) {
     case 1261:
     case 1264:
       //śnieg
+
       return { Status: "Śnieg", Ikona: snieg };
+
     case 1030:
     case 1147:
     case 1135:
       //mgła
+
       return { Status: "Mgła", Ikona: mgla };
     case 1000:
       //słonecznie
       return { Status: "Słonecznie", Ikona: slonecznie };
+
+
     case 1003:
     case 1006:
     case 1009:
       //pochmurno
+
       return { Status: "Pochmurno", Ikona: pochmurno };
     default:
       //nieznany lub błąd
       return { Status: "ERROR", Ikona: error };
+
   }
 }
 
 const Weather = () => {
+
   let [temp, setTemp] = useState(["0.0", "0,0", "0,0"]);
   let [weatherState, setWeatherState] = useState(["", "", ""]);
   let [weatherStateICO, setWeatherStateICO] = useState([
@@ -114,33 +129,36 @@ const Weather = () => {
   let [airLevel, setAirLevel] = useState(10);
   let [ready, setReady] = useState(false);
 
+
   //Burza z deszczem = 0, Burza = 1, Deszcz = 2, Śnieg = 3, Mgła = 4, Słonecznie = 5, Pochmurno = 6, ERROR = 404
 
   const CallApi = async () => {
     setReady(false);
     let request = await fetch(
       // 'https://api.openweathermap.org/data/2.5/weather?q=Kalisz&units=metric&appid=851a0d240becabfe5a8e6d2b6a24c324',
-      // 'http://khistory.pl/forecast.json',
+
+      "http://khistory.pl/forecast.json"
       // "http://api.weatherapi.com/v1/current.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&aqi=yes"
-      "http://api.weatherapi.com/v1/forecast.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&days=3&aqi=yes&alerts=no"
+      // 'http://api.weatherapi.com/v1/forecast.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&days=3&aqi=yes&alerts=no',
     );
     let json = await request.json();
-    setTemp([
-      Math.round(json.current.temp_c),
-      Math.round(json.forecast.forecastday[1].day.avgtemp_c),
-      Math.round(json.forecast.forecastday[2].day.avgtemp_c),
-    ]);
+    setTemp(Math.round(json.current.temp_c));
+
+
     setWeatherState([
       getStatus(json.current.condition.code).Status,
       getStatus(json.forecast.forecastday[1].day.condition.code).Status,
       getStatus(json.forecast.forecastday[2].day.condition.code).Status,
+
     ]);
+
 
     setWeatherStateICO([
       getStatus(json.current.condition.code).Ikona,
       getStatus(json.forecast.forecastday[1].day.condition.code).Ikona,
       getStatus(json.forecast.forecastday[2].day.condition.code).Ikona,
     ]);
+
 
     switch (json.current.air_quality["us-epa-index"]) {
       // switch (1) {
@@ -181,9 +199,11 @@ const Weather = () => {
 
         break;
       default:
+
         setAirCond("**pobieranie**");
         setTimeout(function () {
           setAirCond("**ERROR**");
+
         }, 2000);
         break;
     }
@@ -336,21 +356,36 @@ const Weather = () => {
             {/* dzien 1 */}
             <View style={days.left}>
               <Text style={days.dzien}>DZISIAJ</Text>
+
               <Image source={weatherStateICO[0]} style={style.weather_icon} />
+
+                style={style.weather_icon}
+              />
+
               <Text style={days.stan}>{weatherState[0]}</Text>
               <Text style={days.stopnie}>{temp[0]}°C</Text>
             </View>
             {/* dzien 2 */}
             <View style={days.center}>
               <Text style={days.dzien}>JUTRO</Text>
+
               <Image source={weatherStateICO[1]} style={style.weather_icon} />
+
+                style={style.weather_icon}
+              />
+
               <Text style={days.stan}>{weatherState[1]}</Text>
               <Text style={days.stopnie}>{temp[1]}°C</Text>
             </View>
             {/* dzien 3 */}
             <View style={days.right}>
               <Text style={days.dzien}>POJUTRZE</Text>
+
               <Image source={weatherStateICO[2]} style={style.weather_icon} />
+
+                style={style.weather_icon}
+              />
+
               <Text style={days.stan}>{weatherState[2]}</Text>
               <Text style={days.stopnie}>{temp[2]}°C</Text>
             </View>
@@ -366,7 +401,12 @@ const Weather = () => {
         >
           <View style={style.weather_left}>
             <View style={style.weather_left_top}>
+
               <Image source={weatherStateICO[0]} style={style.weather_icon} />
+
+                style={style.weather_icon}
+              />
+
             </View>
             <View style={style.weather_left_bottom}>
               <Text style={style.stopnie}>{temp[0]}°C</Text>
@@ -526,6 +566,7 @@ const style = StyleSheet.create({
   weather_right: {
     display: "flex",
     flexDirection: "column",
+
     flex: 3.3,
   },
   weather_right_top: {
@@ -542,7 +583,7 @@ const style = StyleSheet.create({
   },
   weather_right_bottom: {
     position: "relative",
-    // backgroundColor: "red",
+
     flex: 0.5,
     justifyContent: "center",
     alignItems: "center",
