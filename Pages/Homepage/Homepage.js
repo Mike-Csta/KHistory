@@ -185,6 +185,13 @@ const style2 = StyleSheet.create({
 let style = style1;
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
+
+if (windowHeight / windowWidth > 1.8) {
+  style = style1;
+} else {
+  style = style2;
+}
+
 // console.log(windowWidth, windowHeight)
 
 // console.log(Dimensions.get("screen"));
