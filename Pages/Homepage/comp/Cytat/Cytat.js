@@ -7,22 +7,13 @@ import {
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
 const Cytat = (props) => {
-<<<<<<< HEAD
   let cytatNr = Math.floor(Math.random() * 5 + 1);
-=======
-  let cytatNr = Math.floor(Math.random() * 5 + 1)
-
->>>>>>> b4f821d8b48ca3a096a2bf6501f21743ce93b5c7
   return (
     <View style={style.main}>
       <View style={style.container}>
         <View style={{ transform: [{ translateY: 0 }] }}>
           <Text style={style.cytat}>
-<<<<<<< HEAD
             <CytatApi typ={"cytat"} numer={props.numer} />
-=======
-            <CytatApi cytat={true} numer={props.numer} />
->>>>>>> b4f821d8b48ca3a096a2bf6501f21743ce93b5c7
           </Text>
         </View>
         <View>
@@ -30,11 +21,7 @@ const Cytat = (props) => {
         </View>
         <View>
           <Text style={style.autor}>
-<<<<<<< HEAD
             <CytatApi typ={"autor"} numer={props.numer} />
-=======
-            <CytatApi cytat={false} numer={props.numer} />
->>>>>>> b4f821d8b48ca3a096a2bf6501f21743ce93b5c7
           </Text>
         </View>
       </View>
@@ -120,19 +107,11 @@ const style2 = StyleSheet.create({
     fontSize: responsiveNumber(9),
     letterSpacing: responsiveLetterSpacing(80, 13),
   },
-<<<<<<< HEAD
 });
 let style = style1;
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 console.log(windowWidth, windowHeight);
-=======
-})
-let style = style1
-const windowWidth = Dimensions.get('window').width
-const windowHeight = Dimensions.get('window').height
-// console.log(windowWidth, windowHeight)
->>>>>>> b4f821d8b48ca3a096a2bf6501f21743ce93b5c7
 
 if (windowHeight / windowWidth > 1.8) {
   style = style1;
