@@ -495,6 +495,34 @@ const style = StyleSheet.create({
     width: '95%',
     height: '120%',
     borderRadius: responsiveNumber(10),
+
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+
+    alignItems: 'center',
+  },
+  weather_Background2: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '95%',
+    height: '100%',
+    borderRadius: responsiveNumber(10),
+
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+
+    alignItems: 'center',
+  },
+  weather_Background3: {
+    position: 'absolute',
+    display: 'flex',
+    flexDirection: 'row',
+    top: 0,
+    width: '95%',
+    height: '120%',
+    borderRadius: responsiveNumber(10),
     overflow: 'hidden',
     justifyContent: 'center',
     textAlign: 'center',
