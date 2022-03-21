@@ -16,7 +16,6 @@ import wykres from "../../../../src/Path3_3.png";
 import poziomo2 from "../../../../src/poziomo2GRAY.png";
 import O2 from "../../../../src/O2.png";
 
-
 import {
   responsiveNumber,
   responsiveLetterSpacing,
@@ -101,7 +100,6 @@ function getStatus(code) {
       //słonecznie
       return { Status: "Słonecznie", Ikona: slonecznie };
 
-
     case 1003:
     case 1006:
     case 1009:
@@ -111,12 +109,10 @@ function getStatus(code) {
     default:
       //nieznany lub błąd
       return { Status: "ERROR", Ikona: error };
-
   }
 }
 
 const Weather = () => {
-
   let [temp, setTemp] = useState(["0.0", "0,0", "0,0"]);
   let [weatherState, setWeatherState] = useState(["", "", ""]);
   let [weatherStateICO, setWeatherStateICO] = useState([
@@ -128,7 +124,6 @@ const Weather = () => {
   let [airColor, setAirColor] = useState("green");
   let [airLevel, setAirLevel] = useState(10);
   let [ready, setReady] = useState(false);
-
 
   //Burza z deszczem = 0, Burza = 1, Deszcz = 2, Śnieg = 3, Mgła = 4, Słonecznie = 5, Pochmurno = 6, ERROR = 404
 
@@ -144,21 +139,17 @@ const Weather = () => {
     let json = await request.json();
     setTemp(Math.round(json.current.temp_c));
 
-
     setWeatherState([
       getStatus(json.current.condition.code).Status,
       getStatus(json.forecast.forecastday[1].day.condition.code).Status,
       getStatus(json.forecast.forecastday[2].day.condition.code).Status,
-
     ]);
-
 
     setWeatherStateICO([
       getStatus(json.current.condition.code).Ikona,
       getStatus(json.forecast.forecastday[1].day.condition.code).Ikona,
       getStatus(json.forecast.forecastday[2].day.condition.code).Ikona,
     ]);
-
 
     switch (json.current.air_quality["us-epa-index"]) {
       // switch (1) {
@@ -199,11 +190,9 @@ const Weather = () => {
 
         break;
       default:
-
         setAirCond("**pobieranie**");
         setTimeout(function () {
           setAirCond("**ERROR**");
-
         }, 2000);
         break;
     }
@@ -359,9 +348,6 @@ const Weather = () => {
 
               <Image source={weatherStateICO[0]} style={style.weather_icon} />
 
-                style={style.weather_icon}
-              />
-
               <Text style={days.stan}>{weatherState[0]}</Text>
               <Text style={days.stopnie}>{temp[0]}°C</Text>
             </View>
@@ -371,9 +357,6 @@ const Weather = () => {
 
               <Image source={weatherStateICO[1]} style={style.weather_icon} />
 
-                style={style.weather_icon}
-              />
-
               <Text style={days.stan}>{weatherState[1]}</Text>
               <Text style={days.stopnie}>{temp[1]}°C</Text>
             </View>
@@ -382,9 +365,6 @@ const Weather = () => {
               <Text style={days.dzien}>POJUTRZE</Text>
 
               <Image source={weatherStateICO[2]} style={style.weather_icon} />
-
-                style={style.weather_icon}
-              />
 
               <Text style={days.stan}>{weatherState[2]}</Text>
               <Text style={days.stopnie}>{temp[2]}°C</Text>
@@ -401,12 +381,7 @@ const Weather = () => {
         >
           <View style={style.weather_left}>
             <View style={style.weather_left_top}>
-
               <Image source={weatherStateICO[0]} style={style.weather_icon} />
-
-                style={style.weather_icon}
-              />
-
             </View>
             <View style={style.weather_left_bottom}>
               <Text style={style.stopnie}>{temp[0]}°C</Text>
