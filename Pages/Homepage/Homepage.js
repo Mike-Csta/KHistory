@@ -57,7 +57,7 @@ const style1 = StyleSheet.create({
     position: 'relative',
     width: '100%',
     backgroundColor: '#282422',
-    height: Dimensions.get('window').height,
+    height: Dimensions.get('window').height + getStatusBarHeight(),
   },
   status_bar_container: {
     marginTop: getStatusBarHeight(),
@@ -185,10 +185,12 @@ const style2 = StyleSheet.create({
 let style = style1
 const windowWidth = Dimensions.get('window').width
 const windowHeight = Dimensions.get('window').height
-// console.log(windowWidth, windowHeight)
+console.log(windowWidth, windowHeight)
 
-console.log(Dimensions.get('screen'))
-
-console.log(style)
+if (windowHeight / windowWidth > 1.8) {
+  style = style1
+} else {
+  style = style2
+}
 
 export default Homepage
