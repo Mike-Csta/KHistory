@@ -50,11 +50,13 @@ const Homepage = ({ navigation }) => {
 
 const style1 = StyleSheet.create({
   main: {
-    display: "flex",
-    position: "relative",
-    width: "100%",
-    backgroundColor: "#282422",
-    height: Dimensions.get("window").height + getStatusBarHeight(),
+
+    display: 'flex',
+    position: 'relative',
+    width: '100%',
+    backgroundColor: '#282422',
+    height: Dimensions.get('window').height + getStatusBarHeight(),
+
   },
   status_bar_container: {
     marginTop: getStatusBarHeight(),
@@ -179,15 +181,17 @@ const style2 = StyleSheet.create({
   },
 });
 
-let style = style1;
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-console.log(windowWidth, windowHeight);
+
+let style = style1
+const windowWidth = Dimensions.get('window').width
+const windowHeight = Dimensions.get('window').height
+console.log(windowWidth, windowHeight)
 
 if (windowHeight / windowWidth > 1.8) {
-  style = style1;
+  style = style1
 } else {
-  style = style2;
+  style = style2
+
 }
 
 export default Homepage;
