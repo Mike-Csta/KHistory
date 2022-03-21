@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 
 const Szablon = (props) => {
-  print(props.numer)
   const Json = async () => {
     let request = await fetch('http://khistory.pl/osoby.json')
     let json = await request.json()

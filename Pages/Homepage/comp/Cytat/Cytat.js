@@ -8,12 +8,13 @@ import {
 } from 'react-native-responsive-number'
 const Cytat = (props) => {
   let cytatNr = Math.floor(Math.random() * 5 + 1)
+
   return (
     <View style={style.main}>
       <View style={style.container}>
         <View style={{ transform: [{ translateY: 0 }] }}>
           <Text style={style.cytat}>
-            <CytatApi typ={'cytat'} numer={props.numer} />
+            <CytatApi cytat={true} numer={props.numer} />
           </Text>
         </View>
         <View>
@@ -21,7 +22,7 @@ const Cytat = (props) => {
         </View>
         <View>
           <Text style={style.autor}>
-            <CytatApi typ={'autor'} numer={props.numer} />
+            <CytatApi cytat={false} numer={props.numer} />
           </Text>
         </View>
       </View>
@@ -111,7 +112,7 @@ const style2 = StyleSheet.create({
 let style = style1
 const windowWidth = Dimensions.get('window').width
 const windowHeight = Dimensions.get('window').height
-console.log(windowWidth, windowHeight)
+// console.log(windowWidth, windowHeight)
 
 if (windowHeight / windowWidth > 1.8) {
   style = style1

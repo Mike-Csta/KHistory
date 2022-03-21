@@ -17,7 +17,7 @@ import scan from '../../../../src/scan.png'
 import lih from '../../../../src/LIH.png'
 
 const Qrbutton = (props) => {
-  console.log(props.numer)
+  // console.log(props.numer)
   return (
     <View>
       <View style={style.centerTop}></View>

@@ -1,0 +1,33 @@
+{
+	"osoby": [{
+			"imie": "Mike",
+			"nazwisko": "Csta",
+			"opis": "Tak",
+			"cytat": "Piękne poezje poetów z kalisza nikt nie wie kim jest ten kto to napisał, jeszcze, dzisiaj"
+		},
+		{
+			"imie": "Adam",
+			"nazwisko": "Asnyk",
+			"opis": "opis2",
+			"cytat": "Głowę swą oprzyj na mym ramieniu I do księżyca obróć swą twarz, I oświecona w bladym promieniu O widmie szczęścia dumaj i marz!"
+		},
+		{
+			"imie": "Adam",
+			"nazwisko": "Asnyk",
+			"opis": "opis3",
+			"cytat": "Jednego serca! tak mało! tak mało, Jednego serca trzeba mi na ziemi! Coby przy mojem miłością zadrżało: A byłbym cichym pomiędzy cichemi..."
+		},
+		{
+			"imie": "Adam",
+			"nazwisko": "Asnyk",
+			"opis": "opis4",
+			"cytat": "Między nami nic nie było. żadnych zwierzeń, wyznań żadnych; Nic nas z sobą nie łączyło Prócz wiosennych marzeń zdradnych"
+		},
+		{
+			"imie": "Adam",
+			"nazwisko": "Asnyk",
+			"opis": "opis5",
+			"cytat": "Jeśli jakaś dłoń ma miejsce w drugiej dłoni, to właśnie jest przyjaźń."
+		}
+	]
+}

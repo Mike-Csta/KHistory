@@ -11,7 +11,6 @@ import {
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import AppLoading from 'expo-app-loading'
 // import { WeatherApi } from './api'
-import sun from '../../../../src/sun.png'
 import wykres from '../../../../src/Path3_3.png'
 import poziomo2 from '../../../../src/poziomo2GRAY.png'
 import O2 from '../../../../src/O2.png'
@@ -22,6 +21,15 @@ import {
 
 import { BlurView } from 'expo-blur'
 
+import burzaZDeszczem from '../../../../src/icons/0.png'
+import burza from '../../../../src/icons/1.png'
+import deszcz from '../../../../src/icons/2.png'
+import snieg from '../../../../src/icons/3.png'
+// import mgla from '../../../../src/icons/4.png'
+import slonecznie from '../../../../src/icons/5.png'
+import pochmurno from '../../../../src/icons/6.png'
+import error from '../../../../src/icons/404.png'
+
 //Burza z deszczem = 0, Burza = 1, Deszcz = 2, Śnieg = 3, Mgła = 4, Słonecznie = 5, Pochmurno = 6, ERROR = 404
 function getStatus(code) {
   switch (code) {
@@ -30,10 +38,10 @@ function getStatus(code) {
     case 1279:
     case 1282:
       //burza z deszczem
-      return { Status: 'Burza z Deszczem', Kod: 0 }
+      return { Status: 'Burza z Deszczem', Ikona: burzaZDeszczem }
     case 1087:
       //burza
-      return { Status: 'Burza', Kod: 1 }
+      return { Status: 'Burza', Ikona: burza }
     case 1063:
     case 1150:
     case 1153:
@@ -51,7 +59,7 @@ function getStatus(code) {
     case 1243:
     case 1246:
       //deszcz
-      return { Status: 'Deszcz', Kod: 2 }
+      return { Status: 'Deszcz', Ikona: deszcz }
     case 1066:
     case 1069:
     case 1072:
@@ -73,33 +81,33 @@ function getStatus(code) {
     case 1261:
     case 1264:
       //śnieg
-      return { Status: 'Śnieg', Kod: 3 }
+      return { Status: 'Śnieg', Ikona: snieg }
     case 1030:
     case 1147:
     case 1135:
       //mgła
-      return { Status: 'Mgła', Kod: 4 }
+      return { Status: 'Mgła', Ikona: mgla }
     case 1000:
       //słonecznie
-      return { Status: 'Słonecznie', Kod: 5 }
+      return { Status: 'Słonecznie', Ikona: slonecznie }
     case 1003:
     case 1006:
     case 1009:
       //pochmurno
-      return { Status: 'Pochmurno', Kod: 6 }
+      return { Status: 'Pochmurno', Ikona: pochmurno }
     default:
       //nieznany lub błąd
-      return { Status: 'ERROR', Kod: 404 }
+      return { Status: 'ERROR', Ikona: error }
   }
 }
 
 const Weather = () => {
-  let [temp, setTemp] = useState('0.0')
+  let [temp, setTemp] = useState(['0.0', '0,0', '0,0'])
   let [weatherState, setWeatherState] = useState(['', '', ''])
   let [weatherStateICO, setWeatherStateICO] = useState([
-    '//cdn.weatherapi.com/weather/64x64/night/296.png',
-    '//cdn.weatherapi.com/weather/64x64/night/296.png',
-    '//cdn.weatherapi.com/weather/64x64/night/296.png',
+    '../../../../src/icons/0.png',
+    '../../../../src/icons/0.png',
+    '../../../../src/icons/0.png',
   ])
   let [airCond, setAirCond] = useState('1')
   let [airColor, setAirColor] = useState('green')
@@ -112,22 +120,26 @@ const Weather = () => {
     setReady(false)
     let request = await fetch(
       // 'https://api.openweathermap.org/data/2.5/weather?q=Kalisz&units=metric&appid=851a0d240becabfe5a8e6d2b6a24c324',
-      'http://khistory.pl/forecast.json',
+      // 'http://khistory.pl/forecast.json',
       // "http://api.weatherapi.com/v1/current.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&aqi=yes"
-      // 'http://api.weatherapi.com/v1/forecast.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&days=3&aqi=yes&alerts=no',
+      'http://api.weatherapi.com/v1/forecast.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&days=3&aqi=yes&alerts=no',
     )
     let json = await request.json()
-    setTemp(Math.round(json.current.temp_c))
-
+    setTemp([
+      Math.round(json.current.temp_c),
+      Math.round(json.forecast.forecastday[1].day.avgtemp_c),
+      Math.round(json.forecast.forecastday[2].day.avgtemp_c),
+    ])
     setWeatherState([
       getStatus(json.current.condition.code).Status,
       getStatus(json.forecast.forecastday[1].day.condition.code).Status,
       getStatus(json.forecast.forecastday[2].day.condition.code).Status,
     ])
+
     setWeatherStateICO([
-      json.current.condition.icon,
-      json.forecast.forecastday[1].day.condition.icon,
-      json.forecast.forecastday[2].day.condition.icon,
+      getStatus(json.current.condition.code).Ikona,
+      getStatus(json.forecast.forecastday[1].day.condition.code).Ikona,
+      getStatus(json.forecast.forecastday[2].day.condition.code).Ikona,
     ])
 
     switch (json.current.air_quality['us-epa-index']) {
@@ -337,31 +349,31 @@ const Weather = () => {
             <View style={days.left}>
               <Text style={days.dzien}>DZISIAJ</Text>
               <Image
-                source={{ uri: 'http:' + weatherStateICO[0] }}
+                source={weatherStateICO[0]}
                 style={style.weather_icon}
               />
               <Text style={days.stan}>{weatherState[0]}</Text>
-              <Text style={days.stopnie}>{temp}°C</Text>
+              <Text style={days.stopnie}>{temp[0]}°C</Text>
             </View>
             {/* dzien 2 */}
             <View style={days.center}>
               <Text style={days.dzien}>JUTRO</Text>
               <Image
-                source={{ uri: 'http:' + weatherStateICO[1] }}
+                source={weatherStateICO[1]}
                 style={style.weather_icon}
               />
               <Text style={days.stan}>{weatherState[1]}</Text>
-              <Text style={days.stopnie}>{temp}°C</Text>
+              <Text style={days.stopnie}>{temp[1]}°C</Text>
             </View>
             {/* dzien 3 */}
             <View style={days.right}>
               <Text style={days.dzien}>POJUTRZE</Text>
               <Image
-                source={{ uri: 'http:' + weatherStateICO[2] }}
+                source={weatherStateICO[2]}
                 style={style.weather_icon}
               />
               <Text style={days.stan}>{weatherState[2]}</Text>
-              <Text style={days.stopnie}>{temp}°C</Text>
+              <Text style={days.stopnie}>{temp[2]}°C</Text>
             </View>
             {/*  */}
           </Animated.View>
@@ -376,12 +388,12 @@ const Weather = () => {
           <View style={style.weather_left}>
             <View style={style.weather_left_top}>
               <Image
-                source={{ uri: 'http:' + weatherStateICO[0] }}
+                source={weatherStateICO[0]}
                 style={style.weather_icon}
               />
             </View>
             <View style={style.weather_left_bottom}>
-              <Text style={style.stopnie}>{temp}°C</Text>
+              <Text style={style.stopnie}>{temp[0]}°C</Text>
             </View>
           </View>
           <View style={style.weather_right}>

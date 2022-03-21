@@ -21,10 +21,10 @@ import {
   responsiveLetterSpacing,
 } from 'react-native-responsive-number'
 
-let cytatNr = Math.floor(Math.random() * 5 + 1)
+let cytatNr = Math.floor(Math.random() * 5)
 
 const Homepage = ({ navigation }) => {
-  console.log(cytatNr)
+  // console.log(cytatNr)
   return (
     <View style={style.main}>
       <StatusBar style="light" />
@@ -57,7 +57,7 @@ const style1 = StyleSheet.create({
     position: 'relative',
     width: '100%',
     backgroundColor: '#282422',
-    height: Dimensions.get('window').height + getStatusBarHeight(),
+    height: Dimensions.get('window').height,
   },
   status_bar_container: {
     marginTop: getStatusBarHeight(),
@@ -185,12 +185,10 @@ const style2 = StyleSheet.create({
 let style = style1
 const windowWidth = Dimensions.get('window').width
 const windowHeight = Dimensions.get('window').height
-console.log(windowWidth, windowHeight)
+// console.log(windowWidth, windowHeight)
 
-if (windowHeight / windowWidth > 1.8) {
-  style = style1
-} else {
-  style = style2
-}
+console.log(Dimensions.get('screen'))
+
+console.log(style)
 
 export default Homepage
