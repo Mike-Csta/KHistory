@@ -33,9 +33,9 @@ const Szablon = (props) => {
       <View style={style.bar}>
         <View style={style.top}>
           <CytatHis />
-          <Button />
+          <Button value={"POSTACIE"} />
           <Scroll />
-          <Button />
+          <Button value={"ZABYTKI"} />
           <Scroll />
         </View>
         <View style={style.bottom}>

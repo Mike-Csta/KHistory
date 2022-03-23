@@ -57,7 +57,7 @@ const style1 = StyleSheet.create({
     position: "relative",
     width: "100%",
     backgroundColor: "#282422",
-    height: Dimensions.get("window").height,
+    height: Dimensions.get("window").height + getStatusBarHeight(),
   },
   status_bar_container: {
     marginTop: getStatusBarHeight(),

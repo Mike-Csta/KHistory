@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, PixelRatio } from "react-native";
 import {
   responsiveNumber,
   responsiveLetterSpacing,
@@ -8,7 +8,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 const Footer = () => {
   return (
     <View style={style.container}>
-      <Text>Szablon Modułu</Text>
+      <Text style={style.text}>POZNAJ HISTORIE KALISZA</Text>
     </View>
   );
 };
@@ -24,6 +24,11 @@ const style = StyleSheet.create({
     flex: 1,
     backgroundColor: "#242424",
     // bottom: getStatusBarHeight(),
+  },
+  text: {
+    color: "white",
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(4.3),
+    letterSpacing: responsiveLetterSpacing(300, 4.3),
   },
 });
 
