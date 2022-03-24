@@ -13,43 +13,31 @@ import {
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
 
-const Scroll = () => {
+const ScrollZabytki = () => {
   const osoby = [
     {
-      imie: "Adam",
-      nazwisko: "Asnyk",
-      obraz:
-        "https://www.kalisz.pl/storage/image/core_files/2018/7/2/4e8a57f412256484aeacecc36186f179/umkalisz/list/aasnyk.jpg",
+      nazwa: "Skarbiec Sanktuarium św. Józefa",
+      // obraz: require("../../src/zabytek.png"),
     },
     {
-      imie: "Adam",
-      nazwisko: "Asnyk",
-      obraz:
-        "https://www.kalisz.pl/storage/image/core_files/2018/7/2/4e8a57f412256484aeacecc36186f179/umkalisz/list/aasnyk.jpg",
+      nazwa: "Skarbiec Sanktuarium św. Józefa",
+      // obraz: require("../../src/zabytek.png"),
     },
     {
-      imie: "Adam",
-      nazwisko: "Asnyk",
-      obraz:
-        "https://www.kalisz.pl/storage/image/core_files/2018/7/2/4e8a57f412256484aeacecc36186f179/umkalisz/list/aasnyk.jpg",
+      nazwa: "Skarbiec Sanktuarium św. Józefa",
+      // obraz: require("../../src/zabytek.png"),
     },
     {
-      imie: "Adam",
-      nazwisko: "Asnyk",
-      obraz:
-        "https://www.kalisz.pl/storage/image/core_files/2018/7/2/4e8a57f412256484aeacecc36186f179/umkalisz/list/aasnyk.jpg",
+      nazwa: "Skarbiec Sanktuarium św. Józefa",
+      // obraz: require("../../src/zabytek.png"),
     },
     {
-      imie: "Adam",
-      nazwisko: "Asnyk",
-      obraz:
-        "https://www.kalisz.pl/storage/image/core_files/2018/7/2/4e8a57f412256484aeacecc36186f179/umkalisz/list/aasnyk.jpg",
+      nazwa: "Skarbiec Sanktuarium św. Józefa",
+      // obraz: require("../../src/zabytek.png"),
     },
     {
-      imie: "Adam",
-      nazwisko: "Asnyk",
-      obraz:
-        "https://www.kalisz.pl/storage/image/core_files/2018/7/2/4e8a57f412256484aeacecc36186f179/umkalisz/list/aasnyk.jpg",
+      nazwa: "Skarbiec Sanktuarium św. Józefa",
+      // obraz: require("../../src/zabytek.png"),
     },
   ];
   return (
@@ -66,13 +54,11 @@ const Scroll = () => {
           {osoby.map((e) => (
             <View style={style.element}>
               <Image
-                source={{
-                  uri: e.obraz,
-                }}
+                source={require("../../src/zabytek.png")}
                 style={style.obraz}
               />
               <View style={style.textView}>
-                <Text style={style.text}>{`${e.imie} ${e.nazwisko}`}</Text>
+                <Text style={style.text}>{`${e.nazwa}`}</Text>
               </View>
             </View>
           ))}
@@ -87,7 +73,7 @@ const style1 = StyleSheet.create({
     display: "flex",
     width: "100%",
     height: responsiveNumber(180),
-    backgroundColor: "#353538",
+    backgroundColor: "#353540",
     borderBottomLeftRadius: responsiveNumber(25),
     borderBottomRightRadius: responsiveNumber(25),
     overflow: "hidden",
@@ -100,7 +86,7 @@ const style1 = StyleSheet.create({
     display: "flex",
     width: "100%",
     height: responsiveNumber(40),
-    backgroundColor: "#353538",
+    backgroundColor: "#353540",
     borderBottomLeftRadius: responsiveNumber(25),
     overflow: "hidden",
     paddingTop: responsiveNumber(10),
@@ -117,7 +103,7 @@ const style1 = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     height: "100%",
-    width: responsiveNumber(150),
+    width: responsiveNumber(285),
     // backgroundColor: "#f55",
     margin: responsiveNumber(1),
   },
@@ -127,7 +113,7 @@ const style1 = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     height: responsiveNumber(135),
-    aspectRatio: 1,
+    aspectRatio: 2,
     borderRadius: responsiveNumber(15),
     margin: responsiveNumber(10),
     marginBottom: responsiveNumber(0),
@@ -139,6 +125,8 @@ const style1 = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     margin: 0,
+    borderBottomColor: "#252525",
+    borderBottomWidth: responsiveNumber(3),
   },
   text: { color: "white", fontSize: PixelRatio.getPixelSizeForLayoutSize(5.3) },
 });
@@ -200,4 +188,4 @@ if (windowHeight / windowWidth > 1.8) {
   style = style2;
 }
 
-export default Scroll;
+export default ScrollZabytki;

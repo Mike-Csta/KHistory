@@ -10,14 +10,15 @@ import {
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import CytatHis from "./CytatHis";
 import Button from "./Button";
-import Scroll from "./Scroll";
+import ScrollOsoby from "./ScrollOsoby";
+import ScrollZabytki from "./ScrollZabytki";
 import Footer from "./Footer";
 import {
   responsiveNumber,
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
 
-const Szablon = (props) => {
+const PeopleAndHis = ({ navigation }) => {
   const Json = async () => {
     let request = await fetch("http://khistory.pl/osoby.json");
     let json = await request.json();
@@ -34,9 +35,9 @@ const Szablon = (props) => {
         <View style={style.top}>
           <CytatHis />
           <Button value={"POSTACIE"} />
-          <Scroll />
+          <ScrollOsoby navigation={navigation} />
           <Button value={"ZABYTKI"} />
-          <Scroll />
+          <ScrollZabytki />
         </View>
         <View style={style.bottom}>
           <Footer />
@@ -70,4 +71,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default Szablon;
+export default PeopleAndHis;
