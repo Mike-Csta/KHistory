@@ -32,6 +32,7 @@ const ScrollOsoby_Page = (props) => {
             >{`${props.route.params[0]} ${props.route.params[1]}`}</Text>
             <ScrollView style={style.opis_scroll}>
               <Text style={style.opis}>{props.route.params[3]}</Text>
+              <Text style={style.footer}>Źródło: kalisz.pl</Text>
             </ScrollView>
           </View>
         </View>
@@ -105,8 +106,8 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    textAlign: "center",
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(5.5),
+    textAlign: "justify",
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(6),
     marginLeft: responsiveNumber(10),
     marginRight: responsiveNumber(10),
     bottom: 0,
@@ -117,6 +118,13 @@ const style = StyleSheet.create({
 
     marginLeft: responsiveNumber(10),
     marginRight: responsiveNumber(10),
+  },
+  footer: {
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    marginBottom: responsiveNumber(15),
+    color: "#445",
   },
 });
 
