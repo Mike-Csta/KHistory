@@ -18,12 +18,12 @@ import {
 import QQQ from "../../src/qqq.jpg";
 
 const ScrollOsoby_Page = (props) => {
-  //   console.log(props.route.params[2]);
+  console.log(props.route);
   return (
     <View style={style.container}>
       <View style={style.bar}>
         <View style={style.top}>
-          <Image style={style.image} source={{ uri: props.route.params[2] }} />
+          <Image style={style.image} source={{ uri: props.route.params[4] }} />
         </View>
         <View style={style.bottom_wraper}>
           <View style={style.bottom}>
@@ -31,6 +31,7 @@ const ScrollOsoby_Page = (props) => {
               style={style.imie}
             >{`${props.route.params[0]} ${props.route.params[1]}`}</Text>
             <ScrollView style={style.opis_scroll}>
+              <Text style={style.mopis}>{props.route.params[2]}</Text>
               <Text style={style.opis}>{props.route.params[3]}</Text>
               <Text style={style.footer}>Źródło: kalisz.pl</Text>
             </ScrollView>
@@ -100,22 +101,34 @@ const style = StyleSheet.create({
     fontSize: PixelRatio.getPixelSizeForLayoutSize(10),
     marginBottom: responsiveNumber(10),
     marginTop: responsiveNumber(20),
-    color: "white",
+    color: "#cf5555",
   },
-  opis: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "justify",
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(6),
+
+  mopis: {
     marginLeft: responsiveNumber(10),
     marginRight: responsiveNumber(10),
-    bottom: 0,
-    color: "#ddd",
+    marginBottom: responsiveNumber(0),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
+    justifyContent: "center",
+    color: "#cfcfcf",
+    fontWeight: "bold",
+    alignItems: "center",
+    textAlign: "justify",
+    // textAlign: "center",
+    marginBottom: PixelRatio.getPixelSizeForLayoutSize(6),
+  },
+  opis: {
+    marginLeft: responsiveNumber(10),
+    marginRight: responsiveNumber(10),
+    marginBottom: responsiveNumber(0),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(6),
+    justifyContent: "center",
+    color: "#ccc",
+    alignItems: "center",
+    textAlign: "justify",
   },
   opis_scroll: {
     flex: 1,
-
     marginLeft: responsiveNumber(10),
     marginRight: responsiveNumber(10),
   },
@@ -123,7 +136,9 @@ const style = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
-    marginBottom: responsiveNumber(15),
+    marginTop: responsiveNumber(-21),
+    marginBottom: responsiveNumber(30),
+
     color: "#445",
   },
 });

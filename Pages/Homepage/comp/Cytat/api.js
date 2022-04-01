@@ -9,9 +9,7 @@ const CytatApi = (props) => {
     let request = await fetch("http://khistory.pl/cytaty.json");
     let json = await request.json();
     setCytat(json.osoby[props.numer].cytat);
-    setAutor(
-      json.osoby[props.numer].imie + " " + json.osoby[props.numer].nazwisko
-    );
+    setAutor(json.osoby[props.numer].nazwisko);
   };
   useEffect(() => {
     Json();

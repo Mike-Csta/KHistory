@@ -30,9 +30,10 @@ const PeopleAndHis = ({ navigation }) => {
 
   const [osoby, setOsoby] = useState([
     {
-      imie: "wczytywanie",
-      nazwisko: "wczytywanie",
-      opis: "wczytywanie",
+      imie: "wczytywanie1",
+      nazwisko: "wczytywanie2",
+      mopis: "wczytywanie3",
+      opis: "wczytywanie4",
       obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
     },
   ]);

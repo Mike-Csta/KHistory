@@ -34,8 +34,9 @@ const ScrollOsoby = (props) => {
                 props.navigation.push("ScrollOsoby_Page", [
                   e.imie,
                   e.nazwisko,
-                  e.obraz,
+                  e.mopis,
                   e.opis,
+                  e.obraz,
                 ])
               }
             >
