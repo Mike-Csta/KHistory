@@ -101,7 +101,7 @@ const style1 = StyleSheet.create({
   obraz: {
     flex: 1,
     justifyContent: "center",
-    textAlign: "center",
+
     alignItems: "center",
     height: responsiveNumber(135),
     aspectRatio: 1,
@@ -147,7 +147,7 @@ const style2 = StyleSheet.create({
   obraz: {
     flex: 1,
     justifyContent: "center",
-    textAlign: "center",
+
     alignItems: "center",
     height: responsiveNumber(135),
     aspectRatio: 1,

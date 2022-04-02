@@ -38,7 +38,6 @@ const ScrollOsoby_Page = (props) => {
           </View>
         </View>
       </View>
-      <View style={style.bottomBackground}></View>
     </View>
   );
 };
@@ -48,24 +47,9 @@ const style = StyleSheet.create({
     display: "flex",
     position: "relative",
     width: "100%",
-    backgroundColor: "#192029",
+    backgroundColor: "#212127",
     height: Dimensions.get("window").height + StatusBar.currentHeight,
   },
-  bottomBackground: {
-    bottom: 0,
-    position: "absolute",
-    height: "33%",
-    width: "100%",
-    borderBottomWidth: 300,
-    borderBottomColor: "#243040",
-    borderLeftWidth: 0,
-    borderLeftColor: "transparent",
-    borderRightWidth: 800,
-    borderRightColor: "transparent",
-    borderStyle: "solid",
-    zIndex: -1000,
-  },
-
   bar: {
     display: "flex",
     // justifyContent: "flex-end",
@@ -98,67 +82,63 @@ const style = StyleSheet.create({
     display: "flex",
     position: "relative",
     flex: 0.92,
-    // backgroundColor: "#2f2f40",
+    backgroundColor: "#2f2f40",
     height: "100%",
     marginLeft: 0,
     borderRadius: responsiveNumber(20),
   },
 
   image: {
-    height: responsiveNumber(330),
+    height: responsiveNumber(300),
     aspectRatio: 1,
-    borderRadius: responsiveNumber(2000),
+    borderRadius: responsiveNumber(20),
   },
   imie: {
     flex: 0.1,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(9.2),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(10),
     marginBottom: responsiveNumber(10),
-    marginTop: responsiveNumber(12),
+    marginTop: responsiveNumber(20),
     color: "#cf5555",
-    textTransform: "uppercase",
   },
 
   mopis: {
-    marginLeft: responsiveNumber(13),
-    marginRight: responsiveNumber(13),
+    marginLeft: responsiveNumber(10),
+    marginRight: responsiveNumber(10),
     marginBottom: responsiveNumber(0),
     fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
     justifyContent: "center",
     color: "#cfcfcf",
     fontWeight: "bold",
     alignItems: "center",
-    textAlign: "center",
+    textAlign: "justify",
     // textAlign: "center",
-    marginBottom: PixelRatio.getPixelSizeForLayoutSize(10),
+    marginBottom: PixelRatio.getPixelSizeForLayoutSize(6),
   },
   opis: {
-    marginLeft: responsiveNumber(18),
-    marginRight: responsiveNumber(18),
+    marginLeft: responsiveNumber(10),
+    marginRight: responsiveNumber(10),
     marginBottom: responsiveNumber(0),
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(6.1),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(6),
     justifyContent: "center",
-    color: "#aaa",
+    color: "#ccc",
     alignItems: "center",
-    textAlign: "center",
-    lineHeight: PixelRatio.getPixelSizeForLayoutSize(10),
-    fontWeight: "900",
-    zIndex: 1000,
+    textAlign: "justify",
   },
   opis_scroll: {
     flex: 1,
     marginLeft: responsiveNumber(10),
     marginRight: responsiveNumber(10),
-    zIndex: 1000,
   },
   footer: {
     justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
-    // marginTop: responsiveNumber(-21),
+    marginTop: responsiveNumber(-21),
     marginBottom: responsiveNumber(30),
+
     color: "#445",
   },
 });
