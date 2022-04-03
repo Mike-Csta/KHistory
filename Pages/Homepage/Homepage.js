@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { getStatusBarHeight } from "react-native-status-bar-height";
@@ -16,6 +17,7 @@ import Qrbutton from "./comp/Qrbutton/Qrbutton";
 import Custom_Buttons from "./comp/Custom_Buttons/Custom_Buttons";
 import background from "../../src/background.jpg";
 import { StatusBar } from "expo-status-bar";
+import Settings from "./comp/Settings/Settings";
 import {
   responsiveNumber,
   responsiveLetterSpacing,
@@ -24,30 +26,32 @@ import {
 let cytatNr = Math.floor(Math.random() * 5);
 
 const Homepage = ({ navigation }) => {
-  // console.log(cytatNr)
   return (
-    <View style={style.main}>
-      <StatusBar style="light" />
-      <Image style={style.background} source={background} />
-      <View style={style.status_bar_container}>
-        <View style={style.margin_left}></View>
-        <View style={style.center}>
-          <View style={style.center_top}>
-            <Logo />
+    <ScrollView style={style.scrollView} snapToOffsets={[1]}>
+      <View style={style.main}>
+        <StatusBar style="light" />
+        <Image style={style.background} source={background} />
+        <View style={style.status_bar_container}>
+          <View style={style.margin_left}></View>
+          <View style={style.center}>
+            <View style={style.center_top}>
+              <Logo />
 
-            <Weather />
+              <Weather />
+            </View>
+            <View style={style.center_center}>
+              <Cytat numer={cytatNr} />
+            </View>
+            <View style={style.center_bottom}>
+              <Qrbutton navigation={navigation} numer={cytatNr} />
+              <Custom_Buttons navigation={navigation} />
+            </View>
           </View>
-          <View style={style.center_center}>
-            <Cytat numer={cytatNr} />
-          </View>
-          <View style={style.center_bottom}>
-            <Qrbutton navigation={navigation} numer={cytatNr} />
-            <Custom_Buttons navigation={navigation} />
-          </View>
+          <View style={style.margin_right}></View>
         </View>
-        <View style={style.margin_right}></View>
       </View>
-    </View>
+      <Settings navigation={navigation} />
+    </ScrollView>
   );
 };
 
@@ -58,6 +62,10 @@ const style1 = StyleSheet.create({
     width: "100%",
     backgroundColor: "#282422",
     height: Dimensions.get("window").height + getStatusBarHeight(),
+  },
+  scrollView: {
+    height: Dimensions.get("window").height,
+    position: "relative",
   },
   status_bar_container: {
     marginTop: getStatusBarHeight(),
@@ -123,6 +131,11 @@ const style2 = StyleSheet.create({
     position: "relative",
     width: "100%",
     backgroundColor: "#282422",
+    height: Dimensions.get("window").height + getStatusBarHeight(),
+  },
+  scrollView: {
+    // height: Dimensions.get("window").height,
+    position: "relative",
   },
   status_bar_container: {
     marginTop: getStatusBarHeight(),
