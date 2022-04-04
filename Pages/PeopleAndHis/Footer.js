@@ -22,7 +22,8 @@ const style = StyleSheet.create({
     alignItems: "center",
     // height: responsiveNumber(50),
     flex: 1,
-    backgroundColor: "#212127",
+    // backgroundColor: "#212127",
+    backgroundColor: "#192029",
     // bottom: getStatusBarHeight(),
   },
   text: {

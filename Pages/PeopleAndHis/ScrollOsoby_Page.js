@@ -56,6 +56,7 @@ const style = StyleSheet.create({
     position: "absolute",
     height: "33%",
     width: "100%",
+    zIndex: -100,
     borderBottomWidth: 300,
     borderBottomColor: "#243040",
     borderLeftWidth: 0,
@@ -63,7 +64,6 @@ const style = StyleSheet.create({
     borderRightWidth: 800,
     borderRightColor: "transparent",
     borderStyle: "solid",
-    zIndex: -1000,
   },
 
   bar: {
@@ -75,6 +75,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    zIndex: 1000,
   },
   top: {
     display: "flex",
@@ -151,7 +152,7 @@ const style = StyleSheet.create({
     flex: 1,
     marginLeft: responsiveNumber(10),
     marginRight: responsiveNumber(10),
-    zIndex: 1000,
+    // zIndex: 1000,
   },
   footer: {
     justifyContent: "center",

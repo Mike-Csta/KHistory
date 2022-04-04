@@ -8,11 +8,11 @@ import {
   StatusBar,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-import CytatHis from "./CytatHis";
-import Button from "./Button";
-import ScrollOsoby from "./ScrollOsoby";
-import ScrollZabytki from "./ScrollZabytki";
-import Footer from "./Footer";
+import CytatHis from "../PeopleAndHis/CytatHis";
+import Button from "../PeopleAndHis/Button";
+import ScrollOsoby from "../PeopleAndHis/ScrollOsoby";
+import ScrollZabytki from "../PeopleAndHis/ScrollZabytki";
+import Footer from "../PeopleAndHis/Footer";
 import {
   responsiveNumber,
   responsiveLetterSpacing,
@@ -109,8 +109,7 @@ const style = StyleSheet.create({
     display: "flex",
     position: "relative",
     width: "100%",
-    // backgroundColor: "#212127",
-    backgroundColor: "#192029",
+    backgroundColor: "#212127",
     height: Dimensions.get("window").height + StatusBar.currentHeight,
   },
   bar: {

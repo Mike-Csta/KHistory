@@ -36,7 +36,7 @@ const CytatHis = () => {
 const style = StyleSheet.create({
   container: {
     display: "flex",
-
+    backgroundColor: "#192029",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
