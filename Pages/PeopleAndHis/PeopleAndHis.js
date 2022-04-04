@@ -90,7 +90,7 @@ const PeopleAndHis = ({ navigation }) => {
     <View style={style.container}>
       <View style={style.bar}>
         <View style={style.top}>
-          <CytatHis />
+          <CytatHis navigation={navigation} />
           <Button value={"POSTACIE"} />
           <ScrollOsoby navigation={navigation} osoby={osoby} />
           <Button value={"ZABYTKI"} />

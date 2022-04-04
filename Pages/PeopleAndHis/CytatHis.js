@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   PixelRatio,
+  TouchableOpacity,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -15,9 +16,20 @@ import {
 } from "react-native-responsive-number";
 import QQQ from "../../src/qqq.jpg";
 
-const CytatHis = () => {
+const CytatHis = (props) => {
+  const [dane, setDane] = useState([
+    "imiee",
+    "nazwiskoo",
+    "mopiss",
+    "opiss",
+    "obrazz",
+  ]);
+
   return (
-    <View style={style.container}>
+    <TouchableOpacity
+      style={style.container}
+      onPress={() => props.navigation.push("ScrollOsoby_Page", [dane])}
+    >
       <View style={style.left}>
         <Image style={style.image} source={QQQ} />
       </View>
@@ -29,7 +41,7 @@ const CytatHis = () => {
           Jeg...
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
