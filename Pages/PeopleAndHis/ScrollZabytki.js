@@ -180,7 +180,7 @@ const style2 = StyleSheet.create({
 let style = style1;
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-console.log(windowWidth, windowHeight);
+//console.log(windowWidth, windowHeight);
 
 if (windowHeight / windowWidth > 1.8) {
   // height: responsiveNumber(130) container

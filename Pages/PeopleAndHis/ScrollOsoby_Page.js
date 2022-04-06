@@ -18,7 +18,7 @@ import {
 import QQQ from "../../src/qqq.jpg";
 
 const ScrollOsoby_Page = (props) => {
-  console.log(props.route);
+  //  console.log(props.route);
   return (
     <View style={style.container}>
       <View style={style.bar}>

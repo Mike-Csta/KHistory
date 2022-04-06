@@ -11,7 +11,7 @@ import {
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
 const Settings = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <TouchableWithoutFeedback
       style={style.container2}

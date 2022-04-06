@@ -17,18 +17,35 @@ import {
 import QQQ from "../../src/qqq.jpg";
 
 const CytatHis = (props) => {
-  const [dane, setDane] = useState([
-    "imiee",
-    "nazwiskoo",
-    "mopiss",
-    "opiss",
-    "obrazz",
-  ]);
+  // const [dane, setDane] = useState([
+  //   {
+  //     imie: "wczytywanie1",
+  //     nazwisko: "wczytywanie2",
+  //     mopis: "wczytywanie3",
+  //     opis: "wczytywanie4",
+  //     obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
+  //   },
+  // ]);
+
+  // useEffect(() => {
+  //   setDane(props.data);
+  // }, []);
+
+  //console.log("askjfhskd", props);
 
   return (
     <TouchableOpacity
       style={style.container}
-      onPress={() => props.navigation.push("ScrollOsoby_Page", [dane])}
+      onPress={() => {
+        props.navigation.push("CytatHis_Page", [
+          props.data[0].imie,
+          props.data[0].nazwisko,
+          props.data[0].obraz,
+          props.data[0].mopis,
+          props.data[0].opis,
+        ]);
+        // console.log(props.data.opis, "sahfdkash");
+      }}
     >
       <View style={style.left}>
         <Image style={style.image} source={QQQ} />
