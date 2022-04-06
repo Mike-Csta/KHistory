@@ -31,19 +31,13 @@ const CytatHis = (props) => {
   //   setDane(props.data);
   // }, []);
 
-  //console.log("askjfhskd", props);
+  console.log("askjfhskd", props);
 
   return (
     <TouchableOpacity
       style={style.container}
       onPress={() => {
-        props.navigation.push("CytatHis_Page", [
-          props.data[0].imie,
-          props.data[0].nazwisko,
-          props.data[0].obraz,
-          props.data[0].mopis,
-          props.data[0].opis,
-        ]);
+        props.navigation.push("CytatHis_Page", [props.data, props.autor]);
         // console.log(props.data.opis, "sahfdkash");
       }}
     >

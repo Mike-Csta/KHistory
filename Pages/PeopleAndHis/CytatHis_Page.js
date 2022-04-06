@@ -19,22 +19,42 @@ import QQQ from "../../src/qqq.jpg";
 
 const CytatHis_Page = (props) => {
   // console.log(props.route.params[0][0].nazwisko, "xD");
-  // console.log("xD hehe", props.route.params[0]);
+
+  // console.log(test);
+
+  const [cytatHisData, setcytatHisData] = useState([
+    {
+      imie: "wczytywanie1",
+      nazwisko: "wczytywanie2",
+      mopis: "wczytywanie3",
+      opis: "wczytywanie4",
+      obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
+    },
+  ]);
+
+  useEffect(() => {
+    let test = props.route.params[0].filter(
+      (e) => `${e.imie} ${e.nazwisko}` == props.route.params[1]
+    );
+
+    setcytatHisData(test);
+    // console.log("aaa", cytatHisData);
+  }, []);
 
   return (
     <View style={style.container}>
       <View style={style.bar}>
         <View style={style.top}>
-          <Image style={style.image} source={{ uri: props.route.params[2] }} />
+          <Image style={style.image} source={{ uri: cytatHisData[0].obraz }} />
         </View>
         <View style={style.bottom_wraper}>
           <View style={style.bottom}>
             <Text
               style={style.imie}
-            >{`${props.route.params[0]} ${props.route.params[1]}`}</Text>
+            >{`${cytatHisData[0].imie} ${cytatHisData[0].nazwisko}`}</Text>
             <ScrollView style={style.opis_scroll}>
-              <Text style={style.mopis}>{props.route.params[3]}</Text>
-              <Text style={style.opis}>{props.route.params[4]}</Text>
+              <Text style={style.mopis}>{cytatHisData[0].mopis}</Text>
+              <Text style={style.opis}>{cytatHisData[0].opis}</Text>
               <Text style={style.footer}>Źródłoe: kalisz.pl</Text>
             </ScrollView>
           </View>

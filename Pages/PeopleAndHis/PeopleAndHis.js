@@ -34,11 +34,8 @@ const PeopleAndHis = (props) => {
   const JsonCytat = async () => {
     let request = await fetch("http://khistory.pl/cytaty.json");
     let json = await request.json();
-    // console.log(json.osoby[props.route.params[0]].nazwisko);
-    // setAutor(json.osoby[props.route.params[0]].nazwisko);
-    setAutor(json.osoby[1].nazwisko);
-
-    console.log(json.osoby[1], "falalala");
+    setAutor(json.osoby[0].nazwisko);
+    console.log(autor);
   };
 
   const [osoby, setOsoby] = useState([
@@ -54,19 +51,11 @@ const PeopleAndHis = (props) => {
   const Json = async () => {
     let request = await fetch("http://khistory.pl/osoby.json");
     let json = await request.json();
-    // console.log(json.osoby);
     setOsoby(json.osoby);
-    // return osoby;
-    console.log(json.osoby.filter((e) => e.imie + " " + e.nazwisko == autor));
-    // console.log(autor);
-    // let dkasjhfio = json.osoby.filter(
-    //   (e) => e.imie + " " + e.nazwisko == autor
-    // );
-    setcytatHisData(
-      // dkasjhfio[0]
-      json.osoby.filter((e) => e.imie + " " + e.nazwisko == autor)
-    );
-    // console.log(cytatHisData);
+
+    // console.log(json.osoby.filter((e) => e.imie + " " + e.nazwisko == autor));
+
+    // console.log(cytatHisData, "hmm");
   };
 
   const cytatHisDataFunction = async () => {
@@ -79,6 +68,7 @@ const PeopleAndHis = (props) => {
     // setOsoby(Json());
     JsonCytat();
     Json();
+    // setcytatHisData(osoby);
     // cytatHisDataFunction();
   }, []);
   //console.log(props);
@@ -86,7 +76,7 @@ const PeopleAndHis = (props) => {
     <View style={style.container}>
       <View style={style.bar}>
         <View style={style.top}>
-          <CytatHis navigation={props.navigation} data={cytatHisData} />
+          <CytatHis navigation={props.navigation} data={osoby} autor={autor} />
           <Button value={"POSTACIE"} />
           <ScrollOsoby navigation={props.navigation} osoby={osoby} />
           <Button value={"ZABYTKI"} />
