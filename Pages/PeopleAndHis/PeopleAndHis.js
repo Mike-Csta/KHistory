@@ -34,8 +34,8 @@ const PeopleAndHis = (props) => {
   const JsonCytat = async () => {
     let request = await fetch("http://khistory.pl/cytaty.json");
     let json = await request.json();
-    setAutor(json.osoby[0].nazwisko);
-    console.log(autor);
+    setAutor(json.osoby[1].nazwisko);
+    // console.log(autor);
   };
 
   const [osoby, setOsoby] = useState([

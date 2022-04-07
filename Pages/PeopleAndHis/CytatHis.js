@@ -17,21 +17,15 @@ import {
 import QQQ from "../../src/qqq.jpg";
 
 const CytatHis = (props) => {
-  // const [dane, setDane] = useState([
-  //   {
-  //     imie: "wczytywanie1",
-  //     nazwisko: "wczytywanie2",
-  //     mopis: "wczytywanie3",
-  //     opis: "wczytywanie4",
-  //     obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
-  //   },
-  // ]);
+  const [dane, setDane] = useState([]);
+  // console.log("askjfhskd", props);
 
-  // useEffect(() => {
-  //   setDane(props.data);
-  // }, []);
-
-  console.log("askjfhskd", props);
+  useEffect(() => {
+    let test = props.data.filter(
+      (e) => `${e.imie} ${e.nazwisko}` == props.autor
+    );
+    if (undefined != test[0]) setDane(test[0]);
+  });
 
   return (
     <TouchableOpacity
@@ -42,15 +36,11 @@ const CytatHis = (props) => {
       }}
     >
       <View style={style.left}>
-        <Image style={style.image} source={QQQ} />
+        <Image style={style.image} source={{ uri: dane.obraz }} />
       </View>
       <View style={style.right}>
-        <Text style={style.imie}>Adam Asnyk</Text>
-        <Text style={style.opis}>
-          Wybitny polski poeta, publicysta i działacz patriotyczny. Urodził się
-          w Kaliszu 11 września 1838 roku. Pochodził z rodziny szlacheckiej.
-          Jeg...
-        </Text>
+        <Text style={style.imie}>{props.autor}</Text>
+        <Text style={style.opis}>{dane.mopis}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -97,8 +87,8 @@ const style = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
     fontSize: PixelRatio.getPixelSizeForLayoutSize(7.3),
-    marginBottom: responsiveNumber(20),
-    marginTop: responsiveNumber(20),
+    marginBottom: responsiveNumber(15),
+    marginTop: responsiveNumber(19),
     color: "white",
   },
   opis: {
