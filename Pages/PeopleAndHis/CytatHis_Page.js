@@ -55,7 +55,7 @@ const CytatHis_Page = (props) => {
             <ScrollView style={style.opis_scroll}>
               <Text style={style.mopis}>{cytatHisData[0].mopis}</Text>
               <Text style={style.opis}>{cytatHisData[0].opis}</Text>
-              <Text style={style.footer}>Źródłoe: kalisz.pl</Text>
+              <Text style={style.footer}>Źródło: kalisz.pl</Text>
             </ScrollView>
           </View>
         </View>

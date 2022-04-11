@@ -21,6 +21,14 @@ const Setting_page = (props) => {
       >
         <Text style={style.text}>Panel Administracyjny</Text>
       </TouchableOpacity>
+
+      <Text style={style.text3}>
+        Pomoc i zgłaszanie błędów: Khistoy2022@gmail.com
+      </Text>
+
+      <Text style={style.text4}>Autorzy: Mike Csta, Szymon Szulc</Text>
+
+      <Text style={style.text2}>Źródła: kalisz.pl, pl.wikipedia.org</Text>
     </View>
   );
 };
@@ -49,6 +57,28 @@ const style = StyleSheet.create({
     color: "white",
     fontSize: PixelRatio.getPixelSizeForLayoutSize(4.3),
     letterSpacing: responsiveLetterSpacing(300, 4.3),
+  },
+  text2: {
+    position: "absolute",
+    color: "#445",
+    bottom: 20,
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(4.3),
+    letterSpacing: responsiveLetterSpacing(50, 4.3),
+  },
+  text3: {
+    position: "absolute",
+    color: "#445",
+    bottom: 50,
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(4.3),
+    letterSpacing: responsiveLetterSpacing(50, 4.3),
+  },
+  text4: {
+    position: "absolute",
+    color: "#445",
+    bottom: 80,
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(5),
+    letterSpacing: responsiveLetterSpacing(50, 4.3),
+    fontWeight: "bold",
   },
 });
 

@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  PixelRatio,
   Animated,
 } from "react-native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -150,12 +151,12 @@ const Weather = () => {
     ]);
 
     setO2detail([
-      { value: Math.round(json.current.air_quality.co), name: "co" },
-      { value: Math.round(json.current.air_quality.no2), name: "no2" },
-      { value: Math.round(json.current.air_quality.o3), name: "o3" },
-      { value: Math.round(json.current.air_quality.so2), name: "so2" },
-      { value: Math.round(json.current.air_quality.pm2_5), name: "pm2_5" },
-      { value: Math.round(json.current.air_quality.pm10), name: "pm10" },
+      { value: Math.round(json.current.air_quality.co), name: "CO" },
+      { value: Math.round(json.current.air_quality.no2), name: "NO2" },
+      { value: Math.round(json.current.air_quality.o3), name: "O3" },
+      { value: Math.round(json.current.air_quality.so2), name: "SO2" },
+      { value: Math.round(json.current.air_quality.pm2_5), name: "PM2_5" },
+      { value: Math.round(json.current.air_quality.pm10), name: "PM10" },
     ]);
 
     switch (json.current.air_quality["us-epa-index"]) {
@@ -382,7 +383,8 @@ const Weather = () => {
                     <Text style={style.O2_wartosc_text}>{e.name}</Text>
                   </View>
                   <View style={style.O2_poziom}>
-                    <Text style={style.O2_poziom_text}>{e.value}</Text>
+                    <Text style={style.O2_poziom_text1}>{e.value}</Text>
+                    <Text style={style.O2_poziom_text2}>μg/m3</Text>
                   </View>
                 </View>
               ))}
@@ -515,38 +517,62 @@ const style = StyleSheet.create({
   },
   O2_top: {
     marginTop: responsiveNumber(9),
+    marginBottom: responsiveNumber(5),
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
   },
-  O2_top_text: { color: "white", fontSize: responsiveNumber(10) },
+  O2_top_text: {
+    color: "white",
+    fontSize: responsiveNumber(10),
+  },
   O2_bottom: {
     display: "flex",
     flexDirection: "row",
     height: "100%",
-    marginLeft: responsiveNumber(10),
-    marginRight: responsiveNumber(10),
+    marginLeft: responsiveNumber(1),
+    marginRight: responsiveNumber(1),
   },
   O2_bottom_elem: {
     display: "flex",
-
+    margin: responsiveNumber(3),
+    borderRadius: responsiveNumber(8),
     flex: 1,
-    // backgroundColor: "red",
+    backgroundColor: "#545151",
+    borderTopColor: "#4c4",
+    borderTopWidth: responsiveNumber(2),
   },
   O2_wartosc: {
-    flex: 0.3,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  O2_wartosc_text: { color: "white", fontSize: responsiveNumber(15) },
-  O2_poziom: {
     flex: 0.2,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
   },
-  O2_poziom_text: { color: "#aaa" },
+
+  O2_poziom: {
+    flex: 0.35,
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    // backgroundColor: "#125",
+  },
+  // O2_poziom_text: { color: "#ccc", fontWeight: "bold" },
+  O2_wartosc_text: {
+    color: "white",
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(5.3),
+    fontWeight: "bold",
+  },
+  O2_poziom_text1: {
+    color: "#ccc",
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(8),
+    fontWeight: "bold",
+  },
+  O2_poziom_text2: {
+    color: "#aaa",
+    // backgroundColor: "red",
+    marginTop: responsiveNumber(5),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(4),
+  },
   weather_container: {
     display: "flex",
     flex: 4,

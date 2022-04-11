@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import CytatHis from "./CytatHis";
-import Button from "./Button";
+import Wafelek from "./Wafelek";
 import ScrollOsoby from "./ScrollOsoby";
 import ScrollZabytki from "./ScrollZabytki";
 import Footer from "./Footer";
@@ -77,9 +77,19 @@ const PeopleAndHis = (props) => {
       <View style={style.bar}>
         <View style={style.top}>
           <CytatHis navigation={props.navigation} data={osoby} autor={autor} />
-          <Button value={"POSTACIE"} />
+          <Wafelek
+            value={"POSTACIE"}
+            osoby={osoby}
+            page="Osoby_Page"
+            navigation={props.navigation}
+          />
           <ScrollOsoby navigation={props.navigation} osoby={osoby} />
-          <Button value={"ZABYTKI"} />
+          <Wafelek
+            value={"ZABYTKI"}
+            osoby={osoby}
+            page="Osoby_Page"
+            navigation={props.navigation}
+          />
           <ScrollZabytki />
         </View>
         <View style={style.bottom}>
