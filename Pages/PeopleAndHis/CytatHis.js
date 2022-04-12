@@ -39,8 +39,12 @@ const CytatHis = (props) => {
         <Image style={style.image} source={{ uri: dane.obraz }} />
       </View>
       <View style={style.right}>
-        <Text style={style.imie}>{props.autor}</Text>
-        <Text style={style.opis}>{dane.mopis}</Text>
+        <View style={style.elem}>
+          <Text style={style.imie}>{props.autor}</Text>
+        </View>
+        <View style={style.elem2}>
+          <Text style={style.opis}>{dane.mopis}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -69,7 +73,11 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    backgroundColor: "#aa5555",
+    // backgroundColor: "#aa5555",
+    backgroundColor: "#212938",
+    borderColor: "#cc5555",
+    borderWidth: 2,
+    borderBottomWidth: 6,
     margin: responsiveNumber(10),
     marginLeft: 0,
     width: responsiveNumber(152),
@@ -82,25 +90,43 @@ const style = StyleSheet.create({
     borderRadius: responsiveNumber(20),
   },
   imie: {
-    flex: 0.21,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
     fontSize: PixelRatio.getPixelSizeForLayoutSize(7.3),
-    marginBottom: responsiveNumber(15),
-    marginTop: responsiveNumber(19),
-    color: "white",
+    // marginBottom: responsiveNumber(15),
+    // marginTop: responsiveNumber(19),
+    color: "#cc5555",
+    fontWeight: "bold",
+    // backgroundColor: "red",
   },
   opis: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
     fontSize: PixelRatio.getPixelSizeForLayoutSize(5.5),
     marginLeft: responsiveNumber(10),
     marginRight: responsiveNumber(10),
-    bottom: 0,
+    top: 0,
     color: "#ddd",
+    // backgroundColor: "red",
+  },
+  elem: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    // backgroundColor: "red",
+  },
+  elem2: {
+    position: "relative",
+    flex: 1,
+    display: "flex",
+    // justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    // backgroundColor: "red",
   },
 });
 

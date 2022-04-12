@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   Image,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   PixelRatio,
 } from "react-native";
 import {
@@ -14,15 +14,22 @@ import {
 
 const Wafelek = (props) => {
   return (
-    <TouchableOpacity
+    <TouchableWithoutFeedback
       style={style.container}
-      onPress={() => props.navigation.push(props.page, [props.osoby])}
+      onPress={() =>
+        props.navigation.push(
+          props.page,
+          !props.osoby ? [props.zabytki] : [props.osoby]
+        )
+      }
     >
-      <View style={style.border}></View>
-      <View style={style.view}>
-        <Text style={style.text}>{props.value}</Text>
+      <View style={style.container}>
+        <View style={style.border}></View>
+        <View style={style.view}>
+          <Text style={style.text}>{props.value}</Text>
+        </View>
       </View>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   );
 };
 

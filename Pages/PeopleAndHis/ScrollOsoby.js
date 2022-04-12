@@ -41,7 +41,14 @@ const ScrollOsoby = (props) => {
                   ])
                 }
               >
-                <View>
+                <View
+                  style={{
+                    borderColor: "#333344",
+                    borderWidth: 1.5,
+                    marginLeft: responsiveNumber(5),
+                    borderRadius: responsiveNumber(20),
+                  }}
+                >
                   <Image
                     source={{
                       uri: e.obraz,
@@ -142,7 +149,8 @@ const style1 = StyleSheet.create({
   obraz: {
     flex: 1,
     justifyContent: "center",
-
+    borderColor: "#333344",
+    borderWidth: 1.5,
     alignItems: "center",
     height: responsiveNumber(135),
     aspectRatio: 1,

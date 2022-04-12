@@ -18,7 +18,7 @@ import {
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
 
-const Osoby_Page = (props) => {
+const Zabytki_Page = (props) => {
   const [input, setInput] = useState("");
   // console.log();
   return (
@@ -38,23 +38,16 @@ const Osoby_Page = (props) => {
           <FlatList
             contentContainerStyle={{ paddingBottom: 20 }}
             style={style.flatList}
-            data={props.route.params[0].filter(
-              (e) =>
-                e.imie.toLowerCase().includes(input.toLowerCase()) ||
-                e.nazwisko.toLowerCase().includes(input.toLowerCase()) ||
-                `${e.imie.toLowerCase()} ${e.nazwisko.toLowerCase()}`.includes(
-                  input.toLowerCase()
-                )
+            data={props.route.params[0].filter((e) =>
+              e.nazwa.toLowerCase().includes(input.toLowerCase())
             )}
-            columnWrapperStyle={{
-              flex: 0.5,
-              justifyContent: "space-evenly",
-            }}
-            numColumns={2}
+            numColumns={1}
             renderItem={(e) => (
               <TouchableOpacity
                 style={style.element}
-                onPress={() => props.navigation.push("Osoby_Page_Page", e.item)}
+                onPress={() =>
+                  props.navigation.push("Zabytki_Page_Page", e.item)
+                }
               >
                 <Image
                   source={{
@@ -63,9 +56,7 @@ const Osoby_Page = (props) => {
                   style={style.obraz}
                 />
                 <View style={style.textView}>
-                  <Text
-                    style={style.text}
-                  >{`${e.item.imie} ${e.item.nazwisko}`}</Text>
+                  <Text style={style.text}>{`${e.item.nazwa}`}</Text>
                 </View>
               </TouchableOpacity>
             )}
@@ -141,9 +132,11 @@ const style = StyleSheet.create({
 
     borderColor: "#333344",
     borderWidth: 1.5,
+
     alignItems: "center",
-    height: responsiveNumber(135),
-    aspectRatio: 1,
+    // height: responsiveNumber(135),
+    width: "95%",
+    // aspectRatio: 2,
     borderRadius: responsiveNumber(15),
     margin: responsiveNumber(10),
     marginBottom: responsiveNumber(0),
@@ -151,14 +144,18 @@ const style = StyleSheet.create({
     marginRight: responsiveNumber(5),
   },
   textView: {
-    flex: 0.2,
+    flex: 0.25,
     // backgroundColor: "green",
     justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
     margin: 0,
   },
-  text: { color: "white", fontSize: PixelRatio.getPixelSizeForLayoutSize(5.3) },
+  text: {
+    color: "white",
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(6.5),
+    // fontWeight: "bold",
+  },
 });
 
-export default Osoby_Page;
+export default Zabytki_Page;

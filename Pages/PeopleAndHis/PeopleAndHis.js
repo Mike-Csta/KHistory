@@ -47,6 +47,14 @@ const PeopleAndHis = (props) => {
       obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
     },
   ]);
+  const [zabytki, setZabytki] = useState([
+    {
+      nazwa: "wczytywanie2",
+      mopis: "wczytywanie3",
+      opis: "wczytywanie4",
+      obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
+    },
+  ]);
 
   const Json = async () => {
     let request = await fetch("http://khistory.pl/osoby.json");
@@ -57,17 +65,21 @@ const PeopleAndHis = (props) => {
 
     // console.log(cytatHisData, "hmm");
   };
+  const Json2 = async () => {
+    let request2 = await fetch("http://khistory.pl/zabytki.json");
+    let json2 = await request2.json();
+    setZabytki(json2.zabytki);
 
-  const cytatHisDataFunction = async () => {
-    // let test = osoby.map((e) => `${e.imie} ${e.nazwisko}` == autor);
-    // let test = osoby;
-    // console.log("dfsjdkhfbs" + test[0].nazwisko);
+    // console.log(json.osoby.filter((e) => e.imie + " " + e.nazwisko == autor));
+
+    // console.log(cytatHisData, "hmm");
   };
 
   useEffect(() => {
     // setOsoby(Json());
     JsonCytat();
     Json();
+    Json2();
     // setcytatHisData(osoby);
     // cytatHisDataFunction();
   }, []);
@@ -86,11 +98,11 @@ const PeopleAndHis = (props) => {
           <ScrollOsoby navigation={props.navigation} osoby={osoby} />
           <Wafelek
             value={"ZABYTKI"}
-            osoby={osoby}
-            page="Osoby_Page"
+            zabytki={zabytki}
+            page="Zabytki_Page"
             navigation={props.navigation}
           />
-          <ScrollZabytki />
+          <ScrollZabytki navigation={props.navigation} zabytki={zabytki} />
         </View>
         <View style={style.bottom}>
           <Footer />
