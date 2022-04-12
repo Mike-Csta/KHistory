@@ -20,6 +20,7 @@ import {
   DarkTheme,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Osoby_Page_Page from "./Pages/PeopleAndHis/Scroll_Page_Page";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,7 @@ export default function App() {
           <Stack.Screen name="Scan" component={Scan} />
           <Stack.Screen name="PeopleAndHis" component={PeopleAndHis} />
           <Stack.Screen name="ScrollOsoby_Page" component={ScrollOsoby_Page} />
+          <Stack.Screen name="Osoby_Page_Page" component={Osoby_Page_Page} />
           <Stack.Screen name="CytatHis_Page" component={CytatHis_Page} />
           <Stack.Screen name="Setting_page" component={Setting_page} />
           <Stack.Screen name="Osoby_Page" component={Osoby_Page} />

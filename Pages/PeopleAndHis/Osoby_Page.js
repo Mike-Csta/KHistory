@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   FlatList,
+  StatusBar,
+  TextInput,
 } from "react-native";
 import {
   responsiveNumber,
@@ -17,33 +19,58 @@ import {
 } from "react-native-responsive-number";
 
 const Osoby_Page = (props) => {
+  const [input, setInput] = useState("");
+  // console.log();
   return (
     <View>
-      <View style={style.borderRadius}></View>
       <View style={style.container}>
-        <FlatList
-          data={props.route.params[0]}
-          columnWrapperStyle={{
-            flex: 0.5,
-            justifyContent: "space-evenly",
-          }}
-          numColumns={2}
-          renderItem={(e) => (
-            <View style={style.element}>
-              <Image
-                source={{
-                  uri: e.item.obraz,
-                }}
-                style={style.obraz}
-              />
-              <View style={style.textView}>
-                <Text
-                  style={style.text}
-                >{`${e.item.imie} ${e.item.nazwisko}`}</Text>
-              </View>
-            </View>
-          )}
-        />
+        <View style={style.bar}>
+          <View style={style.search}>
+            <TextInput
+              type="text"
+              style={style.textInput}
+              placeholder="Wyszukaj Osoby..."
+              placeholderTextColor="#454560"
+              value={input}
+              onChangeText={(e) => setInput(e)}
+            />
+          </View>
+          <FlatList
+            contentContainerStyle={{ paddingBottom: 20 }}
+            style={style.flatList}
+            data={props.route.params[0].filter(
+              (e) =>
+                e.imie.toLowerCase().includes(input.toLowerCase()) ||
+                e.nazwisko.toLowerCase().includes(input.toLowerCase()) ||
+                `${e.imie.toLowerCase()} ${e.nazwisko.toLowerCase()}`.includes(
+                  input.toLowerCase()
+                )
+            )}
+            columnWrapperStyle={{
+              flex: 0.5,
+              justifyContent: "space-evenly",
+            }}
+            numColumns={2}
+            renderItem={(e) => (
+              <TouchableOpacity
+                style={style.element}
+                onPress={() => props.navigation.push("Osoby_Page_Page", e.item)}
+              >
+                <Image
+                  source={{
+                    uri: e.item.obraz,
+                  }}
+                  style={style.obraz}
+                />
+                <View style={style.textView}>
+                  <Text
+                    style={style.text}
+                  >{`${e.item.imie} ${e.item.nazwisko}`}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
       </View>
     </View>
   );
@@ -56,36 +83,44 @@ const style = StyleSheet.create({
     // height: responsiveNumber(180),
     // backgroundColor: "#353540",
     backgroundColor: "#192029",
-    borderBottomLeftRadius: responsiveNumber(25),
-    borderBottomRightRadius: responsiveNumber(25),
+    height: Dimensions.get("window").height + StatusBar.currentHeight,
     overflow: "hidden",
     // paddingTop: responsiveNumber(10),
     zIndex: 2,
-    flexDirection: "row",
-  },
-  borderRadius: {
-    zIndex: -10,
-    position: "absolute",
-    display: "flex",
-    width: "100%",
-    height: responsiveNumber(40),
-    // backgroundColor: "#353540",
-    backgroundColor: "#192029",
-    borderBottomLeftRadius: responsiveNumber(25),
-    overflow: "hidden",
-    paddingTop: responsiveNumber(10),
-
-    marginTop: responsiveNumber(-20),
-  },
-  scrollView: {
-    // margin: responsiveNumber(10),
+    flexDirection: "column",
     position: "relative",
-    flexWrap: "wrap",
-    display: "flex",
-    flexDirection: "row",
-    backgroundColor: "green",
-    width: "100%",
-    height: "auto",
+  },
+
+  flatList: {
+    flex: 1,
+    // margin: responsiveNumber(10),
+  },
+  search: {
+    marginTop: StatusBar.currentHeight,
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+  },
+  bar: {
+    // display: "flex",
+    // justifyContent: "flex-end",
+    // marginTop: StatusBar.currentHeight,
+    bottom: 0,
+    height: "100%",
+  },
+  textInput: {
+    // position: "absolute",
+    backgroundColor: "#242939",
+    borderBottomWidth: 2,
+    borderColor: "#353545",
+    borderRadius: 50,
+    height: responsiveNumber(35),
+    width: "97%",
+    borderRadius: responsiveNumber(7),
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    color: "white",
   },
   element: {
     flex: 1,

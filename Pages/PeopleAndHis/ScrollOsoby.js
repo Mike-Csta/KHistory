@@ -14,7 +14,7 @@ import {
   responsiveNumber,
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
-
+import grid from "../../src/grid.png";
 const ScrollOsoby = (props) => {
   return (
     <View>
@@ -27,32 +27,53 @@ const ScrollOsoby = (props) => {
           showsHorizontalScrollIndicator={false}
           decelerationRate="fast"
         >
-          {props.osoby.map((e) => (
-            <TouchableWithoutFeedback
-              style={style.element}
-              onPress={() =>
-                props.navigation.push("ScrollOsoby_Page", [
-                  e.imie,
-                  e.nazwisko,
-                  e.mopis,
-                  e.opis,
-                  e.obraz,
-                ])
-              }
-            >
-              <View>
-                <Image
-                  source={{
-                    uri: e.obraz,
-                  }}
-                  style={style.obraz}
-                />
-                <View style={style.textView}>
-                  <Text style={style.text}>{`${e.imie} ${e.nazwisko}`}</Text>
+          {props.osoby.map((e, index) =>
+            index < 5 ? (
+              <TouchableWithoutFeedback
+                style={style.element}
+                onPress={() =>
+                  props.navigation.push("ScrollOsoby_Page", [
+                    e.imie,
+                    e.nazwisko,
+                    e.mopis,
+                    e.opis,
+                    e.obraz,
+                  ])
+                }
+              >
+                <View>
+                  <Image
+                    source={{
+                      uri: e.obraz,
+                    }}
+                    style={style.obraz}
+                  />
+                  <View style={style.textView}>
+                    <Text style={style.text}>{`${e.imie} ${e.nazwisko}`}</Text>
+                  </View>
                 </View>
+              </TouchableWithoutFeedback>
+            ) : (
+              console.log("nic")
+            )
+          )}
+          <View style={style.element2}>
+            <TouchableWithoutFeedback
+              onPress={() => props.navigation.push("Osoby_Page", [props.osoby])}
+            >
+              <View
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  textAlign: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image source={grid} style={style.obraz2} />
+                <Text style={style.grid_text}>Więcej</Text>
               </View>
             </TouchableWithoutFeedback>
-          ))}
+          </View>
         </ScrollView>
       </View>
     </View>
@@ -100,6 +121,24 @@ const style1 = StyleSheet.create({
     // backgroundColor: "#f55",
     margin: responsiveNumber(1),
   },
+  element2: {
+    display: "flex",
+    position: "relative",
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    height: "95%",
+    width: responsiveNumber(80),
+    borderRadius: responsiveNumber(20),
+    backgroundColor: "#303547",
+    margin: responsiveNumber(5),
+  },
+  grid_text: {
+    position: "absolute",
+    color: "white",
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(5.3),
+    bottom: 0,
+  },
   obraz: {
     flex: 1,
     justifyContent: "center",
@@ -108,6 +147,18 @@ const style1 = StyleSheet.create({
     height: responsiveNumber(135),
     aspectRatio: 1,
     borderRadius: responsiveNumber(15),
+    margin: responsiveNumber(10),
+    marginBottom: responsiveNumber(0),
+    marginLeft: responsiveNumber(5),
+    marginRight: responsiveNumber(5),
+  },
+  obraz2: {
+    flex: 0.6,
+    justifyContent: "center",
+    opacity: 0.8,
+    alignItems: "center",
+    height: responsiveNumber(135),
+    aspectRatio: 1,
     margin: responsiveNumber(10),
     marginBottom: responsiveNumber(0),
     marginLeft: responsiveNumber(5),
