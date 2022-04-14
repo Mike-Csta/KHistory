@@ -37,6 +37,7 @@
     "expo-font": "~9.2.1",
     "expo-status-bar": "^1.2.0",
     "firebase": "^9.6.5",
+    "jsoneditor-react": "^3.1.2",
     "react": "^16.13.1",
     "react-live-clock": "^5.6.1",
     "react-native": "^0.63.4",
