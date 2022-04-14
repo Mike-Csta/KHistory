@@ -83,6 +83,7 @@ const style = StyleSheet.create({
     width: responsiveNumber(152),
     height: responsiveNumber(190),
     borderRadius: responsiveNumber(20),
+    overflow: "hidden",
   },
   image: {
     height: responsiveNumber(190),

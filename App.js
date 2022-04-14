@@ -1,5 +1,5 @@
 import { useFonts } from "expo-font";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Scan from "./Pages/Scan/Scan";
 import PeopleAndHis from "./Pages/PeopleAndHis/PeopleAndHis";
 import Homepage from "./Pages/Homepage/Homepage";
@@ -24,10 +24,24 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Osoby_Page_Page from "./Pages/PeopleAndHis/Osoby_Page_Page";
 import Zabytki_Page from "./Pages/PeopleAndHis/Zabytki_Page";
 import Zabytki_Page_Page from "./Pages/PeopleAndHis/Zabytki_Page_Page";
-
+import App_Welcome from "./App_Welcome";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  let [data, setData] = useState(false);
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("Welcom"); //TU MA BYĆ "Welcome", TO BŁĄD, KTÓREGO SZUKASZ
+      setData(jsonValue != null ? JSON.parse(jsonValue) : false);
+      console.log(jsonValue);
+    } catch (e) {
+      // error reading value
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   let [fontsLoaded] = useFonts({
     BalooBhaijaan2: require("./src/BalooBhaijaan2.ttf"),
   });
@@ -40,13 +54,14 @@ export default function App() {
     <View style={{ flex: 1, backgroundColor: "#222" }}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName={data ? "Home" : "App_Welcome"}
           screenOptions={{
             headerShown: false,
             detachPreviousScreen: false,
           }}
         >
           <Stack.Screen name="Home" component={Homepage} />
+          <Stack.Screen name="App_Welcome" component={App_Welcome} />
           <Stack.Screen name="Scan" component={Scan} />
           <Stack.Screen name="PeopleAndHis" component={PeopleAndHis} />
           <Stack.Screen name="ScrollOsoby_Page" component={ScrollOsoby_Page} />

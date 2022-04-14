@@ -43,6 +43,7 @@ const CytatHis_Page = (props) => {
 
   return (
     <View style={style.container}>
+      <View style={style.bottomBackground}></View>
       <View style={style.bar}>
         <View style={style.top}>
           <Image style={style.image} source={{ uri: cytatHisData[0].obraz }} />
@@ -60,7 +61,6 @@ const CytatHis_Page = (props) => {
           </View>
         </View>
       </View>
-      <View style={style.bottomBackground}></View>
     </View>
   );
 };

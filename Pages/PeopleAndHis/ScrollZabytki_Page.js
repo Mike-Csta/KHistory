@@ -21,6 +21,7 @@ const ScrollZabytki_Page = (props) => {
   //  console.log(props.route);
   return (
     <View style={style.container}>
+      <View style={style.bottomBackground}></View>
       <View style={style.bar}>
         <View style={style.top}>
           <Image style={style.image} source={{ uri: props.route.params[3] }} />
@@ -39,7 +40,6 @@ const ScrollZabytki_Page = (props) => {
           </View>
         </View>
       </View>
-      <View style={style.bottomBackground}></View>
     </View>
   );
 };

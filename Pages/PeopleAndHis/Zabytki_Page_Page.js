@@ -21,6 +21,7 @@ const Zabytki_Page_Page = (props) => {
   //  console.log(props.route);
   return (
     <View style={style.container}>
+      <View style={style.bottomBackground}></View>
       <View style={style.bar}>
         <View style={style.top}>
           <Image
@@ -42,7 +43,6 @@ const Zabytki_Page_Page = (props) => {
           </View>
         </View>
       </View>
-      <View style={style.bottomBackground}></View>
     </View>
   );
 };

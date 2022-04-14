@@ -8,6 +8,7 @@ import {
   StatusBar,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import CytatHis from "./CytatHis";
 import Wafelek from "./Wafelek";
 import ScrollOsoby from "./ScrollOsoby";
@@ -74,15 +75,25 @@ const PeopleAndHis = (props) => {
 
     // console.log(cytatHisData, "hmm");
   };
-
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("Welcome");
+      let datta = jsonValue != null ? JSON.parse(jsonValue) : "pusto";
+      console.log(datta, "xD");
+    } catch (e) {
+      // error reading value
+    }
+  };
   useEffect(() => {
     // setOsoby(Json());
+    getData();
     JsonCytat();
     Json();
     Json2();
     // setcytatHisData(osoby);
     // cytatHisDataFunction();
   }, []);
+
   //console.log(props);
   return (
     <View style={style.container}>

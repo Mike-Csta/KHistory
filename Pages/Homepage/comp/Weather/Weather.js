@@ -31,78 +31,87 @@ import slonecznie from "../../../../src/icons/5.png";
 import pochmurno from "../../../../src/icons/6.png";
 import error from "../../../../src/icons/404.png";
 
-//Burza z deszczem = 0, Burza = 1, Deszcz = 2, Śnieg = 3, Mgła = 4, Słonecznie = 5, Pochmurno = 6, ERROR = 404
-function getStatus(code) {
-  switch (code) {
-    case 1273:
-    case 1276:
-    case 1279:
-    case 1282:
-      //burza z deszczem
-      return { Status: "Burza z Deszczem", Ikona: burzaZDeszczem };
-    case 1087:
-      //burza
-      return { Status: "Burza", Ikona: burza };
-    case 1063:
-    case 1150:
-    case 1153:
-    case 1168:
-    case 1171:
-    case 1180:
-    case 1183:
-    case 1186:
-    case 1189:
-    case 1192:
-    case 1195:
-    case 1198:
-    case 1201:
-    case 1240:
-    case 1243:
-    case 1246:
-      //deszcz
-      return { Status: "Deszcz", Ikona: deszcz };
-    case 1066:
-    case 1069:
-    case 1072:
-    case 1114:
-    case 1117:
-    case 1204:
-    case 1207:
-    case 1210:
-    case 1213:
-    case 1216:
-    case 1219:
-    case 1222:
-    case 1225:
-    case 1237:
-    case 1249:
-    case 1252:
-    case 1255:
-    case 1258:
-    case 1261:
-    case 1264:
-      //śnieg
-      return { Status: "Śnieg", Ikona: snieg };
-    case 1030:
-    case 1147:
-    case 1135:
-      //mgła
-      return { Status: "Mgła", Ikona: mgla };
-    case 1000:
-      //słonecznie
-      return { Status: "Słonecznie", Ikona: slonecznie };
-    case 1003:
-    case 1006:
-    case 1009:
-      //pochmurno
-      return { Status: "Pochmurno", Ikona: pochmurno };
-    default:
-      //nieznany lub błąd
-      return { Status: "ERROR", Ikona: error };
+const Weather = (props) => {
+  //Burza z deszczem = 0, Burza = 1, Deszcz = 2, Śnieg = 3, Mgła = 4, Słonecznie = 5, Pochmurno = 6, ERROR = 404
+  function getStatus(code) {
+    switch (code) {
+      case 1273:
+      case 1276:
+      case 1279:
+      case 1282:
+        //burza z deszczem
+        return {
+          Status: props.Lang ? "Burza z Deszczem" : "Гроза з дощем",
+          Ikona: burzaZDeszczem,
+        };
+      case 1087:
+        //burza
+        return { Status: props.Lang ? "Burza" : "Буря", Ikona: burza };
+      case 1063:
+      case 1150:
+      case 1153:
+      case 1168:
+      case 1171:
+      case 1180:
+      case 1183:
+      case 1186:
+      case 1189:
+      case 1192:
+      case 1195:
+      case 1198:
+      case 1201:
+      case 1240:
+      case 1243:
+      case 1246:
+        //deszcz
+        return { Status: props.Lang ? "Deszcz" : "Дощ", Ikona: deszcz };
+      case 1066:
+      case 1069:
+      case 1072:
+      case 1114:
+      case 1117:
+      case 1204:
+      case 1207:
+      case 1210:
+      case 1213:
+      case 1216:
+      case 1219:
+      case 1222:
+      case 1225:
+      case 1237:
+      case 1249:
+      case 1252:
+      case 1255:
+      case 1258:
+      case 1261:
+      case 1264:
+        //śnieg
+        return { Status: props.Lang ? "Śnieg" : "Сніг", Ikona: snieg };
+      case 1030:
+      case 1147:
+      case 1135:
+        //mgła
+        return { Status: props.Lang ? "Mgła" : "Туман", Ikona: mgla };
+      case 1000:
+        //słonecznie
+        return {
+          Status: props.Lang ? "Słonecznie" : "Сонячно",
+          Ikona: slonecznie,
+        };
+      case 1003:
+      case 1006:
+      case 1009:
+        //pochmurno
+        return {
+          Status: props.Lang ? "Pochmurno" : "Хмарно",
+          Ikona: pochmurno,
+        };
+      default:
+        //nieznany lub błąd
+        return { Status: "ERROR", Ikona: error };
+    }
   }
-}
 
-const Weather = () => {
   let [o2detail, setO2detail] = useState([
     { co: 0 },
     { no2: 0 },
@@ -374,7 +383,9 @@ const Weather = () => {
         >
           <View>
             <View style={style.O2_top}>
-              <Text style={style.O2_top_text}>STAN POWIETRZA</Text>
+              <Text style={style.O2_top_text}>
+                {props.Lang ? "STAN POWIETRZA" : "КОНДИЦІОНЕР"}
+              </Text>
             </View>
             <View style={style.O2_bottom}>
               {o2detail.map((e) => (
@@ -417,21 +428,25 @@ const Weather = () => {
           <Animated.View intensity={30} tint="default" style={days_weather()}>
             {/* dzien 1 */}
             <View style={days.left}>
-              <Text style={days.dzien}>DZISIAJ</Text>
+              <Text style={days.dzien}>
+                {props.Lang ? "DZISIAJ" : "СЬОГОДНІ"}
+              </Text>
               <Image source={weatherStateICO[0]} style={style.weather_icon} />
               <Text style={days.stan}>{weatherState[0]}</Text>
               <Text style={days.stopnie}>{temp[0]}°C</Text>
             </View>
             {/* dzien 2 */}
             <View style={days.center}>
-              <Text style={days.dzien}>JUTRO</Text>
+              <Text style={days.dzien}>{props.Lang ? "JUTRO" : "3ABTPA"}</Text>
               <Image source={weatherStateICO[1]} style={style.weather_icon} />
               <Text style={days.stan}>{weatherState[1]}</Text>
               <Text style={days.stopnie}>{temp[1]}°C</Text>
             </View>
             {/* dzien 3 */}
             <View style={days.right}>
-              <Text style={days.dzien}>POJUTRZE</Text>
+              <Text style={days.dzien}>
+                {props.Lang ? "POJUTRZE" : "ПІСЛЯЗАВТРА"}
+              </Text>
               <Image source={weatherStateICO[2]} style={style.weather_icon} />
               <Text style={days.stan}>{weatherState[2]}</Text>
               <Text style={days.stopnie}>{temp[2]}°C</Text>
@@ -463,7 +478,10 @@ const Weather = () => {
             </View>
             <View style={style.weather_right_bottom}>
               <Image source={wykres} style={style.weather_wykres} />
-              <Text style={style.powietrze}>Stan Powietrza {airCond}</Text>
+              <Text style={style.powietrze}>
+                {props.Lang ? "Stan Powietrza" : "Кондиціонер "}
+                {props.Lang ? airCond : "добре"}
+              </Text>
             </View>
           </View>
         </BlurView>
@@ -530,6 +548,7 @@ const style = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     height: "100%",
+
     marginLeft: responsiveNumber(1),
     marginRight: responsiveNumber(1),
   },
@@ -538,22 +557,28 @@ const style = StyleSheet.create({
     margin: responsiveNumber(3),
     borderRadius: responsiveNumber(8),
     flex: 1,
-    backgroundColor: "#545151",
-    borderTopColor: "#4c4",
-    borderTopWidth: responsiveNumber(2),
+    backgroundColor: "#313131",
+    // borderColor: "#777",
+    borderWidth: responsiveNumber(0),
+    borderTopColor: "#494",
+    borderTopWidth: responsiveNumber(4),
+    borderRightColor: "#494",
+    borderRightWidth: responsiveNumber(1),
   },
   O2_wartosc: {
-    flex: 0.2,
+    flex: 0.32,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
   },
 
   O2_poziom: {
-    flex: 0.35,
+    // flex: 0.35,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+
+    marginTop: responsiveNumber(-5),
     // backgroundColor: "#125",
   },
   // O2_poziom_text: { color: "#ccc", fontWeight: "bold" },
@@ -593,7 +618,6 @@ const style = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
-
     alignItems: "center",
   },
   weather_Background2: {

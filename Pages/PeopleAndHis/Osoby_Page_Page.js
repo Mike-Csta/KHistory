@@ -21,6 +21,7 @@ const Osoby_Page_Page = (props) => {
   console.log("xD");
   return (
     <View style={style.container}>
+      <View style={style.bottomBackground}></View>
       <View style={style.bar}>
         <View style={style.top}>
           <Image
@@ -41,7 +42,6 @@ const Osoby_Page_Page = (props) => {
           </View>
         </View>
       </View>
-      <View style={style.bottomBackground}></View>
     </View>
   );
 };

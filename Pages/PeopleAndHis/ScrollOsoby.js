@@ -61,7 +61,7 @@ const ScrollOsoby = (props) => {
                 </View>
               </TouchableWithoutFeedback>
             ) : (
-              console.log("nic")
+              false
             )
           )}
           <View style={style.element2}>
@@ -187,9 +187,28 @@ const style2 = StyleSheet.create({
   container: {
     display: "flex",
     width: "100%",
-    height: responsiveNumber(140),
-    backgroundColor: "#353540",
+    height: responsiveNumber(130),
+    // backgroundColor: "#353540",
+    backgroundColor: "#212938",
     borderBottomLeftRadius: responsiveNumber(25),
+    borderBottomRightRadius: responsiveNumber(25),
+    overflow: "hidden",
+    // paddingTop: responsiveNumber(10),
+    zIndex: 2,
+  },
+  borderRadius: {
+    zIndex: -10,
+    position: "absolute",
+    display: "flex",
+    width: "100%",
+    height: responsiveNumber(40),
+    // backgroundColor: "#353540",
+    backgroundColor: "#212938",
+    borderBottomLeftRadius: responsiveNumber(25),
+    overflow: "hidden",
+    paddingTop: responsiveNumber(10),
+
+    marginTop: responsiveNumber(-20),
   },
   scrollView: {
     // margin: responsiveNumber(10),
@@ -201,20 +220,53 @@ const style2 = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     height: "100%",
-    width: responsiveNumber(120),
+    width: responsiveNumber(150),
     // backgroundColor: "#f55",
     margin: responsiveNumber(1),
+  },
+  element2: {
+    display: "flex",
+    position: "relative",
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    height: "95%",
+    width: responsiveNumber(80),
+    borderRadius: responsiveNumber(20),
+    backgroundColor: "#303547",
+    margin: responsiveNumber(5),
+  },
+  grid_text: {
+    position: "absolute",
+    color: "white",
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(5.3),
+    bottom: 0,
   },
   obraz: {
     flex: 1,
     justifyContent: "center",
-
+    borderColor: "#333344",
+    borderWidth: 1.5,
     alignItems: "center",
     height: responsiveNumber(135),
     aspectRatio: 1,
     borderRadius: responsiveNumber(15),
     margin: responsiveNumber(10),
     marginBottom: responsiveNumber(0),
+    marginLeft: responsiveNumber(5),
+    marginRight: responsiveNumber(5),
+  },
+  obraz2: {
+    flex: 0.6,
+    justifyContent: "center",
+    opacity: 0.8,
+    alignItems: "center",
+    height: responsiveNumber(135),
+    aspectRatio: 1,
+    margin: responsiveNumber(10),
+    marginBottom: responsiveNumber(0),
+    marginLeft: responsiveNumber(5),
+    marginRight: responsiveNumber(5),
   },
   textView: {
     flex: 0.2,
@@ -224,7 +276,7 @@ const style2 = StyleSheet.create({
     alignItems: "center",
     margin: 0,
   },
-  text: { color: "white", fontSize: PixelRatio.getPixelSizeForLayoutSize(5.3) },
+  text: { color: "white", fontSize: PixelRatio.getPixelSizeForLayoutSize(3.7) },
 });
 
 let style = style1;
