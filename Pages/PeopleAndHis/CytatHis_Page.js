@@ -43,6 +43,7 @@ const CytatHis_Page = (props) => {
 
   return (
     <View style={style.container}>
+      <View style={style.bottomBackground}></View>
       <View style={style.bar}>
         <View style={style.top}>
           <Image style={style.image} source={{ uri: cytatHisData[0].obraz }} />
@@ -55,12 +56,11 @@ const CytatHis_Page = (props) => {
             <ScrollView style={style.opis_scroll}>
               <Text style={style.mopis}>{cytatHisData[0].mopis}</Text>
               <Text style={style.opis}>{cytatHisData[0].opis}</Text>
-              <Text style={style.footer}>Źródłoe: kalisz.pl</Text>
+              <Text style={style.footer}>Źródło: kalisz.pl</Text>
             </ScrollView>
           </View>
         </View>
       </View>
-      <View style={style.bottomBackground}></View>
     </View>
   );
 };

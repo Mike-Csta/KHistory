@@ -17,21 +17,15 @@ import {
 import QQQ from "../../src/qqq.jpg";
 
 const CytatHis = (props) => {
-  // const [dane, setDane] = useState([
-  //   {
-  //     imie: "wczytywanie1",
-  //     nazwisko: "wczytywanie2",
-  //     mopis: "wczytywanie3",
-  //     opis: "wczytywanie4",
-  //     obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
-  //   },
-  // ]);
+  const [dane, setDane] = useState([]);
+  // console.log("askjfhskd", props);
 
-  // useEffect(() => {
-  //   setDane(props.data);
-  // }, []);
-
-  console.log("askjfhskd", props);
+  useEffect(() => {
+    let test = props.data.filter(
+      (e) => `${e.imie} ${e.nazwisko}` == props.autor
+    );
+    if (undefined != test[0]) setDane(test[0]);
+  });
 
   return (
     <TouchableOpacity
@@ -42,15 +36,15 @@ const CytatHis = (props) => {
       }}
     >
       <View style={style.left}>
-        <Image style={style.image} source={QQQ} />
+        <Image style={style.image} source={{ uri: dane.obraz }} />
       </View>
       <View style={style.right}>
-        <Text style={style.imie}>Adam Asnyk</Text>
-        <Text style={style.opis}>
-          Wybitny polski poeta, publicysta i działacz patriotyczny. Urodził się
-          w Kaliszu 11 września 1838 roku. Pochodził z rodziny szlacheckiej.
-          Jeg...
-        </Text>
+        <View style={style.elem}>
+          <Text style={style.imie}>{props.autor}</Text>
+        </View>
+        <View style={style.elem2}>
+          <Text style={style.opis}>{dane.mopis}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -79,12 +73,17 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    backgroundColor: "#aa5555",
+    // backgroundColor: "#aa5555",
+    backgroundColor: "#212938",
+    borderColor: "#cc5555",
+    borderWidth: 2,
+    borderBottomWidth: 6,
     margin: responsiveNumber(10),
     marginLeft: 0,
     width: responsiveNumber(152),
     height: responsiveNumber(190),
     borderRadius: responsiveNumber(20),
+    overflow: "hidden",
   },
   image: {
     height: responsiveNumber(190),
@@ -92,25 +91,43 @@ const style = StyleSheet.create({
     borderRadius: responsiveNumber(20),
   },
   imie: {
-    flex: 0.21,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
     fontSize: PixelRatio.getPixelSizeForLayoutSize(7.3),
-    marginBottom: responsiveNumber(20),
-    marginTop: responsiveNumber(20),
-    color: "white",
+    // marginBottom: responsiveNumber(15),
+    // marginTop: responsiveNumber(19),
+    color: "#cc5555",
+    fontWeight: "bold",
+    // backgroundColor: "red",
   },
   opis: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
     fontSize: PixelRatio.getPixelSizeForLayoutSize(5.5),
     marginLeft: responsiveNumber(10),
     marginRight: responsiveNumber(10),
-    bottom: 0,
+    top: 0,
     color: "#ddd",
+    // backgroundColor: "red",
+  },
+  elem: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    // backgroundColor: "red",
+  },
+  elem2: {
+    position: "relative",
+    flex: 1,
+    display: "flex",
+    // justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    // backgroundColor: "red",
   },
 });
 

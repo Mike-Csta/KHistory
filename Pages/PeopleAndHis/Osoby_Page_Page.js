@@ -17,23 +17,26 @@ import {
 } from "react-native-responsive-number";
 import QQQ from "../../src/qqq.jpg";
 
-const ScrollOsoby_Page = (props) => {
-  //  console.log(props.route);
+const Osoby_Page_Page = (props) => {
+  console.log("xD");
   return (
     <View style={style.container}>
       <View style={style.bottomBackground}></View>
       <View style={style.bar}>
         <View style={style.top}>
-          <Image style={style.image} source={{ uri: props.route.params[4] }} />
+          <Image
+            style={style.image}
+            source={{ uri: props.route.params.obraz }}
+          />
         </View>
         <View style={style.bottom_wraper}>
           <View style={style.bottom}>
             <Text
               style={style.imie}
-            >{`${props.route.params[0]} ${props.route.params[1]}`}</Text>
+            >{`${props.route.params.imie} ${props.route.params.nazwisko}`}</Text>
             <ScrollView style={style.opis_scroll}>
-              <Text style={style.mopis}>{props.route.params[2]}</Text>
-              <Text style={style.opis}>{props.route.params[3]}</Text>
+              <Text style={style.mopis}>{props.route.params.mopis}</Text>
+              <Text style={style.opis}>{props.route.params.opis}</Text>
               <Text style={style.footer}>Źródło: kalisz.pl</Text>
             </ScrollView>
           </View>
@@ -164,4 +167,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default ScrollOsoby_Page;
+export default Osoby_Page_Page;

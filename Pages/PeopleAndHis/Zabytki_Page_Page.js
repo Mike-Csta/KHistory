@@ -17,24 +17,28 @@ import {
 } from "react-native-responsive-number";
 import QQQ from "../../src/qqq.jpg";
 
-const ScrollOsoby_Page = (props) => {
+const Zabytki_Page_Page = (props) => {
   //  console.log(props.route);
   return (
     <View style={style.container}>
       <View style={style.bottomBackground}></View>
       <View style={style.bar}>
         <View style={style.top}>
-          <Image style={style.image} source={{ uri: props.route.params[4] }} />
+          <Image
+            style={style.image}
+            source={{ uri: props.route.params.obraz }}
+          />
         </View>
         <View style={style.bottom_wraper}>
           <View style={style.bottom}>
-            <Text
-              style={style.imie}
-            >{`${props.route.params[0]} ${props.route.params[1]}`}</Text>
+            <View style={style.bottom_imie}>
+              <Text style={style.imie}>{props.route.params.nazwa}</Text>
+            </View>
+
             <ScrollView style={style.opis_scroll}>
-              <Text style={style.mopis}>{props.route.params[2]}</Text>
-              <Text style={style.opis}>{props.route.params[3]}</Text>
-              <Text style={style.footer}>Źródło: kalisz.pl</Text>
+              <Text style={style.mopis}>{props.route.params.mopis}</Text>
+              <Text style={style.opis}>{props.route.params.opis}</Text>
+              <Text style={style.footer}>Źródło: kalisza.pl</Text>
             </ScrollView>
           </View>
         </View>
@@ -103,6 +107,21 @@ const style = StyleSheet.create({
     height: "100%",
     marginLeft: 0,
     borderRadius: responsiveNumber(20),
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  bottom_imie: {
+    display: "flex",
+    position: "relative",
+    // flex: 0.2,
+    // backgroundColor: "#2f2f40",
+    // height: "100%",
+    marginLeft: 0,
+    borderRadius: responsiveNumber(20),
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
   },
 
   image: {
@@ -111,15 +130,16 @@ const style = StyleSheet.create({
     borderRadius: responsiveNumber(2000),
   },
   imie: {
-    flex: 0.1,
+    // flex: 0.2,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
     fontSize: PixelRatio.getPixelSizeForLayoutSize(9.2),
     marginBottom: responsiveNumber(10),
-    marginTop: responsiveNumber(12),
+    marginTop: responsiveNumber(5),
     color: "#cf5555",
     textTransform: "uppercase",
+    // backgroundColor: "red",
   },
 
   mopis: {
@@ -164,4 +184,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default ScrollOsoby_Page;
+export default Zabytki_Page_Page;

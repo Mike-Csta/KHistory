@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   Image,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   PixelRatio,
 } from "react-native";
 import {
@@ -12,14 +12,24 @@ import {
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
 
-const Button = (e) => {
+const Wafelek = (props) => {
   return (
-    <TouchableOpacity style={style.container}>
-      <View style={style.border}></View>
-      <View style={style.view}>
-        <Text style={style.text}>{e.value}</Text>
+    <TouchableWithoutFeedback
+      style={style.container}
+      onPress={() =>
+        props.navigation.push(
+          props.page,
+          !props.osoby ? [props.zabytki] : [props.osoby]
+        )
+      }
+    >
+      <View style={style.container}>
+        <View style={style.border}></View>
+        <View style={style.view}>
+          <Text style={style.text}>{props.value}</Text>
+        </View>
       </View>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -53,4 +63,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default Button;
+export default Wafelek;

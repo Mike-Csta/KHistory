@@ -30,7 +30,9 @@ const Qrbutton = (props) => {
             <Image source={lih} style={style.image}></Image>
           </View>
           <View style={style.right}>
-            <Text style={style.text}>LUDZIE I HISTORIA</Text>
+            <Text style={style.text}>
+              {props.Lang ? "LUDZIE I HISTORIA" : "ЛЮДИ ТА ІСТОРІЯ"}
+            </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
@@ -39,13 +41,15 @@ const Qrbutton = (props) => {
         >
           <View style={style.right_2}>
             <View style={style.right_2_top}>
-              <Text style={style.text_2}>KOD</Text>
+              <Text style={style.text_2}>{props.Lang ? "KOD" : "СТОП"}</Text>
             </View>
             <View style={style.right_2_center}>
               <Image source={scan} style={style.image_2}></Image>
             </View>
             <View style={style.right_2_bottom}>
-              <Text style={style.text_3}>PRZYSTANKU</Text>
+              <Text style={style.text_3}>
+                {props.Lang ? "PRZYSTANKU" : "КОД"}
+              </Text>
             </View>
           </View>
         </TouchableOpacity>

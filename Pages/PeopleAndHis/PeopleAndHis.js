@@ -8,8 +8,9 @@ import {
   StatusBar,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import CytatHis from "./CytatHis";
-import Button from "./Button";
+import Wafelek from "./Wafelek";
 import ScrollOsoby from "./ScrollOsoby";
 import ScrollZabytki from "./ScrollZabytki";
 import Footer from "./Footer";
@@ -34,14 +35,22 @@ const PeopleAndHis = (props) => {
   const JsonCytat = async () => {
     let request = await fetch("http://khistory.pl/cytaty.json");
     let json = await request.json();
-    setAutor(json.osoby[0].nazwisko);
-    console.log(autor);
+    setAutor(json.osoby[1].nazwisko);
+    // console.log(autor);
   };
 
   const [osoby, setOsoby] = useState([
     {
       imie: "wczytywanie1",
       nazwisko: "wczytywanie2",
+      mopis: "wczytywanie3",
+      opis: "wczytywanie4",
+      obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
+    },
+  ]);
+  const [zabytki, setZabytki] = useState([
+    {
+      nazwa: "wczytywanie2",
       mopis: "wczytywanie3",
       opis: "wczytywanie4",
       obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
@@ -57,30 +66,54 @@ const PeopleAndHis = (props) => {
 
     // console.log(cytatHisData, "hmm");
   };
+  const Json2 = async () => {
+    let request2 = await fetch("http://khistory.pl/zabytki.json");
+    let json2 = await request2.json();
+    setZabytki(json2.zabytki);
 
-  const cytatHisDataFunction = async () => {
-    // let test = osoby.map((e) => `${e.imie} ${e.nazwisko}` == autor);
-    // let test = osoby;
-    // console.log("dfsjdkhfbs" + test[0].nazwisko);
+    // console.log(json.osoby.filter((e) => e.imie + " " + e.nazwisko == autor));
+
+    // console.log(cytatHisData, "hmm");
   };
-
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("Welcome");
+      let datta = jsonValue != null ? JSON.parse(jsonValue) : "pusto";
+      console.log(datta, "xD");
+    } catch (e) {
+      // error reading value
+    }
+  };
   useEffect(() => {
     // setOsoby(Json());
+    getData();
     JsonCytat();
     Json();
+    Json2();
     // setcytatHisData(osoby);
     // cytatHisDataFunction();
   }, []);
+
   //console.log(props);
   return (
     <View style={style.container}>
       <View style={style.bar}>
         <View style={style.top}>
           <CytatHis navigation={props.navigation} data={osoby} autor={autor} />
-          <Button value={"POSTACIE"} />
+          <Wafelek
+            value={"POSTACIE"}
+            osoby={osoby}
+            page="Osoby_Page"
+            navigation={props.navigation}
+          />
           <ScrollOsoby navigation={props.navigation} osoby={osoby} />
-          <Button value={"ZABYTKI"} />
-          <ScrollZabytki />
+          <Wafelek
+            value={"ZABYTKI"}
+            zabytki={zabytki}
+            page="Zabytki_Page"
+            navigation={props.navigation}
+          />
+          <ScrollZabytki navigation={props.navigation} zabytki={zabytki} />
         </View>
         <View style={style.bottom}>
           <Footer />

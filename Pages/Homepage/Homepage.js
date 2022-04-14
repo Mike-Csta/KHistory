@@ -18,6 +18,7 @@ import Custom_Buttons from "./comp/Custom_Buttons/Custom_Buttons";
 import background from "../../src/background.jpg";
 import { StatusBar } from "expo-status-bar";
 import Settings from "./comp/Settings/Settings";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   responsiveNumber,
   responsiveLetterSpacing,
@@ -26,6 +27,18 @@ import {
 let cytatNr = Math.floor(Math.random() * 5);
 
 const Homepage = ({ navigation }) => {
+  const [lang, setLang] = useState(true);
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("Lang");
+      setLang(jsonValue != null ? JSON.parse(jsonValue) : true);
+    } catch (e) {
+      // error reading value
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <ScrollView style={style.scrollView} snapToOffsets={[1]}>
       <View style={style.main}>
@@ -35,16 +48,16 @@ const Homepage = ({ navigation }) => {
           <View style={style.margin_left}></View>
           <View style={style.center}>
             <View style={style.center_top}>
-              <Logo />
+              <Logo Lang={lang} />
 
-              <Weather />
+              <Weather Lang={lang} />
             </View>
             <View style={style.center_center}>
               <Cytat numer={cytatNr} />
             </View>
             <View style={style.center_bottom}>
-              <Qrbutton navigation={navigation} numer={cytatNr} />
-              <Custom_Buttons navigation={navigation} />
+              <Qrbutton navigation={navigation} numer={cytatNr} Lang={lang} />
+              <Custom_Buttons navigation={navigation} Lang={lang} />
             </View>
           </View>
           <View style={style.margin_right}></View>
