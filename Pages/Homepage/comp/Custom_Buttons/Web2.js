@@ -57,7 +57,7 @@ const Web = () => {
     return {
       marginTop: getStatusBarHeight(),
       width: "100%",
-      height: Dimensions.get("window").height - responsiveNumber(50),
+      height: Dimensions.get("window").height - responsiveNumber(55),
       backgroundColor: "black",
       display: "flex",
       justifyContent: "space-between",
@@ -72,12 +72,12 @@ const Web = () => {
     return {
       position: "absolute",
       width: "100%",
-      height: responsiveNumber(50),
+      height: responsiveNumber(55),
 
       bottom: 0,
       zIndex: 1001,
       display: "flex",
-      flexDirection: "row",
+      flexDirection: "column",
       opacity: wysuwanie2,
       zIndex: indeks,
     };
@@ -243,68 +243,73 @@ const Web = () => {
         />
       </Animated.View>
       <Animated.View style={bar_container()}>
-        <TouchableOpacity style={styles.bar_back} onPress={goback}>
-          <View style={styles.bar_back}>
-            <Image
-              source={leftArrow}
-              style={{
-                height: responsiveNumber(25),
-                aspectRatio: 1,
-                opacity: 0.4,
-              }}
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.bar_search}
-          onPress={() => setLink("https://kalisz.naszemiasto.pl/")}
-        >
-          <View style={styles.bar_Icon}>
-            <Text style={{ color: "white" }}>1</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.bar_search}
-          onPress={() => setLink("https://www.faktykaliskie.info/")}
-        >
-          <View style={styles.bar_Icon}>
-            <Text style={{ color: "white" }}>2</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.bar_search}
-          onPress={() => setLink("https://zyciekalisza.pl/wiadomosci")}
-        >
-          <View style={styles.bar_Icon}>
-            <Text style={{ color: "white" }}>3</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.bar_search}
-          onPress={() => setLink("https://calisia.pl/")}
-        >
-          <View style={styles.bar_Icon}>
-            <Text style={{ color: "white" }}>4</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.bar_forwards} onPress={goforward}>
-          <View style={styles.bar_forwards}>
-            <Image
-              source={rightArrow}
-              style={{
-                height: responsiveNumber(25),
-                aspectRatio: 1,
-                opacity: 0.4,
-              }}
-            />
-          </View>
-        </TouchableOpacity>
+        <View style={styles.bar_top}>
+          <Text style={{ color: "#888" }}>{link}</Text>
+        </View>
+        <View style={styles.bar_top}>
+          <TouchableOpacity style={styles.bar_back} onPress={goback}>
+            <View style={styles.bar_back}>
+              <Image
+                source={leftArrow}
+                style={{
+                  height: responsiveNumber(25),
+                  aspectRatio: 1,
+                  opacity: 0.4,
+                }}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.bar_search}
+            onPress={() => setLink("https://kalisz.naszemiasto.pl/")}
+          >
+            <View style={styles.bar_Icon}>
+              <Text style={{ color: "white" }}>1</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.bar_search}
+            onPress={() => setLink("https://www.faktykaliskie.info/")}
+          >
+            <View style={styles.bar_Icon}>
+              <Text style={{ color: "white" }}>2</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.bar_search}
+            onPress={() => setLink("https://zyciekalisza.pl/wiadomosci")}
+          >
+            <View style={styles.bar_Icon}>
+              <Text style={{ color: "white" }}>3</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.bar_search}
+            onPress={() => setLink("https://calisia.pl/")}
+          >
+            <View style={styles.bar_Icon}>
+              <Text style={{ color: "white" }}>4</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.bar_forwards} onPress={goforward}>
+            <View style={styles.bar_forwards}>
+              <Image
+                source={rightArrow}
+                style={{
+                  height: responsiveNumber(25),
+                  aspectRatio: 1,
+                  opacity: 0.4,
+                }}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
       </Animated.View>
     </View>
   );
 };
 
-const styles1 = StyleSheet.create({
+const styles = StyleSheet.create({
   bar_back: {
     backgroundColor: "#151515",
     flex: 1,
@@ -315,6 +320,15 @@ const styles1 = StyleSheet.create({
   bar: {
     backgroundColor: "#151515",
     flex: 5,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  bar_top: {
+    backgroundColor: "#151515",
+    flex: 1,
+    flexDirection: "row",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -369,57 +383,19 @@ const styles1 = StyleSheet.create({
   bar_Icon: {
     backgroundColor: "#222",
 
-    borderRadius: responsiveNumber(300),
-    aspectRatio: 1,
-    height: "85%",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  },
-});
-
-const styles2 = StyleSheet.create({
-  loading_icon: {
-    height: responsiveNumber(150),
-    aspectRatio: 1,
-    marginTop: 0,
-  },
-  loading_tlo_container: {
-    position: "absolute",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  },
-
-  container: {
-    width: "100%",
+    borderRadius: responsiveNumber(10),
+    aspectRatio: 2,
     height: "100%",
-    backgroundColor: "#121212",
-    display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    alignItems: "center",
     textAlign: "center",
-    flexDirection: "column",
   },
-  margin: {},
-  container2: {
-    marginTop: getStatusBarHeight(),
-    flex: 1,
-    marginTop: getStatusBarHeight() - responsiveNumber(73),
-    // aspectRatio: 1,
-  },
-  container3: { flex: 0.1, backgroundColor: "#121212" },
 });
 
-let styles = styles1;
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-// console.log(windowWidth, windowHeight);
-
-if (windowHeight / windowWidth > 1.8) {
-  styles = styles1;
-} else {
-  styles = styles1;
-}
+// if (windowHeight / windowWidth > 1.8) {
+//   styles = styles1;
+// } else {
+//   styles = styles1;
+// }
 
 export default Web;
