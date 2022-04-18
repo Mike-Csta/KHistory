@@ -220,7 +220,7 @@ const Weather = (props) => {
 
   useEffect(() => {
     CallApi();
-  }, []);
+  }, [props.Lang]);
   // setAirLevel(1 * 10 + 35)
 
   let [daysState, setDaysState] = useState(true);
