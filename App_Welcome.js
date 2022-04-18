@@ -6,8 +6,13 @@ import {
   Image,
   TouchableOpacity,
   Button,
+  PixelRatio,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  responsiveNumber,
+  responsiveLetterSpacing,
+} from "react-native-responsive-number";
 import flagaPl from "./src/pl.png";
 import flagaUk from "./src/uk.png";
 const App_Welcome = (props) => {
@@ -60,12 +65,14 @@ const App_Welcome = (props) => {
         </TouchableOpacity>
       </View>
       <Text style={style.text}></Text>
-      <Button
+      <TouchableOpacity
         onPress={() =>
           storeData("Welcome", true) && props.navigation.navigate("Home")
         }
-        title={lang ? "Dalej" : "Далі"}
-      />
+        style={style.button}
+      >
+        <Text style={style.text5}>{lang ? "zapisz" : "зберегти"}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -87,7 +94,22 @@ const style = StyleSheet.create({
     flexDirection: "row",
   },
 
-  image: { height: 100, aspectRatio: 1.5 },
+  image: { height: 100, aspectRatio: 1.5, borderRadius: responsiveNumber(10) },
+  button: {
+    backgroundColor: "#293645",
+    height: responsiveNumber(40),
+    width: responsiveNumber(100),
+    borderRadius: responsiveNumber(100),
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+  },
+  text5: {
+    color: "white",
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(6),
+    letterSpacing: responsiveLetterSpacing(300, 4.3),
+    marginBottom: responsiveNumber(3),
+  },
 });
 
 export default App_Welcome;
