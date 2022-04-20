@@ -75,18 +75,10 @@ const PeopleAndHis = (props) => {
 
     // console.log(cytatHisData, "hmm");
   };
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("Welcome");
-      let datta = jsonValue != null ? JSON.parse(jsonValue) : "pusto";
-      console.log(datta, "xD");
-    } catch (e) {
-      // error reading value
-    }
-  };
+
   useEffect(() => {
     // setOsoby(Json());
-    getData();
+
     JsonCytat();
     Json();
     Json2();

@@ -28,6 +28,7 @@ import Osoby_Page_Page from "./Pages/PeopleAndHis/Osoby_Page_Page";
 import Zabytki_Page from "./Pages/PeopleAndHis/Zabytki_Page";
 import Zabytki_Page_Page from "./Pages/PeopleAndHis/Zabytki_Page_Page";
 import App_Welcome from "./App_Welcome";
+import Lock from "./Lock";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const Stack = createNativeStackNavigator();
 
@@ -65,6 +66,7 @@ export default function App() {
         >
           <Stack.Screen name="Home" component={Homepage} />
           <Stack.Screen name="App_Welcome" component={App_Welcome} />
+          <Stack.Screen name="Lock" component={Lock} />
           <Stack.Screen name="Scan" component={Scan} />
           <Stack.Screen name="PeopleAndHis" component={PeopleAndHis} />
           <Stack.Screen name="ScrollOsoby_Page" component={ScrollOsoby_Page} />

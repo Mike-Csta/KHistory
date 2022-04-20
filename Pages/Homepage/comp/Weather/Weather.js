@@ -471,7 +471,9 @@ const Weather = (props) => {
           </View>
           <View style={style.weather_right}>
             <View style={style.weather_right_top}>
-              <Text style={style.kalisz}>KALISZ</Text>
+              <Text style={style.kalisz}>
+                {props.Lang ? "KALISZ" : "Каліш"}
+              </Text>
             </View>
             <View style={style.weather_right_center}>
               <Text style={style.slonecznie}>{weatherState[0]}</Text>

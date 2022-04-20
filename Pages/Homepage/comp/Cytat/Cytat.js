@@ -8,13 +8,13 @@ import {
 } from "react-native-responsive-number";
 const Cytat = (props) => {
   let cytatNr = Math.floor(Math.random() * 5 + 1);
-
+  console.log(props.lang);
   return (
     <View style={style.main}>
       <View style={style.container}>
         <View style={{ transform: [{ translateY: 0 }] }}>
           <Text style={style.cytat}>
-            <CytatApi cytat={true} numer={props.numer} />
+            <CytatApi cytat={true} numer={props.numer} lang={props.lang} />
           </Text>
         </View>
         <View>
@@ -22,7 +22,7 @@ const Cytat = (props) => {
         </View>
         <View>
           <Text style={style.autor}>
-            <CytatApi cytat={false} numer={props.numer} />
+            <CytatApi cytat={false} numer={props.numer} lang={props.lang} />
           </Text>
         </View>
       </View>

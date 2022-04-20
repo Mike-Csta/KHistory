@@ -26,7 +26,7 @@ import {
 
 let cytatNr = Math.floor(Math.random() * 5);
 
-const Homepage = ({ navigation }) => {
+const Homepage = (props) => {
   const [lang, setLang] = useState(true);
   const getData = async () => {
     try {
@@ -36,9 +36,11 @@ const Homepage = ({ navigation }) => {
       // error reading value
     }
   };
+
   useEffect(() => {
     getData();
-  }, []);
+  }, [props]);
+
   return (
     <ScrollView style={style.scrollView} snapToOffsets={[1]}>
       <View style={style.main}>
@@ -53,17 +55,21 @@ const Homepage = ({ navigation }) => {
               <Weather Lang={lang} />
             </View>
             <View style={style.center_center}>
-              <Cytat numer={cytatNr} />
+              <Cytat numer={cytatNr} lang={lang} />
             </View>
             <View style={style.center_bottom}>
-              <Qrbutton navigation={navigation} numer={cytatNr} Lang={lang} />
-              <Custom_Buttons navigation={navigation} Lang={lang} />
+              <Qrbutton
+                navigation={props.navigation}
+                numer={cytatNr}
+                Lang={lang}
+              />
+              <Custom_Buttons navigation={props.navigation} Lang={lang} />
             </View>
           </View>
           <View style={style.margin_right}></View>
         </View>
       </View>
-      <Settings navigation={navigation} />
+      <Settings navigation={props.navigation} />
     </ScrollView>
   );
 };
