@@ -14,6 +14,7 @@ import {
   Animated,
   Image,
   TouchableHighlight,
+  ScrollView,
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 const Skaner = () => {
@@ -21,6 +22,7 @@ const Skaner = () => {
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("Not yet scanned");
   const [type, setType] = useState("No Type");
+  // const [link, setLink] = useState("No Type");
 
   const askForCameraPermission = () => {
     (async () => {
@@ -51,7 +53,7 @@ const Skaner = () => {
       width: "100%",
       height: "80%",
       zIndex: 10,
-      backgroundColor: "#222",
+      backgroundColor: "#202330",
       borderRadius: 30,
       transition: "all 1s",
       bottom: wysuwanie,
@@ -61,10 +63,25 @@ const Skaner = () => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    setText(data);
+    getJson(data);
     setType(type);
     fade();
   };
+
+  const [kod, setKod] = useState({
+    obraz:
+      "https://d-art.ppstatic.pl/kadry/k/r/18/fa/4d6263fb8c646_o_large.jpg",
+    nazwa: "brak nazwy",
+    opis: "brak opisu",
+    źródło: "brak",
+  });
+  const getJson = async (link) => {
+    let response = await fetch("http://khistory.pl/kody.json");
+    let json = await response.json();
+    setKod(undefined != json[link] ? json[link] : kod);
+  };
+
+  useEffect(() => {}, []);
 
   if (hasPermission === null) {
     return (
@@ -113,14 +130,20 @@ const Skaner = () => {
           style={{ height: "40%", zIndex: 100 }}
           onPress={() => fade(-800)}
         >
-          <Image
-            style={styles.image}
-            source={require("../../../src/dom.jpg")}
-          />
+          <Image style={styles.image} source={{ uri: kod.obraz }} />
         </TouchableHighlight>
+        <Text style={styles.naglowek}>{kod.nazwa}</Text>
+        <ScrollView
+          style={{
+            zIndex: 10000,
 
-        <Text style={styles.naglowek}> Wieżowiec Burdż Chalifa </Text>
-        <Text style={styles.tresc}>{text}</Text>
+            // top: 50,
+            bottom: 0,
+          }}
+        >
+          <Text style={styles.tresc}>{`${kod.opis}`}</Text>
+          <Text style={styles.tresc}>{`Źródło: ${kod.zrodlo}`}</Text>
+        </ScrollView>
         <Text style={styles.maintext}>{type} </Text>
       </Animated.View>
     </>
@@ -251,17 +274,20 @@ const styles = StyleSheet.create({
   naglowek: {
     top: 25,
     color: "white",
-    fontSize: RFValue(30, 1000),
+    fontSize: RFValue(40, 1000),
     justifyContent: "center",
     textAlign: "center",
+    backgroundColor: "#222430",
+    zIndex: 20000,
   },
   tresc: {
     top: 50,
-    color: "#888",
-    fontSize: RFValue(18, 1000),
-    textAlign: "justify",
+    color: "#889",
+    fontSize: RFValue(25, 1000),
+    textAlign: "center",
     marginLeft: 20,
     marginRight: 20,
+    marginBottom: 100,
   },
 });
 
