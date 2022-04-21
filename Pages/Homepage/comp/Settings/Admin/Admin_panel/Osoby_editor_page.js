@@ -34,8 +34,8 @@ const Osoby_editor_page = (props) => {
   let [obraz, setObraz] = useState('')
 
   const Json = async () => {
-    let request = await fetch('http://192.168.8.126/www/osoby.json')
-    // let request = await fetch("http://khistory.pl/osoby.json");
+    // let request = await fetch('http://192.168.8.126/www/osoby.json')
+    let request = await fetch('http://khistory.pl/osoby.json')
     let json = await request.json()
     setOsoby(json.osoby)
     // console.log(json.osoby)
@@ -126,7 +126,7 @@ const Osoby_editor_page = (props) => {
           <TouchableOpacity
             style={style.button}
             onPress={() => {
-              fetch('http://192.168.8.126/www/json.php', {
+              fetch('http://khistory.pl/osoby.php', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
