@@ -36,7 +36,6 @@ const PeopleAndHis = (props) => {
     let request = await fetch("http://khistory.pl/cytaty.json");
     let json = await request.json();
     setAutor(json.osoby[1].nazwisko);
-    // console.log(autor);
   };
 
   const [osoby, setOsoby] = useState([
@@ -61,32 +60,20 @@ const PeopleAndHis = (props) => {
     let request = await fetch("http://khistory.pl/osoby.json");
     let json = await request.json();
     setOsoby(json.osoby);
-
-    // console.log(json.osoby.filter((e) => e.imie + " " + e.nazwisko == autor));
-
-    // console.log(cytatHisData, "hmm");
+    console.log(json);
   };
   const Json2 = async () => {
     let request2 = await fetch("http://khistory.pl/zabytki.json");
     let json2 = await request2.json();
     setZabytki(json2.zabytki);
-
-    // console.log(json.osoby.filter((e) => e.imie + " " + e.nazwisko == autor));
-
-    // console.log(cytatHisData, "hmm");
   };
 
   useEffect(() => {
-    // setOsoby(Json());
-
     JsonCytat();
     Json();
     Json2();
-    // setcytatHisData(osoby);
-    // cytatHisDataFunction();
   }, []);
 
-  //console.log(props);
   return (
     <View style={style.container}>
       <View style={style.bar}>

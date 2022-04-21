@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -16,6 +16,22 @@ import {
 } from "react-native-responsive-number";
 import grid from "../../src/grid.png";
 const ScrollOsoby = (props) => {
+  const [all, setAll] = useState({
+    osoby: [
+      {
+        imie: "aaaa",
+        nazwisko: "asdasd",
+        obraz: "dasds",
+        mopis: "sadad",
+        opis: "sdasd",
+      },
+    ],
+  });
+  useEffect(() => {
+    setAll(props);
+    // console.log("all", all);
+  }, [props]);
+
   return (
     <View>
       <View style={style.borderRadius}></View>
@@ -27,7 +43,7 @@ const ScrollOsoby = (props) => {
           showsHorizontalScrollIndicator={false}
           decelerationRate="fast"
         >
-          {props.osoby.map((e, index) =>
+          {all.osoby.map((e, index) =>
             index < 5 ? (
               <TouchableWithoutFeedback
                 style={style.element}
