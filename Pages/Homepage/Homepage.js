@@ -26,7 +26,7 @@ import {
 
 let cytatNr = Math.floor(Math.random() * 5);
 
-const Homepage = ({ navigation }) => {
+const Homepage = (props) => {
   const [lang, setLang] = useState(true);
   const getData = async () => {
     try {
@@ -36,36 +36,58 @@ const Homepage = ({ navigation }) => {
       // error reading value
     }
   };
-  useEffect(() => {
-    getData();
-  }, []);
-  return (
-    <ScrollView style={style.scrollView} snapToOffsets={[1]}>
-      <View style={style.main}>
-        <StatusBar style="light" />
-        <Image style={style.background} source={background} />
-        <View style={style.status_bar_container}>
-          <View style={style.margin_left}></View>
-          <View style={style.center}>
-            <View style={style.center_top}>
-              <Logo Lang={lang} />
+  const [forceLock, setForceLock] = useState("false");
+  const getJson = async () => {
+    let response = await fetch("http://khistory.pl/miketest.json");
+    let json = await response.json();
+    setForceLock(json.dostep.lock);
+    console.log(json.dostep.lock);
+  };
 
-              <Weather Lang={lang} />
-            </View>
-            <View style={style.center_center}>
-              <Cytat numer={cytatNr} />
-            </View>
-            <View style={style.center_bottom}>
-              <Qrbutton navigation={navigation} numer={cytatNr} Lang={lang} />
-              <Custom_Buttons navigation={navigation} Lang={lang} />
-            </View>
-          </View>
-          <View style={style.margin_right}></View>
-        </View>
+  useEffect(() => {
+    getJson();
+    getData();
+  }, [props]);
+
+  if (forceLock == "true") {
+    return (
+      <View style={loginStyle.container}>
+        <Text style={loginStyle.text}>Przerwa Techniczna</Text>
       </View>
-      <Settings navigation={navigation} />
-    </ScrollView>
-  );
+    );
+  } else {
+    return (
+      <ScrollView style={style.scrollView} snapToOffsets={[1]}>
+        <View style={style.main}>
+          <StatusBar style="light" />
+          <Image style={style.background} source={background} />
+          <View style={style.status_bar_container}>
+            <View style={style.margin_left}></View>
+            <View style={style.center}>
+              <View style={style.center_top}>
+                <Logo Lang={lang} />
+
+                <Weather Lang={lang} />
+              </View>
+              <View style={style.center_center}>
+                <Cytat numer={cytatNr} lang={lang} />
+              </View>
+              <View style={style.center_bottom}>
+                <Qrbutton
+                  navigation={props.navigation}
+                  numer={cytatNr}
+                  Lang={lang}
+                />
+                <Custom_Buttons navigation={props.navigation} Lang={lang} />
+              </View>
+            </View>
+            <View style={style.margin_right}></View>
+          </View>
+        </View>
+        <Settings navigation={props.navigation} />
+      </ScrollView>
+    );
+  }
 };
 
 const style1 = StyleSheet.create({
@@ -223,5 +245,23 @@ if (windowHeight / windowWidth > 1.8) {
 // console.log(Dimensions.get("screen"));
 
 // console.log(style);
+
+const loginStyle = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    backgroundColor: "#171720",
+    height: "100%",
+    position: "relative",
+  },
+  text: { color: "white", fontSize: 20, marginBottom: 20 },
+  flagi: {
+    display: "flex",
+
+    height: "20%",
+    flexDirection: "row",
+  },
+});
 
 export default Homepage;

@@ -47,7 +47,7 @@ const Setting_page = (props) => {
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: lang ? "#123" : "transparent",
+            backgroundColor: lang ? "#232329" : "transparent",
             borderBottomColor: lang ? "#823" : "transparent",
             borderBottomWidth: 3,
           }}
@@ -60,7 +60,7 @@ const Setting_page = (props) => {
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: !lang ? "#123" : "transparent",
+            backgroundColor: !lang ? "#232329" : "transparent",
             borderBottomColor: !lang ? "#861" : "transparent",
             borderBottomWidth: 3,
           }}
@@ -71,9 +71,7 @@ const Setting_page = (props) => {
       </View>
       <Text style={style.text}></Text>
       <TouchableOpacity
-        onPress={() =>
-          storeData("Welcome", true) && NativeModules.DevSettings.reload()
-        }
+        onPress={() => props.navigation.push("Home", "xD")}
         style={style.button}
       >
         <Text style={style.text5}>{lang ? "zapisz" : "зберегти"}</Text>

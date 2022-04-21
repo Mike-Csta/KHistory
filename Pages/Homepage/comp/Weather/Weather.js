@@ -26,7 +26,7 @@ import burzaZDeszczem from "../../../../src/icons/0.png";
 import burza from "../../../../src/icons/1.png";
 import deszcz from "../../../../src/icons/2.png";
 import snieg from "../../../../src/icons/3.png";
-// import mgla from '../../../../src/icons/4.png'
+import mgla from "../../../../src/icons/4.png";
 import slonecznie from "../../../../src/icons/5.png";
 import pochmurno from "../../../../src/icons/6.png";
 import error from "../../../../src/icons/404.png";
@@ -471,7 +471,9 @@ const Weather = (props) => {
           </View>
           <View style={style.weather_right}>
             <View style={style.weather_right_top}>
-              <Text style={style.kalisz}>KALISZ</Text>
+              <Text style={style.kalisz}>
+                {props.Lang ? "KALISZ" : "Каліш"}
+              </Text>
             </View>
             <View style={style.weather_right_center}>
               <Text style={style.slonecznie}>{weatherState[0]}</Text>
