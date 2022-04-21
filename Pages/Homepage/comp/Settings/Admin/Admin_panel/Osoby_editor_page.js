@@ -8,26 +8,52 @@ import {
   TextInput,
   Dimensions,
   StatusBar,
+  KeyboardAvoidingView,
+  TouchableOpacity,
 } from 'react-native'
 import {
   responsiveNumber,
   responsiveLetterSpacing,
 } from 'react-native-responsive-number'
 const Osoby_editor_page = (props) => {
-  let [osoba, setOsoba] = useState({
-    imie: 'wczytywanie1',
-    nazwisko: 'wczytywanie2',
-    mopis: 'wczytywanie3',
-    opis: 'wczytywanie4',
-    obraz:
-      'https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg',
-  })
+  let [osoby, setOsoby] = useState([
+    {
+      imie: 'wczytywanie1',
+      nazwisko: 'wczytywanie2',
+      mopis: 'wczytywanie3',
+      opis: 'wczytywanie4',
+      obraz:
+        'https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg',
+    },
+  ])
 
   let [imie, setImie] = useState('')
   let [nazwisko, setNazwisko] = useState('')
   let [mopis, setMopis] = useState('')
   let [opis, setOpis] = useState('')
   let [obraz, setObraz] = useState('')
+
+  const Json = async () => {
+    let request = await fetch('http://192.168.8.126/www/osoby.json')
+    // let request = await fetch("http://khistory.pl/osoby.json");
+    let json = await request.json()
+    setOsoby(json.osoby)
+    // console.log(json.osoby)
+  }
+
+  const getOsoby = (a) => {
+    let test = osoby.filter((e) => `${e.imie} ${e.nazwisko}` != a)
+    test.unshift({
+      imie: imie,
+      mopis: mopis,
+      nazwisko: nazwisko,
+      obraz: obraz,
+      opis: opis,
+    })
+    return test
+  }
+
+  const getJson = () => {}
 
   const load = () => {
     setImie(props.route.params[0].imie)
@@ -38,16 +64,17 @@ const Osoby_editor_page = (props) => {
   }
 
   useEffect(() => {
+    Json()
     load()
   }, [])
 
   return (
-    <View style={style.container}>
+    <KeyboardAvoidingView style={style.container} behavior={'height'}>
       <ScrollView style={style.scroll}>
         {/* poczatek obraz z polem */}
         <View>
           {/* obraz */}
-          <View>
+          <View style={style.viewImg}>
             <Image
               style={style.img}
               source={{ uri: props.route.params[0].obraz }}
@@ -95,9 +122,26 @@ const Osoby_editor_page = (props) => {
           </View>
         </View>
         {/*  */}
-        <View></View>
+        <View>
+          <TouchableOpacity
+            style={style.button}
+            onPress={() => {
+              fetch('http://192.168.8.126/www/json.php', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'charset': 'utf-8',
+                },
+                body: JSON.stringify(getOsoby(imie + ' ' + nazwisko)),
+              })
+            }}
+          >
+            <Text>TEST</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -109,15 +153,20 @@ const style = StyleSheet.create({
     backgroundColor: '#242730',
     // bottom: getStatusBarHeight(),
   },
+  viewImg: {
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+  },
   img: {
     height: responsiveNumber(250),
     aspectRatio: 1,
     borderRadius: responsiveNumber(2000),
     justifyContent: 'center',
-    textAlign: 'center',
     alignItems: 'center',
   },
   scroll: {
+    marginTop: StatusBar.currentHeight,
     height: '200%',
   },
   textInput: {
@@ -132,6 +181,11 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
     alignItems: 'center',
+  },
+  button: {
+    width: '100%',
+    height: responsiveNumber(2000),
+    backgroundColor: 'white',
   },
 })
 
