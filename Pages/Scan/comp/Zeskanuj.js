@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 
@@ -6,9 +6,10 @@ import {
   responsiveNumber,
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const Zeskanuj = () => {
+  const [help, setHelp] = useState(false);
   return (
     <View style={styles.zeskanuj_text_container}>
       <View style={styles.zeskanuj_top}>
@@ -18,11 +19,26 @@ const Zeskanuj = () => {
         </Text>
       </View>
       <View style={styles.zeskanuj_bottom}>
-        <Image
-          style={styles.image5}
-          source={require("../../../src/qlogo.png")}
-        />
+        <TouchableOpacity onPress={() => setHelp(!help)}>
+          <Image
+            style={styles.image5}
+            source={require("../../../src/qlogo.png")}
+          />
+        </TouchableOpacity>
       </View>
+      {!help ? (
+        <></>
+      ) : (
+        <TouchableOpacity
+          onPress={() => setHelp(!help)}
+          style={styles.zeskanuj_help}
+        >
+          <Text style={styles.zeskanuj_help_text}>
+            Na niektórych przystankach autobusowych znajdują sie kody QR,
+            zeskanuj ję aby zobaczyć ciekawostke o okolicy i jej historii
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -39,6 +55,25 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     marginBottom: "15%",
+  },
+  zeskanuj_help: {
+    position: "absolute",
+    color: "white",
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    width: "80%",
+
+    backgroundColor: "#202025",
+    zIndex: 5000,
+    borderColor: "#aa2020",
+    borderWidth: 2,
+  },
+  zeskanuj_help_text: {
+    color: "#aaa",
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
   },
   zeskanuj_text: {
     fontSize: RFValue(37, 1000),
