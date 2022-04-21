@@ -152,6 +152,7 @@ const style = StyleSheet.create({
   wrapper: {
     display: "flex",
     position: "relative",
+
     width: "100%",
     flexDirection: "row",
   },

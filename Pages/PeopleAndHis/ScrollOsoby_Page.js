@@ -53,6 +53,7 @@ const style = StyleSheet.create({
   },
   bottomBackground: {
     bottom: 0,
+
     position: "absolute",
     height: "33%",
     width: "100%",

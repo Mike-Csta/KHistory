@@ -113,6 +113,7 @@ const style = StyleSheet.create({
   },
   bar: {
     display: "flex",
+
     justifyContent: "flex-end",
     marginTop: StatusBar.currentHeight,
     height: "100%",

@@ -29,7 +29,7 @@ const ScrollOsoby = (props) => {
   });
   useEffect(() => {
     setAll(props);
-    // console.log("all", all);
+    // console.log("all", all);;
   }, [props]);
 
   return (
