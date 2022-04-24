@@ -12,6 +12,7 @@ import {
   FlatList,
   StatusBar,
   TextInput,
+  SafeAreaView,
 } from "react-native";
 import {
   responsiveNumber,
@@ -23,7 +24,7 @@ const Osoby_Page = (props) => {
   // console.log();
   return (
     <View>
-      <View style={style.container}>
+      <SafeAreaView style={style.container}>
         <View style={style.bar}>
           <View style={style.search}>
             <TextInput
@@ -71,7 +72,7 @@ const Osoby_Page = (props) => {
             )}
           />
         </View>
-      </View>
+      </SafeAreaView>
     </View>
   );
 };
@@ -83,7 +84,7 @@ const style = StyleSheet.create({
     // height: responsiveNumber(180),
     // backgroundColor: "#353540",
     backgroundColor: "#192029",
-    height: Dimensions.get("window").height + StatusBar.currentHeight,
+    // height: Dimensions.get("window").height + StatusBar.currentHeight,
     overflow: "hidden",
     // paddingTop: responsiveNumber(10),
     zIndex: 2,

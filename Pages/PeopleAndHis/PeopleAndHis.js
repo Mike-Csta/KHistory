@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   StatusBar,
+  SafeAreaView,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -75,7 +76,7 @@ const PeopleAndHis = (props) => {
   }, []);
 
   return (
-    <View style={style.container}>
+    <SafeAreaView style={style.container}>
       <View style={style.bar}>
         <View style={style.top}>
           <CytatHis navigation={props.navigation} data={osoby} autor={autor} />
@@ -98,7 +99,7 @@ const PeopleAndHis = (props) => {
           <Footer />
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -109,7 +110,7 @@ const style = StyleSheet.create({
     width: "100%",
     // backgroundColor: "#212127",
     backgroundColor: "#192029",
-    height: Dimensions.get("window").height + StatusBar.currentHeight,
+    // height: Dimensions.get("window").height + StatusBar.currentHeight,
   },
   bar: {
     display: "flex",
@@ -124,7 +125,7 @@ const style = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     flex: 0.1,
-    marginBottom: responsiveNumber(40),
+    marginBottom: StatusBar.currentHeight * 2,
   },
 });
 

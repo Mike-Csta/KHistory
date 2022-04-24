@@ -22,7 +22,7 @@ const App_Welcome = (props) => {
   const JsonDostep = async () => {
     let request = await fetch("http://khistory.pl/dostep.json");
     let json = await request.json();
-    setLock(json.dostep.lock);
+    // setLock(json.dostep.lock);
   };
   const storeData = async (key, value) => {
     try {

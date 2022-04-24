@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { getStatusBarHeight } from "react-native-status-bar-height";
@@ -57,35 +58,30 @@ const Homepage = (props) => {
     );
   } else {
     return (
-      <ScrollView style={style.scrollView} snapToOffsets={[1]}>
-        <View style={style.main}>
-          <StatusBar style="light" />
-          <Image style={style.background} source={background} />
-          <View style={style.status_bar_container}>
-            <View style={style.margin_left}></View>
-            <View style={style.center}>
-              <View style={style.center_top}>
-                <Logo Lang={lang} />
+      <SafeAreaView style={style.main}>
+        <StatusBar style="light" />
+        <Image style={style.background} source={background} />
+        <View style={style.status_bar_container}>
+          <View style={style.margin_left}></View>
+          <View style={style.center}>
+            <View style={style.center_top}>
+              <Logo Lang={lang} />
 
-                <Weather Lang={lang} />
-              </View>
-              <View style={style.center_center}>
-                <Cytat numer={cytatNr} lang={lang} />
-              </View>
-              <View style={style.center_bottom}>
-                <Qrbutton
-                  navigation={props.navigation}
-                  numer={cytatNr}
-                  Lang={lang}
-                />
-                <Custom_Buttons navigation={props.navigation} Lang={lang} />
-              </View>
+              <Weather Lang={lang} />
             </View>
-            <View style={style.margin_right}></View>
+            <View style={style.center_center}>
+              <Cytat numer={cytatNr} lang={lang} />
+            </View>
+            <View style={style.center_bottom}></View>
           </View>
+          <View style={style.margin_right}></View>
         </View>
-        <Settings navigation={props.navigation} />
-      </ScrollView>
+        <View style={style.center_bottom2}>
+          <Qrbutton navigation={props.navigation} numer={cytatNr} Lang={lang} />
+          <Custom_Buttons navigation={props.navigation} Lang={lang} />
+        </View>
+        {/* <Settings navigation={props.navigation} /> */}
+      </SafeAreaView>
     );
   }
 };
@@ -96,7 +92,7 @@ const style1 = StyleSheet.create({
     position: "relative",
     width: "100%",
     backgroundColor: "#282422",
-    height: Dimensions.get("window").height + getStatusBarHeight(),
+    // height: Dimensions.get("window").height + getStatusBarHeight(),
   },
   scrollView: {
     height: Dimensions.get("window").height,
@@ -108,7 +104,7 @@ const style1 = StyleSheet.create({
     flexDirection: "row",
     height: "100%",
     justifyContent: "space-between",
-    // backgroundColor: '#FFBBFF',
+    // backgroundColor: "#FFBBFF",
   },
 
   margin_left: {
@@ -132,7 +128,7 @@ const style1 = StyleSheet.create({
     position: "relative",
     display: "flex",
     marginTop: responsiveNumber(22),
-    flex: 0.9,
+    flex: 0.8,
     // bottom: 10,
     // backgroundColor: "red",
   },
@@ -141,7 +137,14 @@ const style1 = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     flex: 1,
-    marginBottom: responsiveNumber(40),
+    marginBottom: getStatusBarHeight(),
+  },
+  center_bottom2: {
+    position: "absolute",
+    display: "flex",
+    flexDirection: "column",
+    // flex: 1,
+    bottom: getStatusBarHeight(),
   },
   margin_right: {
     width: RFValue(11, 1000),

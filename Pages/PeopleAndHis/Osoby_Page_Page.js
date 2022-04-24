@@ -8,6 +8,7 @@ import {
   PixelRatio,
   StatusBar,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -20,7 +21,7 @@ import QQQ from "../../src/qqq.jpg";
 const Osoby_Page_Page = (props) => {
   console.log("xD");
   return (
-    <View style={style.container}>
+    <SafeAreaView style={style.container}>
       <View style={style.bottomBackground}></View>
       <View style={style.bar}>
         <View style={style.top}>
@@ -42,7 +43,7 @@ const Osoby_Page_Page = (props) => {
           </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -52,7 +53,7 @@ const style = StyleSheet.create({
     position: "relative",
     width: "100%",
     backgroundColor: "#192029",
-    height: Dimensions.get("window").height + StatusBar.currentHeight,
+    // height: Dimensions.get("window").height + StatusBar.currentHeight,
   },
   bottomBackground: {
     bottom: 0,
