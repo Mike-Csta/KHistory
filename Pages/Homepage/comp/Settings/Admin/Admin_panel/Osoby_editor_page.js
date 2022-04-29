@@ -130,7 +130,13 @@ const Osoby_editor_page = (props) => {
               "Content-Type": "application/json",
               charset: "utf-8",
             },
-            body: JSON.stringify(getOsoby(imie + " " + nazwisko)),
+            body: JSON.stringify(
+              getOsoby(
+                props.route.params[0].imie +
+                  " " +
+                  props.route.params[0].nazwisko
+              )
+            ),
           });
         }}
       >
