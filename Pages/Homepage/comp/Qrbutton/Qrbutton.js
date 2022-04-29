@@ -98,6 +98,7 @@ const style = StyleSheet.create({
     textAlign: "center",
     display: "flex",
     flexDirection: "column",
+    right: -2,
   },
   main: {
     display: "flex",

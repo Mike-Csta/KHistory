@@ -76,11 +76,11 @@ const Homepage = (props) => {
           </View>
           <View style={style.margin_right}></View>
         </View>
-        <View style={style.center_bottom2}>
+        <ScrollView style={style.center_bottom2} snapToOffsets={[1]}>
           <Qrbutton navigation={props.navigation} numer={cytatNr} Lang={lang} />
           <Custom_Buttons navigation={props.navigation} Lang={lang} />
-        </View>
-        {/* <Settings navigation={props.navigation} /> */}
+          <Settings navigation={props.navigation} Lang={lang} />
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -145,6 +145,7 @@ const style1 = StyleSheet.create({
     flexDirection: "column",
     // flex: 1,
     bottom: getStatusBarHeight(),
+    height: responsiveNumber(276),
   },
   margin_right: {
     width: RFValue(11, 1000),

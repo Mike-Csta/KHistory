@@ -4,42 +4,134 @@ import {
   Text,
   StyleSheet,
   Image,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
+  TriangleCorner,
 } from "react-native";
+import { getStatusBarHeight } from "react-native-status-bar-height";
 import {
   responsiveNumber,
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
-const Settings = (props) => {
-  // console.log(props);
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+
+import lih from "../../../../src/settings.png";
+
+const Setting = (props) => {
+  // console.log(props.numer)
   return (
-    <TouchableWithoutFeedback
-      style={style.container2}
-      // onPress={() => props.navigation.navigate("Setting_page")}>
-      onPress={() => props.navigation.navigate("Setting_page")}
-    >
-      <View style={style.container}>
-        <Text style={style.text}>USTAWIENIA</Text>
+    <View style={style.main}>
+      <View style={style.centerTop}></View>
+      <View style={style.center}>
+        <TouchableOpacity
+          style={style.t1}
+          onPress={() => props.navigation.navigate("Setting_page")}
+        >
+          <View style={style.left}>
+            <Image source={lih} style={style.image}></Image>
+          </View>
+          <View style={style.right}>
+            <Text style={style.text}>
+              {props.Lang ? "USTAWIENIA" : "налаштування"}
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
-    </TouchableWithoutFeedback>
+    </View>
   );
 };
 
 const style = StyleSheet.create({
-  container: {
-    position: "relative",
-    alignItems: "center",
-    justifyContent: "center",
+  t1: {
+    display: "flex",
+    flexDirection: "row",
+    width: "80.1%",
+  },
+
+  main: {
+    // height: responsiveNumber(90),
+
+    // backgroundColor: "black",
+
+    marginBottom: responsiveNumber(10),
+  },
+  centerTop: {
+    // backgroundColor: "#4488ff42",
+    flex: 1,
+    // margin: responsiveNumber(6),
+
+    display: "flex",
+    flexDirection: "row",
+    borderRadius: responsiveNumber(22),
+    opacity: 1,
+
+    // height: responsiveNumber(90),
+  },
+  center: {
+    backgroundColor: "#444040",
+    // flex: 1,
+    margin: responsiveNumber(6),
+
+    display: "flex",
+    flexDirection: "row",
+    borderRadius: responsiveNumber(18),
+    opacity: 1,
+    height: responsiveNumber(70),
+    overflow: "hidden",
+  },
+  text: {
+    color: "white",
+    fontSize: RFValue(14),
+    letterSpacing: responsiveLetterSpacing(270, 14),
+    opacity: 0.93,
+  },
+  left: {
+    display: "flex",
     textAlign: "center",
-    height: responsiveNumber(50),
-    backgroundColor: "#202020",
+    justifyContent: "center",
+    alignItems: "center",
+
+    flex: 0.43,
   },
-  container2: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "red",
+  right: {
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
   },
-  text: { fontSize: responsiveNumber(15), color: "#888" },
+
+  text_2: {
+    color: "white",
+    fontSize: RFValue(6.5),
+    letterSpacing: responsiveLetterSpacing(90, 6.5),
+    opacity: 0.93,
+    // backgroundColor: "red",
+    marginRight: responsiveNumber(8),
+    marginTop: responsiveNumber(7),
+    width: responsiveNumber(30),
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text_3: {
+    color: "white",
+    fontSize: RFValue(6.5),
+    letterSpacing: responsiveLetterSpacing(90, 6.5),
+    opacity: 0.93,
+    // backgroundColor: "red",
+    marginRight: responsiveNumber(20),
+    marginBottom: responsiveNumber(7),
+    width: responsiveNumber(70),
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: { height: responsiveNumber(50), aspectRatio: 1, opacity: 0.68 },
+  image_2: {
+    height: responsiveNumber(27),
+    aspectRatio: 1,
+    opacity: 0.68,
+    marginRight: responsiveNumber(8),
+  },
 });
 
-export default Settings;
+export default Setting;
