@@ -41,6 +41,7 @@ const Cytat_Editor = (props) => {
 
   const getOsoby = (a) => {
     let test = osoby.filter((e) => `${e.imie} ${e.nazwisko}` != a)
+    setOsoby(test)
     return test
   }
 
