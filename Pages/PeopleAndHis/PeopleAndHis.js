@@ -34,7 +34,9 @@ const PeopleAndHis = (props) => {
   const [autor, setAutor] = useState("");
 
   const JsonCytat = async () => {
-    let request = await fetch("http://khistory.pl/cytaty.json");
+    let request = props.route.params[1]
+      ? await fetch("http://khistory.pl/cytaty.json")
+      : await fetch("http://khistory.pl/cytatyUk.json");
     let json = await request.json();
     setAutor(json.osoby[1].nazwisko);
   };
@@ -58,13 +60,17 @@ const PeopleAndHis = (props) => {
   ]);
 
   const Json = async () => {
-    let request = await fetch("http://khistory.pl/osoby.json");
+    let request = props.route.params[1]
+      ? await fetch("http://khistory.pl/osoby.json")
+      : await fetch("http://khistory.pl/osobyUK.json");
     let json = await request.json();
     setOsoby(json.osoby);
-    console.log(json);
+    // console.log(json);
   };
   const Json2 = async () => {
-    let request2 = await fetch("http://khistory.pl/zabytki.json");
+    let request2 = props.route.params[1]
+      ? await fetch("http://khistory.pl/zabytki.json")
+      : await fetch("http://khistory.pl/zabytkiUk.json");
     let json2 = await request2.json();
     setZabytki(json2.zabytki);
   };
@@ -74,21 +80,20 @@ const PeopleAndHis = (props) => {
     Json();
     Json2();
   }, []);
-
   return (
     <SafeAreaView style={style.container}>
       <View style={style.bar}>
         <View style={style.top}>
           <CytatHis navigation={props.navigation} data={osoby} autor={autor} />
           <Wafelek
-            value={"POSTACIE"}
+            value={props.route.params[1] ? "POSTACIE" : "ПЕРСОНАЖИ"}
             osoby={osoby}
             page="Osoby_Page"
             navigation={props.navigation}
           />
           <ScrollOsoby navigation={props.navigation} osoby={osoby} />
           <Wafelek
-            value={"ZABYTKI"}
+            value={props.route.params[1] ? "ZABYTKI" : "ПАМЯТНИКИ"}
             zabytki={zabytki}
             page="Zabytki_Page"
             navigation={props.navigation}
@@ -96,7 +101,7 @@ const PeopleAndHis = (props) => {
           <ScrollZabytki navigation={props.navigation} zabytki={zabytki} />
         </View>
         <View style={style.bottom}>
-          <Footer />
+          <Footer Lang={props.route.params[1]} />
         </View>
       </View>
     </SafeAreaView>

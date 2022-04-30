@@ -38,7 +38,7 @@ export default function App() {
     try {
       const jsonValue = await AsyncStorage.getItem("Welcome"); //TU MA BYĆ "Welcome", TO BŁĄD, KTÓREGO SZUKASZ
       setData(jsonValue != null ? JSON.parse(jsonValue) : false);
-      console.log(jsonValue);
+      // console.log(jsonValue);
     } catch (e) {
       // error reading value
     }

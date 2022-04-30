@@ -30,7 +30,9 @@ const Osoby_editor_page = (props) => {
   let [nazwisko, setNazwisko] = useState("");
   let [mopis, setMopis] = useState("");
   let [opis, setOpis] = useState("");
-  let [obraz, setObraz] = useState("");
+  let [obraz, setObraz] = useState(
+    "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg"
+  );
 
   const Json = async () => {
     // let request = await fetch('http://192.168.8.126/www/osoby.json')
@@ -51,7 +53,6 @@ const Osoby_editor_page = (props) => {
     });
     return test;
   };
-
   const getJson = () => {};
 
   const load = () => {
@@ -74,10 +75,7 @@ const Osoby_editor_page = (props) => {
         <View style={style.wrapper}>
           <View>
             <View style={style.top}>
-              <Image
-                style={style.img}
-                source={{ uri: props.route.params[0].obraz }}
-              />
+              <Image style={style.img} source={{ uri: obraz }} />
             </View>
             <View style={style.bottom}>
               <TextInput
@@ -120,28 +118,30 @@ const Osoby_editor_page = (props) => {
           </View>
         </View>
       </ScrollView>
-      <TouchableOpacity
-        style={style.button}
-        onPress={() => {
-          fetch("http://khistory.pl/osoby.php", {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              charset: "utf-8",
-            },
-            body: JSON.stringify(
-              getOsoby(
-                props.route.params[0].imie +
-                  " " +
-                  props.route.params[0].nazwisko
-              )
-            ),
-          });
-        }}
-      >
-        <Text>Zapisz Chyba</Text>
-      </TouchableOpacity>
+      <View style={style.button_outline}>
+        <TouchableOpacity
+          style={style.button}
+          onPress={() => {
+            fetch("http://khistory.pl/osoby.php", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                charset: "utf-8",
+              },
+              body: JSON.stringify(
+                getOsoby(
+                  props.route.params[0].imie +
+                    " " +
+                    props.route.params[0].nazwisko
+                )
+              ),
+            });
+          }}
+        >
+          <Text style={style.text}>Zapisz</Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };
@@ -220,10 +220,41 @@ const style = StyleSheet.create({
   },
   button: {
     position: "absolute",
-    width: responsiveNumber(100),
-    height: responsiveNumber(30),
-    backgroundColor: "white",
+    width: responsiveNumber(90),
+    height: responsiveNumber(35),
+    backgroundColor: "#dd4444",
+    bottom: 2.5,
+    borderBottomLeftRadius: responsiveNumber(5),
+    borderBottomRightRadius: responsiveNumber(5),
+    borderTopLeftRadius: responsiveNumber(16),
+    borderTopRightRadius: responsiveNumber(16),
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+  },
+  button_outline: {
+    position: "absolute",
+    width: responsiveNumber(115),
+    height: responsiveNumber(37),
+    right: responsiveNumber(30),
+    // backgroundColor: "gray",
     bottom: 0,
+    borderBottomLeftRadius: responsiveNumber(0),
+    borderBottomRightRadius: responsiveNumber(0),
+    borderTopLeftRadius: responsiveNumber(28),
+    borderTopRightRadius: responsiveNumber(28),
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    borderWidth: 20,
+    borderBottomWidth: 0,
+    borderColor: "#aa3035",
+  },
+  text: {
+    color: "#fff",
+    fontSize: responsiveNumber(16.5),
+    fontWeight: "bold",
+    letterSpacing: responsiveLetterSpacing(16.5, 15),
   },
 });
 

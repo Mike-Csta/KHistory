@@ -5,10 +5,12 @@ import {
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-const Footer = () => {
+const Footer = (props) => {
   return (
     <View style={style.container}>
-      <Text style={style.text}>POZNAJ HISTORIE KALISZA</Text>
+      <Text style={style.text}>
+        {props.Lang ? "POZNAJ HISTORIE KALISZA" : "Дізнайтеся історії Каліша"}
+      </Text>
     </View>
   );
 };

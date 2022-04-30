@@ -42,7 +42,7 @@ const Homepage = (props) => {
     let response = await fetch("http://khistory.pl/miketest.json");
     let json = await response.json();
     // setForceLock(json.dostep.lock);
-    console.log(json.dostep.lock);
+    // console.log(json.dostep.lock);
   };
 
   useEffect(() => {

@@ -24,7 +24,9 @@ const Qrbutton = (props) => {
       <View style={style.center}>
         <TouchableOpacity
           style={style.t1}
-          onPress={() => props.navigation.push("PeopleAndHis", [props.numer])}
+          onPress={() =>
+            props.navigation.push("PeopleAndHis", [props.numer, props.Lang])
+          }
         >
           <View style={style.left}>
             <Image source={lih} style={style.image}></Image>
