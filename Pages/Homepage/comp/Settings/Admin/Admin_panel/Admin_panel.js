@@ -50,6 +50,12 @@ const Admin_panel = (props) => {
       >
         <Text style={style.text}>Zabytki</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={style.button}
+        onPress={() => props.navigation.navigate("Cytat_editor")}
+      >
+        <Text style={style.text}>Cytaty</Text>
+      </TouchableOpacity>
     </View>
   );
 };

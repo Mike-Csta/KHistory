@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
   StatusBar,
+  SafeAreaView,
 } from "react-native";
 import {
   responsiveNumber,
@@ -19,23 +20,26 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 import notepad from "../../../../../../src/notepad.png";
 import trash from "../../../../../../src/trash.png";
 
-const Cytat_Editor = () => {
-  let [osoby, setOsoby] = useState([
+const Cytat_Editor = (props) => {
+  let [cytaty, setCytaty] = useState([
     {
-      imie: "wczytywanie1",
       nazwisko: "wczytywanie2",
-      mopis: "wczytywanie3",
       opis: "wczytywanie4",
-      obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
+      cytat: "wczytywanie3",
     },
   ]);
 
   const Json = async () => {
-    let request = await fetch("http://192.168.8.126/www/osoby.json");
-    // let request = await fetch("http://khistory.pl/osoby.json");
+    let request = await fetch("http://khistory.pl/cytaty.json");
     let json = await request.json();
-    setOsoby(json.osoby);
-    // console.log(json.osoby)
+    setCytaty(json.osoby);
+    console.log(json.osoby);
+  };
+
+  const getOsoby = (a) => {
+    let test = cytaty.filter((e) => `${e.opis}` != a);
+    setCytaty(test);
+    return test;
   };
 
   useEffect(() => {
@@ -43,32 +47,31 @@ const Cytat_Editor = () => {
   }, []);
 
   return (
-    <View style={style.container}>
+    <SafeAreaView style={style.container}>
       <View style={style.panel}>
-        <Text style={style.text}>Postacie Historyczne</Text>
+        <Text style={style.text}>Cytaty</Text>
       </View>
       <ScrollView style={style.scroll}>
-        {osoby.map((e) => (
+        {cytaty.map((e) => (
           //   <TouchableWithoutFeedback style={style.button}>
           <View style={style.button}>
             <View style={style.left}>
-              {/* obrazek */}
-              <Image
-                source={{
-                  uri: e.obraz,
-                }}
-                style={style.obraz}
-              />
+              <Text style={style.textCytat}>{e.cytat}</Text>
             </View>
             <View style={style.right}>
               {/* Imię nazwisko */}
               <View style={style.rightTop}>
-                <Text style={style.text}>{`${e.imie} ${e.nazwisko}`}</Text>
+                <Text style={style.text2}>{`${e.nazwisko}`}</Text>
               </View>
               {/* Przyciski */}
               <View style={style.rightBottom}>
                 {/* Edytuj */}
-                <TouchableOpacity style={style.rightBottomLeft}>
+                <TouchableOpacity
+                  style={style.rightBottomLeft}
+                  onPress={() => {
+                    props.navigation.push("Cytaty_editor_page", [e, cytaty]);
+                  }}
+                >
                   <View style={style.left}>
                     <Image source={notepad} style={style.iconNotepad}></Image>
                   </View>
@@ -80,7 +83,20 @@ const Cytat_Editor = () => {
                   </View>
                 </TouchableOpacity>
                 {/* Usuń */}
-                <TouchableOpacity style={style.rightBottomRight}>
+                <TouchableOpacity
+                  style={style.rightBottomRight}
+                  onPress={() => {
+                    fetch("http://khistory.pl/cytaty.php", {
+                      method: "POST",
+                      headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        charset: "utf-8",
+                      },
+                      body: JSON.stringify(getOsoby(e.opis)),
+                    });
+                  }}
+                >
                   <Image source={trash} style={style.iconTrash}></Image>
                 </TouchableOpacity>
               </View>
@@ -89,7 +105,7 @@ const Cytat_Editor = () => {
           //   </TouchableWithoutFeedback>
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -98,7 +114,7 @@ const style = StyleSheet.create({
     // position: 'relative',
     display: "flex",
     width: "100%",
-    height: Dimensions.get("window").height + StatusBar.currentHeight,
+    height: "100%",
 
     // justifyContent: 'center',
     // textAlign: 'center',
@@ -120,6 +136,11 @@ const style = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
   },
+  textCytat: {
+    color: "white",
+    margin: responsiveNumber(20),
+    fontSize: responsiveNumber(15),
+  },
   right: {
     flex: 1,
     // backgroundColor: 'red',
@@ -132,7 +153,7 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   rightBottom: {
-    flex: 1,
+    flex: 0.7,
     // backgroundColor: 'purple',
     flexDirection: "row",
   },
@@ -140,7 +161,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
-    flex: 0.5,
+    flex: 0.4,
     backgroundColor: "#bb474d",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -161,7 +182,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     aspectRatio: 1,
     // backgroundColor: 'red',
-    height: responsiveNumber(40),
+    height: responsiveNumber(35),
     margin: responsiveNumber(15),
     // marginBottom: responsiveNumber(),
     marginLeft: responsiveNumber(20),
@@ -174,6 +195,7 @@ const style = StyleSheet.create({
     aspectRatio: 1,
     // backgroundColor: 'red',
     height: responsiveNumber(40),
+    opacity: 0.7,
     margin: responsiveNumber(10),
     // marginBottom: responsiveNumber(),
     marginLeft: responsiveNumber(5),
@@ -184,7 +206,7 @@ const style = StyleSheet.create({
     marginBottom: responsiveNumber(7.5),
     marginRight: responsiveNumber(10),
     marginLeft: responsiveNumber(10),
-    height: responsiveNumber(150),
+    // height: responsiveNumber(150),
     zIndex: 1000,
     backgroundColor: "#3a3c50",
     // justifyContent: 'center',
@@ -192,7 +214,7 @@ const style = StyleSheet.create({
     // alignItems: 'center',
     borderRadius: 15,
     display: "flex",
-    flexDirection: "row",
+    // flexDirection: "row",
   },
   panel: {
     marginTop: StatusBar.currentHeight,
@@ -217,8 +239,16 @@ const style = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(4.3),
+    fontSize: responsiveNumber(20),
+    fontWeight: "bold",
     letterSpacing: responsiveLetterSpacing(300, 4.3),
+  },
+  text2: {
+    color: "#dde",
+    fontSize: responsiveNumber(15),
+    marginBottom: responsiveNumber(20),
+    // fontWeight: "bold",
+    letterSpacing: responsiveLetterSpacing(0, 15),
   },
 });
 

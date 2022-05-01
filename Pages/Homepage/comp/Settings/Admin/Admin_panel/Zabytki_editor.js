@@ -51,7 +51,7 @@ const Cytat_Editor = (props) => {
   return (
     <SafeAreaView style={style.container}>
       <View style={style.panel}>
-        <Text style={style.text}>Postacie Historyczne</Text>
+        <Text style={style.text}>Zabytki</Text>
       </View>
       <ScrollView style={style.scroll}>
         {zabytki.map((e) => (
