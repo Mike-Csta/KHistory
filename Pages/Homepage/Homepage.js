@@ -41,15 +41,14 @@ const Homepage = (props) => {
   const getJson = async () => {
     let response = await fetch("http://khistory.pl/miketest.json");
     let json = await response.json();
-    // setForceLock(json.dostep.lock);
-    // console.log(json.dostep.lock);
+    setForceLock(json.dostep.lock);
+    console.log(json);
   };
 
   useEffect(() => {
     getJson();
     getData();
-  }, [props]);
-
+  }, []);
   if (forceLock == "true") {
     return (
       <View style={loginStyle.container}>
