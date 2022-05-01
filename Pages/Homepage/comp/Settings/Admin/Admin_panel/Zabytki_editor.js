@@ -35,7 +35,7 @@ const Cytat_Editor = (props) => {
     let request = await fetch("http://khistory.pl/zabytki.json");
     let json = await request.json();
     setZabytki(json.zabytki);
-    console.log(json.zabytki);
+    // console.log(json.zabytki);
   };
 
   const getOsoby = (a) => {

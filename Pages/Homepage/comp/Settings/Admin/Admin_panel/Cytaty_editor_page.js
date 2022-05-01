@@ -110,11 +110,11 @@ const Osoby_editor_page = (props) => {
   };
 
   const getCytaty = (a) => {
-    let test = cytaty.filter((e) => `${e.nazwisko}` != a);
+    let test = cytaty.filter((e) => `${e.opis}` != a);
     test.unshift({
       nazwisko: imie + " " + nazwisko,
-      cytat: cytat,
       opis: Math.random() + Math.random() * Math.random() + Math.random() / 100,
+      cytat: cytat,
     });
     return test;
   };
@@ -126,12 +126,12 @@ const Osoby_editor_page = (props) => {
     setCytat(props.route.params[0].cytat);
     setOpisCytat(props.route.params[0].opis);
   };
-
+  // console.log(osoby);
   useEffect(() => {
     Json();
     JsonCytat();
     load();
-  }, []);
+  }, [props]);
 
   return (
     // <KeyboardAvoidingView style={style.container} behavior={"height"}>
@@ -208,7 +208,7 @@ const Osoby_editor_page = (props) => {
                     props.route.params[0].nazwisko.split(" ")[1]
                 )
               ),
-            }) &&
+            }),
               fetch("http://khistory.pl/cytaty.php", {
                 method: "POST",
                 headers: {
@@ -216,7 +216,7 @@ const Osoby_editor_page = (props) => {
                   "Content-Type": "application/json",
                   charset: "utf-8",
                 },
-                body: JSON.stringify(getCytaty(props.route.params[0].nazwisko)),
+                body: JSON.stringify(getCytaty(props.route.params[0].opis)),
               });
           }}
         >

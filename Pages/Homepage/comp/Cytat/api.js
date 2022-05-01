@@ -20,5 +20,5 @@ const CytatApi = (props) => {
   if (props.cytat) return <Text>{cytat}</Text>;
   else return <Text>{autor}</Text>;
 };
-
+// console.log(props);
 export { CytatApi };

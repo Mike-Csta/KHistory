@@ -85,6 +85,7 @@ const Homepage = (props) => {
     );
   }
 };
+console.log(cytatNr);
 
 const style1 = StyleSheet.create({
   main: {

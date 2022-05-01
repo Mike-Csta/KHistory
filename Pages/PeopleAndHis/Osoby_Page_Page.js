@@ -19,7 +19,7 @@ import {
 import QQQ from "../../src/qqq.jpg";
 
 const Osoby_Page_Page = (props) => {
-  console.log("xD");
+  // console.log("xD");
   return (
     <SafeAreaView style={style.container}>
       <View style={style.bottomBackground}></View>

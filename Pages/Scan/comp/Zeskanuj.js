@@ -9,7 +9,7 @@ import {
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const Zeskanuj = (props) => {
-  console.log(props);
+  // console.log(props);
   const [help, setHelp] = useState(false);
   return (
     <View style={styles.zeskanuj_text_container}>
