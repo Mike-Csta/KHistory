@@ -39,7 +39,7 @@ const Qrbutton = (props) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={style.t}
-          onPress={() => props.navigation.navigate("Scan")}
+          onPress={() => props.navigation.push("Scan", [props.Lang])}
         >
           <View style={style.right_2}>
             <View style={style.right_2_top}>

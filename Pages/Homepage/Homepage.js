@@ -170,10 +170,10 @@ const style2 = StyleSheet.create({
     position: "relative",
     width: "100%",
     backgroundColor: "#282422",
-    height: Dimensions.get("window").height + getStatusBarHeight(),
+    // height: Dimensions.get("window").height + getStatusBarHeight(),
   },
   scrollView: {
-    // height: Dimensions.get("window").height,
+    height: Dimensions.get("window").height,
     position: "relative",
   },
   status_bar_container: {
@@ -182,7 +182,7 @@ const style2 = StyleSheet.create({
     flexDirection: "row",
     height: "100%",
     justifyContent: "space-between",
-    // backgroundColor: '#FFBBFF',
+    // backgroundColor: "#FFBBFF",
   },
 
   margin_left: {
@@ -215,7 +215,15 @@ const style2 = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     flex: 1,
-    marginBottom: getStatusBarHeight() * 2.26,
+    marginBottom: getStatusBarHeight(),
+  },
+  center_bottom2: {
+    position: "absolute",
+    display: "flex",
+    flexDirection: "column",
+    // flex: 1,
+    bottom: getStatusBarHeight(),
+    height: responsiveNumber(276),
   },
   margin_right: {
     width: RFValue(11, 1000),

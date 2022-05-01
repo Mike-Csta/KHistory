@@ -10,12 +10,12 @@ import { View, StyleSheet, Image, FlatList } from "react-native";
 import Header from "./comp/Header";
 import Skaner from "./comp/Skaner";
 import Zeskanuj from "./comp/Zeskanuj";
-const Home = () => {
+const Home = (props) => {
   return (
     <View style={styles.container}>
-      <Header />
+      <Header Lang={props.route.params[0]} />
       <Skaner style={styles.skaner} />
-      <Zeskanuj />
+      <Zeskanuj Lang={props.route.params[0]} />
 
       <Image
         style={styles.image2}

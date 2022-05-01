@@ -8,7 +8,7 @@ import {
 } from "react-native-responsive-number";
 import { Text, View, StyleSheet, Image } from "react-native";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <View style={styles.header_wrap}>
       <View style={styles.header}>
@@ -20,7 +20,11 @@ const Header = () => {
         </View>
         <View style={styles.header_right}>
           <View style={styles.header_right_wrap}>
-            <Text style={styles.header_text}>POZNAJ HISTORIE KALISZA</Text>
+            <Text style={styles.header_text}>
+              {props.Lang
+                ? "POZNAJ HISTORIE KALISZA"
+                : "Дізнайтеся історії Каліша"}
+            </Text>
           </View>
         </View>
       </View>

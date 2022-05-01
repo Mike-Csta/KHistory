@@ -15,7 +15,9 @@ import Admin_login from "./Pages/Homepage/comp/Settings/Admin/Admin_login";
 import Admin_panel from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Admin_panel";
 import Cytat_editor from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Cytat_editor";
 import Osoby_editor from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Osoby_editor";
+import Zabytki_editor from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Zabytki_editor";
 import Osoby_editor_page from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Osoby_editor_page";
+import Zabytki_editor_page from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Zabytki_editor_page";
 import ScrollZabytki_Page from "./Pages/PeopleAndHis/ScrollZabytki_Page";
 import Osoby_Page from "./Pages/PeopleAndHis/Osoby_Page";
 import {
@@ -89,9 +91,14 @@ export default function App() {
           <Stack.Screen name="Web2" component={Web2} />
           <Stack.Screen name="Cytat_editor" component={Cytat_editor} />
           <Stack.Screen name="Osoby_editor" component={Osoby_editor} />
+          <Stack.Screen name="Zabytki_editor" component={Zabytki_editor} />
           <Stack.Screen
             name="Osoby_editor_page"
             component={Osoby_editor_page}
+          />
+          <Stack.Screen
+            name="Zabytki_editor_page"
+            component={Zabytki_editor_page}
           />
         </Stack.Navigator>
       </NavigationContainer>

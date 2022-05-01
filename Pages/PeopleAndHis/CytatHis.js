@@ -14,11 +14,10 @@ import {
   responsiveNumber,
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
-import QQQ from "../../src/qqq.jpg";
+import shadow from "../../src/shadow.png";
 
 const CytatHis = (props) => {
   const [dane, setDane] = useState([]);
-  // console.log("askjfhskd", props);
 
   useEffect(() => {
     let test = props.data.filter(
@@ -32,7 +31,6 @@ const CytatHis = (props) => {
       style={style.container}
       onPress={() => {
         props.navigation.push("CytatHis_Page", [props.data, props.autor]);
-        // console.log(props.data.opis, "sahfdkash");
       }}
     >
       <View style={style.left}>
@@ -45,6 +43,7 @@ const CytatHis = (props) => {
         <View style={style.elem2}>
           <Text style={style.opis}>{dane.mopis}</Text>
         </View>
+        <Image style={style.shadow} source={shadow} />
       </View>
     </TouchableOpacity>
   );
@@ -59,6 +58,12 @@ const style = StyleSheet.create({
     textAlign: "center",
     flexDirection: "row",
     // marginTop: getStatusBarHeight(),
+  },
+  shadow: {
+    position: "absolute",
+    width: "100%",
+    height: "40%",
+    bottom: responsiveNumber(-30),
   },
   left: {
     display: "flex",

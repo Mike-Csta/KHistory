@@ -8,14 +8,19 @@ import {
 } from "react-native-responsive-number";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-const Zeskanuj = () => {
+const Zeskanuj = (props) => {
+  console.log(props);
   const [help, setHelp] = useState(false);
   return (
     <View style={styles.zeskanuj_text_container}>
       <View style={styles.zeskanuj_top}>
         <Text style={styles.zeskanuj_text}>
-          <Text style={styles.zeskanuj_text_color}>Z</Text>ESKANUJ
-          <Text style={styles.zeskanuj_text_color}>K</Text>OD
+          <Text style={styles.zeskanuj_text_color}>
+            {props.Lang ? "Z" : "С"}
+          </Text>
+          {props.Lang ? "ESKANUJ" : "КАНУВАТИ"}
+          <Text style={styles.zeskanuj_text_color}> K</Text>
+          {props.Lang ? "OD" : "ОД"}
         </Text>
       </View>
       <View style={styles.zeskanuj_bottom}>
@@ -34,8 +39,9 @@ const Zeskanuj = () => {
           style={styles.zeskanuj_help}
         >
           <Text style={styles.zeskanuj_help_text}>
-            Na niektórych przystankach autobusowych znajdują sie kody QR,
-            zeskanuj ję aby zobaczyć ciekawostke o okolicy i jej historii
+            {props.Lang
+              ? "Na niektórych przystankach autobusowych znajdują sie kody QR,zeskanuj ję aby zobaczyć ciekawostke o okolicy i jej historii"
+              : "На деяких зупинках є QR-коди, відскануйте їх, щоб побачити цікаві факти про місцевість та її історію"}
           </Text>
         </TouchableOpacity>
       )}
