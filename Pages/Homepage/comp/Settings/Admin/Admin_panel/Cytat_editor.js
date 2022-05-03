@@ -33,7 +33,7 @@ const Cytat_Editor = (props) => {
     let request = await fetch("http://khistory.pl/cytaty.json");
     let json = await request.json();
     setCytaty(json.osoby);
-    // console.log(json.osoby);
+    console.log(json.osoby);
     console.log(props.route.params[0]);
   };
 
@@ -45,7 +45,7 @@ const Cytat_Editor = (props) => {
 
   useEffect(() => {
     Json();
-  }, [props]);
+  }, [props.route.params[0]]);
 
   return (
     <SafeAreaView style={style.container}>

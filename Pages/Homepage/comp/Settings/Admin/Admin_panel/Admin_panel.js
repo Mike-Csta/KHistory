@@ -36,7 +36,7 @@ const Admin_panel = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={style.button}
-        onPress={() => props.navigation.navigate("Zabytki_editor")}
+        onPress={() => props.navigation.push("Zabytki_editor", [Math.random()])}
         // onPress={() => {
         //   fetch('http://192.168.8.126/www/json.php', {
         //     method: 'POST',
@@ -52,7 +52,7 @@ const Admin_panel = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={style.button}
-        onPress={() => props.navigation.navigate("Cytat_editor")}
+        onPress={() => props.navigation.push("Cytat_editor", [Math.random()])}
       >
         <Text style={style.text}>Cytaty</Text>
       </TouchableOpacity>

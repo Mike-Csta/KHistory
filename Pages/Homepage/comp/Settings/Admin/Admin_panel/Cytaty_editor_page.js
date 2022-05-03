@@ -219,8 +219,8 @@ const Osoby_editor_page = (props) => {
                 body: JSON.stringify(getCytaty(props.route.params[0].opis)),
               }),
               setTimeout(() => {
-                props.navigation.push("Cytat_editor", cytaty, Math.random());
-              }, 1000);
+                props.navigation.push("Cytat_editor", [Math.random() * 2]);
+              }, 3000);
           }}
         >
           <Text style={style.text}>Zapisz</Text>

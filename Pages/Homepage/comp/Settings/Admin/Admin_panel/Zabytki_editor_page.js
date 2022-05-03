@@ -38,6 +38,7 @@ const Osoby_editor_page = (props) => {
     let json = await request.json();
     setZabytki(json.zabytki);
     // console.log(json.osoby)
+    console.log(props.route.params[0]);
   };
 
   const getOsoby = (a) => {
@@ -62,6 +63,7 @@ const Osoby_editor_page = (props) => {
   useEffect(() => {
     Json();
     load();
+    console.log(props.route.params[0]);
   }, []);
 
   return (
@@ -118,8 +120,8 @@ const Osoby_editor_page = (props) => {
               body: JSON.stringify(getOsoby(props.route.params[0].nazwa)),
             });
             setTimeout(() => {
-              props.navigation.push("Zabytki_editor", zabytki, Math.random());
-            }, 1000);
+              props.navigation.push("Zabytki_editor", [Math.random() * 2]);
+            }, 3000);
           }}
         >
           <Text style={style.text}>Zapisz</Text>
