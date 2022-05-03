@@ -15,8 +15,8 @@ import {
 } from "react-native-responsive-number";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 const Admin_login = (props) => {
-  const [login, setLogin] = useState("admin");
-  const [password, setPassword] = useState("0000");
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
   const [zleHaslo, setZleHaslo] = useState("");
   const [data, setData] = useState(["falalala", "falalala"]);
 
