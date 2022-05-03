@@ -30,12 +30,12 @@ const Cytat_Editor = (props) => {
     },
   ]);
 
-  const Json = async () => {
+  const Json = async (a) => {
     // let request = await fetch('http://192.168.8.126/www/osoby.json')
     let request = await fetch("http://khistory.pl/zabytki.json");
     let json = await request.json();
     setZabytki(json.zabytki);
-    // console.log(json.zabytki);
+    console.log(props.route.params[0]);
   };
 
   const getOsoby = (a) => {
@@ -45,8 +45,8 @@ const Cytat_Editor = (props) => {
   };
 
   useEffect(() => {
-    Json();
-  }, []);
+    Json(props);
+  }, [props]);
 
   return (
     <SafeAreaView style={style.container}>

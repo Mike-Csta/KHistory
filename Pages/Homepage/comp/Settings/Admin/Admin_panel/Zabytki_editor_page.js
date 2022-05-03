@@ -117,6 +117,9 @@ const Osoby_editor_page = (props) => {
               },
               body: JSON.stringify(getOsoby(props.route.params[0].nazwa)),
             });
+            setTimeout(() => {
+              props.navigation.push("Zabytki_editor", zabytki, Math.random());
+            }, 1000);
           }}
         >
           <Text style={style.text}>Zapisz</Text>

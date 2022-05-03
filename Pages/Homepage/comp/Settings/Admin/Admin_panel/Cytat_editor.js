@@ -34,6 +34,7 @@ const Cytat_Editor = (props) => {
     let json = await request.json();
     setCytaty(json.osoby);
     // console.log(json.osoby);
+    console.log(props.route.params[0]);
   };
 
   const getOsoby = (a) => {
@@ -44,7 +45,7 @@ const Cytat_Editor = (props) => {
 
   useEffect(() => {
     Json();
-  }, []);
+  }, [props]);
 
   return (
     <SafeAreaView style={style.container}>

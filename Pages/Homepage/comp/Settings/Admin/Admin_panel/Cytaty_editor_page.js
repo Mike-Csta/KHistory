@@ -217,7 +217,10 @@ const Osoby_editor_page = (props) => {
                   charset: "utf-8",
                 },
                 body: JSON.stringify(getCytaty(props.route.params[0].opis)),
-              });
+              }),
+              setTimeout(() => {
+                props.navigation.push("Cytat_editor", cytaty, Math.random());
+              }, 1000);
           }}
         >
           <Text style={style.text}>Zapisz</Text>
