@@ -66,110 +66,100 @@ const Cytat_Editor = (props) => {
     Json()
   }, [])
 
-  if (ready) {
-    return (
-      <SafeAreaView style={style.container}>
-        <View style={style.panel}>
-          <Text style={style.text}>Postacie Historyczne</Text>
-        </View>
-        <ScrollView style={style.scroll}>
-          {osoby.map((e) => (
-            //   <TouchableWithoutFeedback style={style.button}>
-            <View style={style.button}>
-              <View style={style.left}>
-                {/* obrazek */}
-                <Image
-                  source={{
-                    uri: e.obraz,
-                  }}
-                  style={style.obraz}
-                />
+  return (
+    <SafeAreaView style={style.container}>
+      <View style={style.panel}>
+        <Text style={style.text}>Postacie Historyczne</Text>
+      </View>
+      <ScrollView style={style.scroll}>
+        {osoby.map((e) => (
+          //   <TouchableWithoutFeedback style={style.button}>
+          <View style={style.button}>
+            <View style={style.left}>
+              {/* obrazek */}
+              <Image
+                source={{
+                  uri: e.obraz,
+                }}
+                style={style.obraz}
+              />
+            </View>
+            <View style={style.right}>
+              {/* Imię nazwisko */}
+              <View style={style.rightTop}>
+                <Text
+                  style={style.text2}
+                >{`${e.imie} ${e.nazwisko}`}</Text>
               </View>
-              <View style={style.right}>
-                {/* Imię nazwisko */}
-                <View style={style.rightTop}>
-                  <Text
-                    style={style.text2}
-                  >{`${e.imie} ${e.nazwisko}`}</Text>
-                </View>
-                {/* Przyciski */}
-                <View style={style.rightBottom}>
-                  {/* Edytuj */}
-                  <TouchableOpacity
-                    style={style.rightBottomLeft}
-                    onPress={() => {
-                      props.navigation.push('Osoby_editor_page', [
-                        e,
-                        osoby,
-                        false,
-                      ])
-                    }}
-                  >
-                    <View style={style.left}>
-                      <Image
-                        source={notepad}
-                        style={style.iconNotepad}
-                      ></Image>
+              {/* Przyciski */}
+              <View style={style.rightBottom}>
+                {/* Edytuj */}
+                <TouchableOpacity
+                  style={style.rightBottomLeft}
+                  onPress={() => {
+                    props.navigation.push('Osoby_editor_page', [
+                      e,
+                      osoby,
+                      false,
+                    ])
+                  }}
+                >
+                  <View style={style.left}>
+                    <Image
+                      source={notepad}
+                      style={style.iconNotepad}
+                    ></Image>
+                  </View>
+                  <View style={style.right}>
+                    <View style={style.rightTop}>
+                      <Text style={style.text}>EDYTUJ</Text>
                     </View>
-                    <View style={style.right}>
-                      <View style={style.rightTop}>
-                        <Text style={style.text}>EDYTUJ</Text>
-                      </View>
-                      {/* <View style={style.rightBottom}></View> */}
-                    </View>
-                  </TouchableOpacity>
-                  {/* Usuń */}
-                  <TouchableOpacity
-                    style={style.rightBottomRight}
-                    onPress={() => {
-                      fetch('http://khistory.pl/osoby.php', {
-                        cashe: 'no-store',
-                        method: 'POST',
-                        headers: {
-                          'Accept': 'application/json',
-                          'Content-Type': 'application/json',
-                          'charset': 'utf-8',
-                        },
-                        body: JSON.stringify(
-                          getOsoby(e.imie + ' ' + e.nazwisko),
-                        ),
-                      })
-                    }}
-                  >
-                    <Image source={trash} style={style.iconTrash}></Image>
-                  </TouchableOpacity>
-                </View>
+                    {/* <View style={style.rightBottom}></View> */}
+                  </View>
+                </TouchableOpacity>
+                {/* Usuń */}
+                <TouchableOpacity
+                  style={style.rightBottomRight}
+                  onPress={() => {
+                    fetch('http://khistory.pl/osoby.php', {
+                      cashe: 'no-store',
+                      method: 'POST',
+                      headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'charset': 'utf-8',
+                      },
+                      body: JSON.stringify(
+                        getOsoby(e.imie + ' ' + e.nazwisko),
+                      ),
+                    })
+                  }}
+                >
+                  <Image source={trash} style={style.iconTrash}></Image>
+                </TouchableOpacity>
               </View>
             </View>
-            //   </TouchableWithoutFeedback>
-          ))}
+          </View>
+          //   </TouchableWithoutFeedback>
+        ))}
 
-          <TouchableOpacity
-            style={style.button2}
-            onPress={() =>
-              props.navigation.push('Osoby_editor_page', [
-                dOsoby,
-                osoby,
-                true,
-              ])
-            }
-          >
-            <Text
-              style={{ fontSize: responsiveNumber(20), color: '#aab' }}
-            >
-              DODAJ POSTAĆ
-            </Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </SafeAreaView>
-    )
-  } else {
-    return (
-      <View>
-        <Text>LOADING!</Text>
-      </View>
-    )
-  }
+        <TouchableOpacity
+          style={style.button2}
+          onPress={() =>
+            props.navigation.push('Osoby_editor_page', [
+              dOsoby,
+              osoby,
+              true,
+            ])
+          }
+        >
+          <Text style={{ fontSize: responsiveNumber(20), color: '#aab' }}>
+            DODAJ POSTAĆ
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
+  )
 }
 
 const style = StyleSheet.create({
