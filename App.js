@@ -20,6 +20,7 @@ import Osoby_editor_page from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/
 import Zabytki_editor_page from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Zabytki_editor_page";
 import Cytaty_editor_page from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Cytaty_editor_page";
 import ScrollZabytki_Page from "./Pages/PeopleAndHis/ScrollZabytki_Page";
+import Link_edit from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Link_edit";
 import Osoby_Page from "./Pages/PeopleAndHis/Osoby_Page";
 import {
   NavigationContainer,
@@ -72,6 +73,7 @@ export default function App() {
           <Stack.Screen name="Lock" component={Lock} />
           <Stack.Screen name="Scan" component={Scan} />
           <Stack.Screen name="PeopleAndHis" component={PeopleAndHis} />
+          <Stack.Screen name="Link_edit" component={Link_edit} />
           <Stack.Screen name="ScrollOsoby_Page" component={ScrollOsoby_Page} />
           <Stack.Screen
             name="ScrollZabytki_Page"

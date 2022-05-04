@@ -22,7 +22,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const Web = () => {
   const jsCode = ``;
 
@@ -217,10 +217,39 @@ const Web = () => {
   const [linkText, setLinkText] = useState("https://kalisz.naszemiasto.pl/");
   const [changeText, onChangeText] = useState("https://kalisz.naszemiasto.pl/");
   const [link, setLink] = useState("https://kalisz.naszemiasto.pl/");
+  const [linki, setLinki] = useState([
+    "https://kalisz.naszemiasto.pl/",
+    "https://www.faktykaliskie.info/",
+    "https://zyciekalisza.pl/wiadomosci",
+    "https://calisia.pl/",
+  ]);
 
   const onSearch = () => {
     setLink(changeText);
   };
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("linki");
+      setLinki(
+        jsonValue != null
+          ? JSON.parse(jsonValue)
+          : [
+              "https://kalisz.naszemiasto.pl/",
+              "https://www.faktykaliskie.info/",
+              "https://zyciekalisza.pl/wiadomosci",
+              "https://calisia.pl/",
+            ]
+      );
+      setLink(linki[0]);
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -261,7 +290,7 @@ const Web = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.bar_search}
-            onPress={() => setLink("https://kalisz.naszemiasto.pl/")}
+            onPress={() => setLink(linki[0])}
           >
             <View style={styles.bar_Icon}>
               <Text style={{ color: "white" }}>1</Text>
@@ -269,7 +298,7 @@ const Web = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.bar_search}
-            onPress={() => setLink("https://www.faktykaliskie.info/")}
+            onPress={() => setLink(linki[1])}
           >
             <View style={styles.bar_Icon}>
               <Text style={{ color: "white" }}>2</Text>
@@ -277,7 +306,7 @@ const Web = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.bar_search}
-            onPress={() => setLink("https://zyciekalisza.pl/wiadomosci")}
+            onPress={() => setLink(linki[2])}
           >
             <View style={styles.bar_Icon}>
               <Text style={{ color: "white" }}>3</Text>
@@ -285,7 +314,7 @@ const Web = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.bar_search}
-            onPress={() => setLink("https://calisia.pl/")}
+            onPress={() => setLink(linki[3])}
           >
             <View style={styles.bar_Icon}>
               <Text style={{ color: "white" }}>4</Text>

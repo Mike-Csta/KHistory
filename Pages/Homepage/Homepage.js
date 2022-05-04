@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,55 +8,55 @@ import {
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
-} from 'react-native'
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
-import { getStatusBarHeight } from 'react-native-status-bar-height'
-import Logo from './comp/Logo/Logo'
-import Weather from './comp/Weather/Weather'
-import Cytat from './comp/Cytat/Cytat'
-import Qrbutton from './comp/Qrbutton/Qrbutton'
-import Custom_Buttons from './comp/Custom_Buttons/Custom_Buttons'
-import background from '../../src/background.jpg'
-import { StatusBar } from 'expo-status-bar'
-import Settings from './comp/Settings/Settings'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+} from "react-native";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { getStatusBarHeight } from "react-native-status-bar-height";
+import Logo from "./comp/Logo/Logo";
+import Weather from "./comp/Weather/Weather";
+import Cytat from "./comp/Cytat/Cytat";
+import Qrbutton from "./comp/Qrbutton/Qrbutton";
+import Custom_Buttons from "./comp/Custom_Buttons/Custom_Buttons";
+import background from "../../src/background.jpg";
+import { StatusBar } from "expo-status-bar";
+import Settings from "./comp/Settings/Settings";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   responsiveNumber,
   responsiveLetterSpacing,
-} from 'react-native-responsive-number'
+} from "react-native-responsive-number";
 
-let cytatNr = Math.floor(Math.random() * 5)
+let cytatNr = Math.floor(Math.random() * 5);
 
 const Homepage = (props) => {
-  const [lang, setLang] = useState(true)
+  const [lang, setLang] = useState(true);
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem('Lang')
-      setLang(jsonValue != null ? JSON.parse(jsonValue) : true)
+      const jsonValue = await AsyncStorage.getItem("Lang");
+      setLang(jsonValue != null ? JSON.parse(jsonValue) : true);
     } catch (e) {
       // error reading value
     }
-  }
-  const [forceLock, setForceLock] = useState('false')
+  };
+  const [forceLock, setForceLock] = useState("false");
   const getJson = async () => {
-    let response = await fetch('http://khistory.pl/miketest.json', {
-      cashe: 'no-store',
-    })
-    let json = await response.json()
-    setForceLock(json.dostep.lock)
-    console.log(json)
-  }
+    let response = await fetch("http://khistory.pl/miketest.json", {
+      cashe: "no-store",
+    });
+    let json = await response.json();
+    // setForceLock(json.dostep.lock)
+    console.log(json);
+  };
 
   useEffect(() => {
-    getJson()
-    getData()
-  }, [])
-  if (forceLock == 'true') {
+    getJson();
+    getData();
+  }, []);
+  if (forceLock == "true") {
     return (
       <View style={loginStyle.container}>
         <Text style={loginStyle.text}>Przerwa Techniczna</Text>
       </View>
-    )
+    );
   } else {
     /* Returning a JSX element. */
     return (
@@ -79,38 +79,34 @@ const Homepage = (props) => {
           <View style={style.margin_right}></View>
         </View>
         <ScrollView style={style.center_bottom2} snapToOffsets={[1]}>
-          <Qrbutton
-            navigation={props.navigation}
-            numer={cytatNr}
-            Lang={lang}
-          />
+          <Qrbutton navigation={props.navigation} numer={cytatNr} Lang={lang} />
           <Custom_Buttons navigation={props.navigation} Lang={lang} />
           <Settings navigation={props.navigation} Lang={lang} />
         </ScrollView>
       </SafeAreaView>
-    )
+    );
   }
-}
-console.log(cytatNr)
+};
+console.log(cytatNr);
 
 const style1 = StyleSheet.create({
   main: {
-    display: 'flex',
-    position: 'relative',
-    width: '100%',
-    backgroundColor: '#282422',
+    display: "flex",
+    position: "relative",
+    width: "100%",
+    backgroundColor: "#282422",
     // height: Dimensions.get("window").height + getStatusBarHeight(),
   },
   scrollView: {
-    height: Dimensions.get('window').height,
-    position: 'relative',
+    height: Dimensions.get("window").height,
+    position: "relative",
   },
   status_bar_container: {
     marginTop: getStatusBarHeight(),
-    display: 'flex',
-    flexDirection: 'row',
-    height: '100%',
-    justifyContent: 'space-between',
+    display: "flex",
+    flexDirection: "row",
+    height: "100%",
+    justifyContent: "space-between",
     // backgroundColor: "#FFBBFF",
   },
 
@@ -119,37 +115,37 @@ const style1 = StyleSheet.create({
     // backgroundColor: "red"
   },
   center: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
     flex: 20,
     // justifyContent: "space-between",
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   center_top: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
   },
   center_center: {
-    position: 'relative',
-    display: 'flex',
+    position: "relative",
+    display: "flex",
     marginTop: responsiveNumber(22),
     flex: 0.8,
     // bottom: 10,
     // backgroundColor: "red",
   },
   center_bottom: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
     flex: 1,
     marginBottom: getStatusBarHeight(),
   },
   center_bottom2: {
-    position: 'absolute',
-    display: 'flex',
-    flexDirection: 'column',
+    position: "absolute",
+    display: "flex",
+    flexDirection: "column",
     // flex: 1,
     bottom: getStatusBarHeight(),
     height: responsiveNumber(276),
@@ -159,36 +155,36 @@ const style1 = StyleSheet.create({
     //  backgroundColor: "blue"
   },
   background: {
-    position: 'absolute',
+    position: "absolute",
     opacity: 0.1,
     top: 0,
-    resizeMode: 'cover',
-    width: '120%',
-    height: 100 + getStatusBarHeight() + '%',
+    resizeMode: "cover",
+    width: "120%",
+    height: 100 + getStatusBarHeight() + "%",
     aspectRatio: 1,
 
-    transform: [{ scaleX: 1 }, { rotate: '180deg' }],
+    transform: [{ scaleX: 1 }, { rotate: "180deg" }],
   },
-})
+});
 
 const style2 = StyleSheet.create({
   main: {
-    display: 'flex',
-    position: 'relative',
-    width: '100%',
-    backgroundColor: '#282422',
+    display: "flex",
+    position: "relative",
+    width: "100%",
+    backgroundColor: "#282422",
     // height: Dimensions.get("window").height + getStatusBarHeight(),
   },
   scrollView: {
-    height: Dimensions.get('window').height,
-    position: 'relative',
+    height: Dimensions.get("window").height,
+    position: "relative",
   },
   status_bar_container: {
     marginTop: getStatusBarHeight(),
-    display: 'flex',
-    flexDirection: 'row',
-    height: '100%',
-    justifyContent: 'space-between',
+    display: "flex",
+    flexDirection: "row",
+    height: "100%",
+    justifyContent: "space-between",
     // backgroundColor: "#FFBBFF",
   },
 
@@ -197,37 +193,37 @@ const style2 = StyleSheet.create({
     // backgroundColor: "red"
   },
   center: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
     flex: 20,
     // justifyContent: "space-between",
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   center_top: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
   },
   center_center: {
-    position: 'relative',
-    display: 'flex',
+    position: "relative",
+    display: "flex",
     marginTop: responsiveNumber(22),
     flex: 0.4,
     // bottom: 10,
     // backgroundColor: "red",
   },
   center_bottom: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
     flex: 1,
     marginBottom: getStatusBarHeight(),
   },
   center_bottom2: {
-    position: 'absolute',
-    display: 'flex',
-    flexDirection: 'column',
+    position: "absolute",
+    display: "flex",
+    flexDirection: "column",
     // flex: 1,
     bottom: getStatusBarHeight(),
     height: responsiveNumber(276),
@@ -237,26 +233,26 @@ const style2 = StyleSheet.create({
     //  backgroundColor: "blue"
   },
   background: {
-    position: 'absolute',
+    position: "absolute",
     opacity: 0.1,
     top: 0,
-    resizeMode: 'cover',
-    width: '120%',
-    height: 100 + getStatusBarHeight() + '%',
+    resizeMode: "cover",
+    width: "120%",
+    height: 100 + getStatusBarHeight() + "%",
     aspectRatio: 1,
 
-    transform: [{ scaleX: 1 }, { rotate: '180deg' }],
+    transform: [{ scaleX: 1 }, { rotate: "180deg" }],
   },
-})
+});
 
-let style = style1
-const windowWidth = Dimensions.get('window').width
-const windowHeight = Dimensions.get('window').height
+let style = style1;
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 if (windowHeight / windowWidth > 1.8) {
-  style = style1
+  style = style1;
 } else {
-  style = style2
+  style = style2;
 }
 
 // console.log(windowWidth, windowHeight)
@@ -267,20 +263,20 @@ if (windowHeight / windowWidth > 1.8) {
 
 const loginStyle = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
-    backgroundColor: '#171720',
-    height: '100%',
-    position: 'relative',
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    backgroundColor: "#171720",
+    height: "100%",
+    position: "relative",
   },
-  text: { color: 'white', fontSize: 20, marginBottom: 20 },
+  text: { color: "white", fontSize: 20, marginBottom: 20 },
   flagi: {
-    display: 'flex',
+    display: "flex",
 
-    height: '20%',
-    flexDirection: 'row',
+    height: "20%",
+    flexDirection: "row",
   },
-})
+});
 
-export default Homepage
+export default Homepage;

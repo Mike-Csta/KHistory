@@ -27,9 +27,7 @@ const Setting_page = (props) => {
       // error reading value
     }
   };
-  useEffect(() => {
-    getData();
-  }, []);
+
   const storeData = async (key, value) => {
     try {
       const jsonValue = JSON.stringify(value);
@@ -38,6 +36,10 @@ const Setting_page = (props) => {
       // saving error
     }
   };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <View style={style.container}>
@@ -78,6 +80,12 @@ const Setting_page = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={style.admin}
+        onPress={() => props.navigation.navigate("Link_edit")}
+      >
+        <Text style={style.text}>Strony Domyślne Przeglądarki</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={style.admin2}
         onPress={() => props.navigation.navigate("Admin_login")}
       >
         <Text style={style.text}>Panel Administracyjny</Text>
@@ -107,6 +115,15 @@ const style = StyleSheet.create({
   },
   admin: {
     marginTop: responsiveNumber(150),
+    width: "100%",
+    height: "10%",
+    backgroundColor: "#272732",
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+  },
+  admin2: {
+    marginTop: responsiveNumber(10),
     width: "100%",
     height: "10%",
     backgroundColor: "#272732",
