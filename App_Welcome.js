@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -8,97 +8,103 @@ import {
   Button,
   PixelRatio,
   TextInput,
-} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+} from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
   responsiveNumber,
   responsiveLetterSpacing,
-} from "react-native-responsive-number";
-import flagaPl from "./src/pl.png";
-import flagaUk from "./src/uk.png";
+} from 'react-native-responsive-number'
+import flagaPl from './src/pl.png'
+import flagaUk from './src/uk.png'
 const App_Welcome = (props) => {
-  const [lock, setLock] = useState("false");
+  const [lock, setLock] = useState('false')
 
   const JsonDostep = async () => {
-    let request = await fetch("http://khistory.pl/dostep.json");
-    let json = await request.json();
+    let request = await fetch('http://khistory.pl/dostep.json', {
+      cashe: 'no-store',
+    })
+    let json = await request.json()
     // setLock(json.dostep.lock);
-  };
+  }
   const storeData = async (key, value) => {
     try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem(`${key}`, jsonValue);
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem(`${key}`, jsonValue)
     } catch (e) {
       // saving error
     }
-  };
+  }
   useEffect(() => {
-    storeData("Lang", true);
-  }, []);
-  const [lang, setLang] = useState(true);
+    storeData('Lang', true)
+  }, [])
+  const [lang, setLang] = useState(true)
 
   //lock
 
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
-  const [zleHaslo, setZleHaslo] = useState("");
-  const [data, setData] = useState(["falalala", "falalala"]);
+  const [login, setLogin] = useState('')
+  const [password, setPassword] = useState('')
+  const [zleHaslo, setZleHaslo] = useState('')
+  const [data, setData] = useState(['falalala', 'falalala'])
 
   const Json = async () => {
-    let request = await fetch("http://khistory.pl/login.json");
-    let json = await request.json();
-    setData([json.login.login, json.login.haslo]);
-  };
+    let request = await fetch('http://khistory.pl/login.json', {
+      cashe: 'no-store',
+    })
+    let json = await request.json()
+    setData([json.login.login, json.login.haslo])
+  }
 
   useEffect(() => {
-    JsonDostep();
-    Json();
-  }, []);
+    JsonDostep()
+    Json()
+  }, [])
 
   const Autch = () => {
     if (login == data[0] && password == data[1]) {
-      return props.navigation.navigate("Lock");
+      return props.navigation.navigate('Lock')
     } else {
-      setZleHaslo("ZŁY LOGIN LUB HASLO");
+      setZleHaslo('ZŁY LOGIN LUB HASLO')
     }
-  };
+  }
 
   //lock end
-  if (lock == "false") {
+  if (lock == 'false') {
     return (
       <View style={style.container}>
         <Text style={style.text}>
-          {lang ? "WITAJ W KHISTORY, WYBIERZ JĘZYK:" : "Привіт, виберіть мову:"}
+          {lang
+            ? 'WITAJ W KHISTORY, WYBIERZ JĘZYK:'
+            : 'Привіт, виберіть мову:'}
         </Text>
-        <Text style={{ color: "#aaa", fontSize: 10, marginBottom: 20 }}>
+        <Text style={{ color: '#aaa', fontSize: 10, marginBottom: 20 }}>
           {!lang
-            ? "WITAJ W KHISTORY, WYBIERZ JĘZYK:"
-            : "Привіт, виберіть мову:"}
+            ? 'WITAJ W KHISTORY, WYBIERZ JĘZYK:'
+            : 'Привіт, виберіть мову:'}
         </Text>
         <View style={style.flagi}>
           <TouchableOpacity
             style={{
               flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: lang ? "#123" : "transparent",
-              borderBottomColor: lang ? "#823" : "transparent",
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: lang ? '#123' : 'transparent',
+              borderBottomColor: lang ? '#823' : 'transparent',
               borderBottomWidth: 3,
             }}
-            onPress={() => storeData("Lang", true) && setLang(true)}
+            onPress={() => storeData('Lang', true) && setLang(true)}
           >
             <Image source={flagaPl} style={style.image} />
           </TouchableOpacity>
           <TouchableOpacity
             style={{
               flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: !lang ? "#123" : "transparent",
-              borderBottomColor: !lang ? "#861" : "transparent",
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: !lang ? '#123' : 'transparent',
+              borderBottomColor: !lang ? '#861' : 'transparent',
               borderBottomWidth: 3,
             }}
-            onPress={() => storeData("Lang", false) && setLang(false)}
+            onPress={() => storeData('Lang', false) && setLang(false)}
           >
             <Image source={flagaUk} style={style.image} />
           </TouchableOpacity>
@@ -106,14 +112,14 @@ const App_Welcome = (props) => {
         <Text style={style.text}></Text>
         <TouchableOpacity
           onPress={() =>
-            storeData("Welcome", true) && props.navigation.navigate("Home")
+            storeData('Welcome', true) && props.navigation.navigate('Home')
           }
           style={style.button}
         >
-          <Text style={style.text5}>{lang ? "zapisz" : "зберегти"}</Text>
+          <Text style={style.text5}>{lang ? 'zapisz' : 'зберегти'}</Text>
         </TouchableOpacity>
       </View>
-    );
+    )
   } else {
     return (
       <View style={loginStyle.container}>
@@ -135,19 +141,19 @@ const App_Welcome = (props) => {
         <TouchableOpacity
           style={loginStyle.button}
           onPress={() => {
-            Autch();
+            Autch()
           }}
         >
           <Text
             style={{
-              justifyContent: "center",
-              textAlign: "center",
-              alignItems: "center",
+              justifyContent: 'center',
+              textAlign: 'center',
+              alignItems: 'center',
 
-              color: "white",
+              color: 'white',
               fontSize: PixelRatio.getPixelSizeForLayoutSize(5),
               letterSpacing: responsiveLetterSpacing(300, 4.3),
-              fontWeight: "bold",
+              fontWeight: 'bold',
             }}
           >
             ZALOGUJ
@@ -155,100 +161,104 @@ const App_Welcome = (props) => {
         </TouchableOpacity>
         <Text style={loginStyle.error}>{zleHaslo}</Text>
       </View>
-    );
+    )
   }
-};
+}
 
 const style = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
-    backgroundColor: "#051523",
-    height: "100%",
-    position: "relative",
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+    backgroundColor: '#051523',
+    height: '100%',
+    position: 'relative',
   },
-  text: { color: "white", fontSize: 20, marginBottom: 20 },
+  text: { color: 'white', fontSize: 20, marginBottom: 20 },
   flagi: {
-    display: "flex",
+    display: 'flex',
 
-    height: "20%",
-    flexDirection: "row",
+    height: '20%',
+    flexDirection: 'row',
   },
 
-  image: { height: 100, aspectRatio: 1.5, borderRadius: responsiveNumber(10) },
+  image: {
+    height: 100,
+    aspectRatio: 1.5,
+    borderRadius: responsiveNumber(10),
+  },
   button: {
-    backgroundColor: "#293645",
+    backgroundColor: '#293645',
     height: responsiveNumber(40),
     width: responsiveNumber(100),
     borderRadius: responsiveNumber(100),
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
   },
   text5: {
-    color: "white",
+    color: 'white',
     fontSize: PixelRatio.getPixelSizeForLayoutSize(6),
     letterSpacing: responsiveLetterSpacing(300, 4.3),
     marginBottom: responsiveNumber(3),
   },
-});
+})
 
 const loginStyle = StyleSheet.create({
   container: {
-    display: "flex",
-    width: "100%",
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
     // height: responsiveNumber(50),
     flex: 1,
-    backgroundColor: "#212127",
+    backgroundColor: '#212127',
     // bottom: getStatusBarHeight(),
   },
   text: {
-    color: "#e55",
+    color: '#e55',
     fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
     letterSpacing: responsiveLetterSpacing(300, 4.3),
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   text2: {
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
     marginBottom: 20,
-    color: "white",
+    color: 'white',
     fontSize: PixelRatio.getPixelSizeForLayoutSize(5),
     letterSpacing: responsiveLetterSpacing(300, 4.3),
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   textInput: {
-    backgroundColor: "#414146",
-    width: "90%",
+    backgroundColor: '#414146',
+    width: '90%',
     height: responsiveNumber(35),
     margin: responsiveNumber(20),
-    fontWeight: "bold",
-    color: "white",
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
+    fontWeight: 'bold',
+    color: 'white',
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
     borderRadius: responsiveNumber(100),
   },
   button: {
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
-    backgroundColor: "#303035",
-    width: "30%",
+    justifyContent: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+    backgroundColor: '#303035',
+    width: '30%',
     height: responsiveNumber(35),
     borderRadius: responsiveNumber(5),
   },
   error: {
-    color: "#f33",
+    color: '#f33',
     marginTop: responsiveNumber(50),
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: responsiveNumber(20),
   },
-});
+})
 
-export default App_Welcome;
+export default App_Welcome

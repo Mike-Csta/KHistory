@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -7,93 +7,110 @@ import {
   Dimensions,
   StatusBar,
   SafeAreaView,
-} from "react-native";
-import { getStatusBarHeight } from "react-native-status-bar-height";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import CytatHis from "./CytatHis";
-import Wafelek from "./Wafelek";
-import ScrollOsoby from "./ScrollOsoby";
-import ScrollZabytki from "./ScrollZabytki";
-import Footer from "./Footer";
+} from 'react-native'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import CytatHis from './CytatHis'
+import Wafelek from './Wafelek'
+import ScrollOsoby from './ScrollOsoby'
+import ScrollZabytki from './ScrollZabytki'
+import Footer from './Footer'
 import {
   responsiveNumber,
   responsiveLetterSpacing,
-} from "react-native-responsive-number";
+} from 'react-native-responsive-number'
 
 const PeopleAndHis = (props) => {
   // console.log(props);
   const [cytatHisData, setcytatHisData] = useState([
     {
-      imie: "wczytywanie1",
-      nazwisko: "wczytywanie2",
-      mopis: "wczytywanie3",
-      opis: "wczytywanie4",
-      obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
+      imie: 'wczytywanie1',
+      nazwisko: 'wczytywanie2',
+      mopis: 'wczytywanie3',
+      opis: 'wczytywanie4',
+      obraz:
+        'https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg',
     },
-  ]);
-  const [autor, setAutor] = useState("");
+  ])
+  const [autor, setAutor] = useState('')
 
   const JsonCytat = async () => {
     let request = props.route.params[1]
-      ? await fetch("http://khistory.pl/cytaty.json")
-      : await fetch("http://khistory.pl/cytatyUk.json");
-    let json = await request.json();
-    setAutor(json.osoby[1].nazwisko);
-  };
+      ? await fetch('http://khistory.pl/cytaty.json', {
+          cashe: 'no-store',
+        })
+      : await fetch('http://khistory.pl/cytatyUk.json', {
+          cashe: 'no-store',
+        })
+    let json = await request.json()
+    setAutor(json.osoby[1].nazwisko)
+  }
 
   const [osoby, setOsoby] = useState([
     {
-      imie: "wczytywanie1",
-      nazwisko: "wczytywanie2",
-      mopis: "wczytywanie3",
-      opis: "wczytywanie4",
-      obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
+      imie: 'wczytywanie1',
+      nazwisko: 'wczytywanie2',
+      mopis: 'wczytywanie3',
+      opis: 'wczytywanie4',
+      obraz:
+        'https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg',
     },
-  ]);
+  ])
   const [zabytki, setZabytki] = useState([
     {
-      nazwa: "wczytywanie2",
-      mopis: "wczytywanie3",
-      opis: "wczytywanie4",
-      obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
+      nazwa: 'wczytywanie2',
+      mopis: 'wczytywanie3',
+      opis: 'wczytywanie4',
+      obraz:
+        'https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg',
     },
-  ]);
+  ])
 
   const Json = async () => {
     let request = props.route.params[1]
-      ? await fetch("http://khistory.pl/osoby.json")
-      : await fetch("http://khistory.pl/osobyUK.json");
-    let json = await request.json();
-    setOsoby(json.osoby);
+      ? await fetch('http://khistory.pl/osoby.json', { cashe: 'no-store' })
+      : await fetch('http://khistory.pl/osobyUK.json', {
+          cashe: 'no-store',
+        })
+    let json = await request.json()
+    setOsoby(json.osoby)
     // console.log(json);
-  };
+  }
   const Json2 = async () => {
     let request2 = props.route.params[1]
-      ? await fetch("http://khistory.pl/zabytki.json")
-      : await fetch("http://khistory.pl/zabytkiUk.json");
-    let json2 = await request2.json();
-    setZabytki(json2.zabytki);
-  };
+      ? await fetch('http://khistory.pl/zabytki.json', {
+          cashe: 'no-store',
+        })
+      : await fetch('http://khistory.pl/zabytkiUk.json', {
+          cashe: 'no-store',
+        })
+    let json2 = await request2.json()
+    setZabytki(json2.zabytki)
+  }
 
   useEffect(() => {
-    JsonCytat();
-    Json();
-    Json2();
-  }, []);
+    JsonCytat()
+    Json()
+    Json2()
+  }, [])
   return (
     <SafeAreaView style={style.container}>
       <View style={style.bar}>
         <View style={style.top}>
-          <CytatHis navigation={props.navigation} data={osoby} autor={autor} />
+          <CytatHis
+            navigation={props.navigation}
+            data={osoby}
+            autor={autor}
+          />
           <Wafelek
-            value={props.route.params[1] ? "POSTACIE" : "ПЕРСОНАЖИ"}
+            value={props.route.params[1] ? 'POSTACIE' : 'ПЕРСОНАЖИ'}
             osoby={osoby}
             page="Osoby_Page"
             navigation={props.navigation}
           />
           <ScrollOsoby navigation={props.navigation} osoby={osoby} />
           <Wafelek
-            value={props.route.params[1] ? "ZABYTKI" : "ПАМЯТНИКИ"}
+            value={props.route.params[1] ? 'ZABYTKI' : 'ПАМЯТНИКИ'}
             zabytki={zabytki}
             page="Zabytki_Page"
             navigation={props.navigation}
@@ -105,33 +122,33 @@ const PeopleAndHis = (props) => {
         </View>
       </View>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const style = StyleSheet.create({
   container: {
-    display: "flex",
-    position: "relative",
-    width: "100%",
+    display: 'flex',
+    position: 'relative',
+    width: '100%',
     // backgroundColor: "#212127",
-    backgroundColor: "#192029",
+    backgroundColor: '#192029',
     // height: Dimensions.get("window").height + StatusBar.currentHeight,
   },
   bar: {
-    display: "flex",
+    display: 'flex',
 
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     marginTop: StatusBar.currentHeight,
-    height: "100%",
+    height: '100%',
   },
-  top: { flex: 1, justifyContent: "space-between" },
+  top: { flex: 1, justifyContent: 'space-between' },
   bottom: {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
     flex: 0.1,
     marginBottom: StatusBar.currentHeight * 2,
   },
-});
+})
 
-export default PeopleAndHis;
+export default PeopleAndHis

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -6,41 +6,44 @@ import {
   Image,
   Dimensions,
   StatusBar,
-} from "react-native";
-import { getStatusBarHeight } from "react-native-status-bar-height";
-import CytatHis from "../PeopleAndHis/CytatHis";
-import Button from "../PeopleAndHis/Button";
-import ScrollOsoby from "../PeopleAndHis/ScrollOsoby";
-import ScrollZabytki from "../PeopleAndHis/ScrollZabytki";
-import Footer from "../PeopleAndHis/Footer";
+} from 'react-native'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+import CytatHis from '../PeopleAndHis/CytatHis'
+import Button from '../PeopleAndHis/Button'
+import ScrollOsoby from '../PeopleAndHis/ScrollOsoby'
+import ScrollZabytki from '../PeopleAndHis/ScrollZabytki'
+import Footer from '../PeopleAndHis/Footer'
 import {
   responsiveNumber,
   responsiveLetterSpacing,
-} from "react-native-responsive-number";
+} from 'react-native-responsive-number'
 
 const PeopleAndHis = ({ navigation }) => {
   const Json = async () => {
-    let request = await fetch("http://khistory.pl/osoby.json");
-    let json = await request.json();
+    let request = await fetch('http://khistory.pl/osoby.json', {
+      cashe: 'no-store',
+    })
+    let json = await request.json()
     // console.log(json.osoby[0]);
     // console.log(json.osoby[1]);
     // console.log(json.osoby[2]);
-    setOsoby(json.osoby);
-  };
+    setOsoby(json.osoby)
+  }
 
   const [osoby, setOsoby] = useState([
     {
-      imie: "wczytywanie1",
-      nazwisko: "wczytywanie2",
-      mopis: "wczytywanie3",
-      opis: "wczytywanie4",
-      obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
+      imie: 'wczytywanie1',
+      nazwisko: 'wczytywanie2',
+      mopis: 'wczytywanie3',
+      opis: 'wczytywanie4',
+      obraz:
+        'https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg',
     },
-  ]);
+  ])
   useEffect(() => {
     // setOsoby(Json());
-    Json();
-  }, []);
+    Json()
+  }, [])
 
   // const osoby = [
   //   {
@@ -91,9 +94,9 @@ const PeopleAndHis = ({ navigation }) => {
       <View style={style.bar}>
         <View style={style.top}>
           <CytatHis />
-          <Button value={"POSTACIE"} />
+          <Button value={'POSTACIE'} />
           <ScrollOsoby navigation={navigation} osoby={osoby} />
-          <Button value={"ZABYTKI"} />
+          <Button value={'ZABYTKI'} />
           <ScrollZabytki />
         </View>
         <View style={style.bottom}>
@@ -101,31 +104,31 @@ const PeopleAndHis = ({ navigation }) => {
         </View>
       </View>
     </View>
-  );
-};
+  )
+}
 
 const style = StyleSheet.create({
   container: {
-    display: "flex",
-    position: "relative",
-    width: "100%",
-    backgroundColor: "#212127",
-    height: Dimensions.get("window").height + StatusBar.currentHeight,
+    display: 'flex',
+    position: 'relative',
+    width: '100%',
+    backgroundColor: '#212127',
+    height: Dimensions.get('window').height + StatusBar.currentHeight,
   },
   bar: {
-    display: "flex",
-    justifyContent: "flex-end",
+    display: 'flex',
+    justifyContent: 'flex-end',
     marginTop: StatusBar.currentHeight,
-    height: "100%",
+    height: '100%',
   },
-  top: { flex: 1, justifyContent: "space-between" },
+  top: { flex: 1, justifyContent: 'space-between' },
   bottom: {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
     flex: 0.1,
     marginBottom: responsiveNumber(40),
   },
-});
+})
 
-export default PeopleAndHis;
+export default PeopleAndHis
