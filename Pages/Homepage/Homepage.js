@@ -43,7 +43,7 @@ const Homepage = (props) => {
       cashe: "no-store",
     });
     let json = await response.json();
-    // setForceLock(json.dostep.lock)
+    setForceLock(json.dostep.lock);
     console.log(json);
   };
 
