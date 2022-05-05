@@ -410,14 +410,15 @@ const styles = StyleSheet.create({
     // aspectRatio: 1,
   },
   bar_Icon: {
-    backgroundColor: "#222",
+    backgroundColor: "#242424",
 
     borderRadius: responsiveNumber(10),
     aspectRatio: 2,
-    height: "100%",
+    height: "90%",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    marginBottom: responsiveNumber(5),
   },
 });
 

@@ -7,8 +7,10 @@ import {
   SafeAreaView,
   TextInput,
   Button,
+  TouchableOpacity,
 } from "react-native";
 import { responsiveNumber } from "react-native-responsive-number";
+import { responsiveLetterSpacing } from "react-native-responsive-number";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Link_edit = () => {
@@ -43,35 +45,41 @@ const Link_edit = () => {
   };
   return (
     <SafeAreaView style={style.main}>
+      <Text style={style.textInput2}>Zakładka 1:</Text>
       <TextInput
         style={style.textInput}
         value={link0}
         onChangeText={(text) => setLink0(text)}
       ></TextInput>
+      <Text style={style.textInput2}>Zakładka 2:</Text>
       <TextInput
         style={style.textInput}
         value={link1}
         onChangeText={(text) => setLink1(text)}
       ></TextInput>
+      <Text style={style.textInput2}>Zakładka 3:</Text>
       <TextInput
         style={style.textInput}
         value={link2}
         onChangeText={(text) => setLink2(text)}
       ></TextInput>
+      <Text style={style.textInput2}>Zakładka 4:</Text>
       <TextInput
         style={style.textInput}
         value={link3}
         onChangeText={(text) => setLink3(text)}
       ></TextInput>
       <Text style={{ marginTop: responsiveNumber(30) }}>
-        <Button
-          title="Zapisz"
+        <TouchableOpacity
+          style={style.button}
           onPress={() => storeData("linki", [link0, link1, link2, link3])}
-        />
+        >
+          <Text style={style.text}>Zapisz</Text>
+        </TouchableOpacity>
       </Text>
       <Text style={{ marginTop: responsiveNumber(30) }}>
-        <Button
-          title="Resetuj"
+        <TouchableOpacity
+          style={style.button}
           onPress={() =>
             storeData("linki", [
               "https://kalisz.naszemiasto.pl/",
@@ -80,7 +88,9 @@ const Link_edit = () => {
               "https://calisia.pl/",
             ])
           }
-        />
+        >
+          <Text style={style.text}>Resetuj</Text>
+        </TouchableOpacity>
       </Text>
     </SafeAreaView>
   );
@@ -100,10 +110,33 @@ const style = StyleSheet.create({
     borderRadius: responsiveNumber(15),
     height: responsiveNumber(40),
     width: "90%",
+    marginTop: responsiveNumber(5),
+    textAlign: "center",
+    color: "#ccd",
+    fontSize: responsiveNumber(13),
+  },
+  textInput2: {
+    width: "90%",
     marginTop: responsiveNumber(30),
+    fontSize: responsiveNumber(14),
+    letterSpacing: responsiveLetterSpacing(40, 14),
+    textAlign: "center",
+    color: "#aab",
+    fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: "#557",
+    borderRadius: responsiveNumber(15),
+    height: responsiveNumber(40),
+    width: responsiveNumber(90),
+    marginTop: responsiveNumber(5),
     textAlign: "center",
     color: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
   },
+  text: { color: "#fff" },
 });
 
 export default Link_edit;
