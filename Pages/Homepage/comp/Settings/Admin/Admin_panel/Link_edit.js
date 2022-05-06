@@ -14,6 +14,16 @@ import { responsiveLetterSpacing } from "react-native-responsive-number";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Link_edit = () => {
+  const [lang, setLang] = useState(true);
+  const getLang = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("Lang");
+      setLang(jsonValue != null ? JSON.parse(jsonValue) : true);
+    } catch (e) {
+      // error reading value
+    }
+  };
+
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("linki");
@@ -32,6 +42,7 @@ const Link_edit = () => {
   const [link3, setLink3] = useState("");
 
   useEffect(() => {
+    getLang();
     getData();
   }, []);
 
@@ -45,25 +56,25 @@ const Link_edit = () => {
   };
   return (
     <SafeAreaView style={style.main}>
-      <Text style={style.textInput2}>Zakładka 1:</Text>
+      <Text style={style.textInput2}>{lang ? "Zakładka 1" : "Вкладка 1"}</Text>
       <TextInput
         style={style.textInput}
         value={link0}
         onChangeText={(text) => setLink0(text)}
       ></TextInput>
-      <Text style={style.textInput2}>Zakładka 2:</Text>
+      <Text style={style.textInput2}>{lang ? "Zakładka 2" : "Вкладка 2"}</Text>
       <TextInput
         style={style.textInput}
         value={link1}
         onChangeText={(text) => setLink1(text)}
       ></TextInput>
-      <Text style={style.textInput2}>Zakładka 3:</Text>
+      <Text style={style.textInput2}>{lang ? "Zakładka 3" : "Вкладка 3"}</Text>
       <TextInput
         style={style.textInput}
         value={link2}
         onChangeText={(text) => setLink2(text)}
       ></TextInput>
-      <Text style={style.textInput2}>Zakładka 4:</Text>
+      <Text style={style.textInput2}>{lang ? "Zakładka 4" : "Вкладка 4"}</Text>
       <TextInput
         style={style.textInput}
         value={link3}
@@ -74,7 +85,7 @@ const Link_edit = () => {
           style={style.button}
           onPress={() => storeData("linki", [link0, link1, link2, link3])}
         >
-          <Text style={style.text}>Zapisz</Text>
+          <Text style={style.text}>{lang ? "Zapisz" : "Зберегти"}</Text>
         </TouchableOpacity>
       </Text>
       <Text style={{ marginTop: responsiveNumber(30) }}>
@@ -89,7 +100,7 @@ const Link_edit = () => {
             ])
           }
         >
-          <Text style={style.text}>Resetuj</Text>
+          <Text style={style.text}>{lang ? "Resetuj" : "Скинути"}</Text>
         </TouchableOpacity>
       </Text>
     </SafeAreaView>

@@ -82,21 +82,34 @@ const Setting_page = (props) => {
         style={style.admin}
         onPress={() => props.navigation.navigate("Link_edit")}
       >
-        <Text style={style.text}>Strony Domyślne Przeglądarki</Text>
+        <Text style={style.text}>
+          {lang
+            ? "Strony Domyślne Przeglądarki"
+            : "Сторінки за замовчуванням браузера"}
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={style.admin2}
         onPress={() => props.navigation.navigate("Admin_login")}
       >
-        <Text style={style.text}>Panel Administracyjny</Text>
+        <Text style={style.text}>
+          {lang ? "Panel Administracyjny" : "Панель адміністрування"}
+        </Text>
       </TouchableOpacity>
       <Text style={style.text3}>
-        Pomoc i zgłaszanie błędów: Khistory2022@gmail.com
+        {lang
+          ? "Pomoc i zgłaszanie błędów: "
+          : "Довідка та повідомлення про помилки: "}
+        Khistory2022@gmail.com
       </Text>
 
-      <Text style={style.text4}>Autorzy: Mike Csta, Szymon Szulc</Text>
+      <Text style={style.text4}>
+        {lang ? "Autorzy" : "Автори"}: Mike Csta, Szymon Szulc
+      </Text>
 
-      <Text style={style.text2}>Źródła: kalisz.pl, pl.wikipedia.org</Text>
+      <Text style={style.text2}>
+        {lang ? "Źródła" : "Джерела"}: kalisz.pl, pl.wikipedia.org
+      </Text>
     </View>
   );
 };

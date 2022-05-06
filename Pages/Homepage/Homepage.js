@@ -43,7 +43,8 @@ const Homepage = (props) => {
       cache: "no-store",
     });
     let json = await response.json();
-    setForceLock(json.dostep.lock);
+    /* Setting the value of `forceLock` to the value of `json.dostep.lock`. */
+    // setForceLock(json.dostep.lock);
     console.log(json);
   };
 

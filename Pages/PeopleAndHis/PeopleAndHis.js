@@ -65,7 +65,7 @@ const PeopleAndHis = (props) => {
 
   const Json = async () => {
     let request = props.route.params[1]
-      ? await fetch("http://khistory.pl/osoby.json", { cache: "force-cache" })
+      ? await fetch("http://khistory.pl/osoby.json", { cache: "no-store" })
       : await fetch("http://khistory.pl/osobyUK.json", {
           cache: "no-store",
         });

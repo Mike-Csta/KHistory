@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     width: "80%",
-
+    borderRadius: responsiveNumber(10),
     backgroundColor: "#202025",
     zIndex: 5000,
     borderColor: "#aa2020",
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
+    fontSize: RFValue(25, 1000),
   },
   zeskanuj_text: {
     fontSize: RFValue(37, 1000),
