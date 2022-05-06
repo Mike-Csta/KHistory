@@ -21,6 +21,14 @@ import notepad from "../../../../../../src/notepad.png";
 import trash from "../../../../../../src/trash.png";
 
 const Cytat_Editor = (props) => {
+  let [ready, setReady] = useState(false);
+
+  let [dZabytki, setDZabytki] = useState({
+    nazwa: "",
+    mopis: "",
+    opis: "",
+    obraz: "https://ak.picdn.net/shutterstock/videos/1041501241/thumb/1.jpg",
+  });
   let [zabytki, setZabytki] = useState([
     {
       nazwa: "wczytywanie2",
@@ -38,6 +46,7 @@ const Cytat_Editor = (props) => {
     let json = await request.json();
     setZabytki(json.zabytki);
     console.log(props.route.params[0]);
+    setReady(true);
   };
 
   const getOsoby = (a) => {
@@ -114,6 +123,20 @@ const Cytat_Editor = (props) => {
           </View>
           //   </TouchableWithoutFeedback>
         ))}
+        <TouchableOpacity
+          style={style.button2}
+          onPress={() =>
+            props.navigation.push("Zabytki_editor_page", [
+              dZabytki,
+              zabytki,
+              true,
+            ])
+          }
+        >
+          <Text style={{ fontSize: responsiveNumber(20), color: "#aab" }}>
+            DODAJ ZABYTEK
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -133,6 +156,21 @@ const style = StyleSheet.create({
 
     backgroundColor: "#242730",
     // bottom: getStatusBarHeight(),
+  },
+  button2: {
+    marginTop: responsiveNumber(7.5),
+    marginBottom: responsiveNumber(7.5),
+    marginRight: responsiveNumber(10),
+    marginLeft: responsiveNumber(10),
+    height: responsiveNumber(75),
+    zIndex: 1000,
+    backgroundColor: "#3a3c50",
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    borderRadius: 15,
+    display: "flex",
+    flexDirection: "row",
   },
   scroll: {
     position: "relative",

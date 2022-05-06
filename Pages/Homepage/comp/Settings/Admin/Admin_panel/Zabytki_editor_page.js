@@ -45,6 +45,7 @@ const Osoby_editor_page = (props) => {
 
   const getOsoby = (a) => {
     let test = zabytki.filter((e) => `${e.nazwa}` != a);
+    if (props.route.params[2]) test = zabytki;
     test.unshift({
       nazwa: nazwa,
       mopis: mopis,

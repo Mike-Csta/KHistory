@@ -103,18 +103,22 @@ const Osoby_editor_page = (props) => {
   // console.log(osoba[0].obraz);
   const getOsoby = (a) => {
     let test = osoby.filter((e) => `${e.imie} ${e.nazwisko}` != a);
-    test.unshift({
-      imie: imie,
-      mopis: mopis,
-      nazwisko: nazwisko,
-      obraz: obraz,
-      opis: opis,
-    });
+    if (props.route.params[2]) test = osoby;
+    opis == "" || mopis == ""
+      ? ""
+      : test.unshift({
+          imie: imie,
+          mopis: mopis,
+          nazwisko: nazwisko,
+          obraz: obraz,
+          opis: opis,
+        });
     return test;
   };
 
   const getCytaty = (a) => {
     let test = cytaty.filter((e) => `${e.opis}` != a);
+    if (props.route.params[2]) test = cytaty;
     test.unshift({
       nazwisko: imie + " " + nazwisko,
       opis: Math.random() + Math.random() * Math.random() + Math.random() / 100,

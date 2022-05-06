@@ -21,6 +21,12 @@ import notepad from "../../../../../../src/notepad.png";
 import trash from "../../../../../../src/trash.png";
 
 const Cytat_Editor = (props) => {
+  let [ready, setReady] = useState(false);
+  let [dCytaty, setDCytaty] = useState({
+    nazwisko: "",
+    opis: "",
+    cytat: "",
+  });
   let [cytaty, setCytaty] = useState([
     {
       nazwisko: "wczytywanie2",
@@ -36,6 +42,7 @@ const Cytat_Editor = (props) => {
     let json = await request.json();
     setCytaty(json.osoby);
     console.log(json.osoby);
+    setReady(true);
     console.log(props.route.params[0]);
   };
 
@@ -108,6 +115,16 @@ const Cytat_Editor = (props) => {
           </View>
           //   </TouchableWithoutFeedback>
         ))}
+        <TouchableOpacity
+          style={style.button2}
+          onPress={() =>
+            props.navigation.push("Cytaty_editor_page", [dCytaty, cytaty, true])
+          }
+        >
+          <Text style={{ fontSize: responsiveNumber(20), color: "#aab" }}>
+            DODAJ CYTAT
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -127,6 +144,21 @@ const style = StyleSheet.create({
 
     backgroundColor: "#242730",
     // bottom: getStatusBarHeight(),
+  },
+  button2: {
+    marginTop: responsiveNumber(7.5),
+    marginBottom: responsiveNumber(7.5),
+    marginRight: responsiveNumber(10),
+    marginLeft: responsiveNumber(10),
+    height: responsiveNumber(75),
+    zIndex: 1000,
+    backgroundColor: "#3a3c50",
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    borderRadius: 15,
+    display: "flex",
+    flexDirection: "row",
   },
   scroll: {
     position: "relative",
