@@ -21,7 +21,7 @@ const App_Welcome = (props) => {
 
   const JsonDostep = async () => {
     let request = await fetch("http://khistory.pl/dostep.json", {
-      cashe: "no-store",
+      cache: "no-store",
     });
     let json = await request.json();
     // setLock(json.dostep.lock);
@@ -54,7 +54,7 @@ const App_Welcome = (props) => {
 
   const Json = async () => {
     let request = await fetch("http://khistory.pl/login.json", {
-      cashe: "no-store",
+      cache: "no-store",
     });
     let json = await request.json();
     setData([json.login.login, json.login.haslo]);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -8,28 +8,28 @@ import {
   Dimensions,
   PixelRatio,
   Animated,
-} from 'react-native'
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
-import AppLoading from 'expo-app-loading'
+} from "react-native";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import AppLoading from "expo-app-loading";
 // import { WeatherApi } from './api'
-import wykres from '../../../../src/Path3_3.png'
-import poziomo2 from '../../../../src/poziomo2GRAY.png'
-import O2 from '../../../../src/O2.png'
+import wykres from "../../../../src/Path3_3.png";
+import poziomo2 from "../../../../src/poziomo2GRAY.png";
+import O2 from "../../../../src/O2.png";
 import {
   responsiveNumber,
   responsiveLetterSpacing,
-} from 'react-native-responsive-number'
+} from "react-native-responsive-number";
 
-import { BlurView } from 'expo-blur'
+import { BlurView } from "expo-blur";
 
-import burzaZDeszczem from '../../../../src/icons/0.png'
-import burza from '../../../../src/icons/1.png'
-import deszcz from '../../../../src/icons/2.png'
-import snieg from '../../../../src/icons/3.png'
-import mgla from '../../../../src/icons/4.png'
-import slonecznie from '../../../../src/icons/5.png'
-import pochmurno from '../../../../src/icons/6.png'
-import error from '../../../../src/icons/404.png'
+import burzaZDeszczem from "../../../../src/icons/0.png";
+import burza from "../../../../src/icons/1.png";
+import deszcz from "../../../../src/icons/2.png";
+import snieg from "../../../../src/icons/3.png";
+import mgla from "../../../../src/icons/4.png";
+import slonecznie from "../../../../src/icons/5.png";
+import pochmurno from "../../../../src/icons/6.png";
+import error from "../../../../src/icons/404.png";
 
 const Weather = (props) => {
   //Burza z deszczem = 0, Burza = 1, Deszcz = 2, Śnieg = 3, Mgła = 4, Słonecznie = 5, Pochmurno = 6, ERROR = 404
@@ -41,12 +41,12 @@ const Weather = (props) => {
       case 1282:
         //burza z deszczem
         return {
-          Status: props.Lang ? 'Burza z Deszczem' : 'Гроза з дощем',
+          Status: props.Lang ? "Burza z Deszczem" : "Гроза з дощем",
           Ikona: burzaZDeszczem,
-        }
+        };
       case 1087:
         //burza
-        return { Status: props.Lang ? 'Burza' : 'Буря', Ikona: burza }
+        return { Status: props.Lang ? "Burza" : "Буря", Ikona: burza };
       case 1063:
       case 1150:
       case 1153:
@@ -64,7 +64,7 @@ const Weather = (props) => {
       case 1243:
       case 1246:
         //deszcz
-        return { Status: props.Lang ? 'Deszcz' : 'Дощ', Ikona: deszcz }
+        return { Status: props.Lang ? "Deszcz" : "Дощ", Ikona: deszcz };
       case 1066:
       case 1069:
       case 1072:
@@ -86,29 +86,29 @@ const Weather = (props) => {
       case 1261:
       case 1264:
         //śnieg
-        return { Status: props.Lang ? 'Śnieg' : 'Сніг', Ikona: snieg }
+        return { Status: props.Lang ? "Śnieg" : "Сніг", Ikona: snieg };
       case 1030:
       case 1147:
       case 1135:
         //mgła
-        return { Status: props.Lang ? 'Mgła' : 'Туман', Ikona: mgla }
+        return { Status: props.Lang ? "Mgła" : "Туман", Ikona: mgla };
       case 1000:
         //słonecznie
         return {
-          Status: props.Lang ? 'Słonecznie' : 'Сонячно',
+          Status: props.Lang ? "Słonecznie" : "Сонячно",
           Ikona: slonecznie,
-        }
+        };
       case 1003:
       case 1006:
       case 1009:
         //pochmurno
         return {
-          Status: props.Lang ? 'Pochmurno' : 'Хмарно',
+          Status: props.Lang ? "Pochmurno" : "Хмарно",
           Ikona: pochmurno,
-        }
+        };
       default:
         //nieznany lub błąd
-        return { Status: 'ERROR', Ikona: error }
+        return { Status: "ERROR", Ikona: error };
     }
   }
 
@@ -119,229 +119,225 @@ const Weather = (props) => {
     { so2: 0 },
     { pm2_5: 0 },
     { pm10: 0 },
-  ])
-  let [temp, setTemp] = useState(['0.0', '0,0', '0,0'])
-  let [weatherState, setWeatherState] = useState(['', '', ''])
+  ]);
+  let [temp, setTemp] = useState(["0.0", "0,0", "0,0"]);
+  let [weatherState, setWeatherState] = useState(["", "", ""]);
   let [weatherStateICO, setWeatherStateICO] = useState([
-    '../../../../src/icons/0.png',
-    '../../../../src/icons/0.png',
-    '../../../../src/icons/0.png',
-  ])
-  let [airCond, setAirCond] = useState('1')
-  let [airColor, setAirColor] = useState('green')
-  let [airLevel, setAirLevel] = useState(10)
-  let [ready, setReady] = useState(false)
+    "../../../../src/icons/0.png",
+    "../../../../src/icons/0.png",
+    "../../../../src/icons/0.png",
+  ]);
+  let [airCond, setAirCond] = useState("1");
+  let [airColor, setAirColor] = useState("green");
+  let [airLevel, setAirLevel] = useState(10);
+  let [ready, setReady] = useState(false);
 
   //Burza z deszczem = 0, Burza = 1, Deszcz = 2, Śnieg = 3, Mgła = 4, Słonecznie = 5, Pochmurno = 6, ERROR = 404
   const CallApi = async () => {
-    setReady(false)
+    setReady(false);
     let request = await fetch(
       // 'https://api.openweathermap.org/data/2.5/weather?q=Kalisz&units=metric&appid=851a0d240becabfe5a8e6d2b6a24c324',
       // 'http://khistory.pl/forecast.json',
       // "http://api.weatherapi.com/v1/current.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&aqi=yes"
-      'http://api.weatherapi.com/v1/forecast.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&days=3&aqi=yes&alerts=no',
-      { cashe: 'no-store' },
-    )
-    let json = await request.json()
+      "http://api.weatherapi.com/v1/forecast.json?key=79b92f73f3f64256af9221026220302&q=Kalisz&days=3&aqi=yes&alerts=no",
+      { cache: "no-store" }
+    );
+    let json = await request.json();
     setTemp([
       Math.round(json.current.temp_c),
       Math.round(json.forecast.forecastday[1].day.maxtemp_c),
       Math.round(json.forecast.forecastday[2].day.maxtemp_c),
-    ])
+    ]);
     setWeatherState([
       getStatus(json.current.condition.code).Status,
       getStatus(json.forecast.forecastday[1].day.condition.code).Status,
       getStatus(json.forecast.forecastday[2].day.condition.code).Status,
-    ])
+    ]);
 
     setWeatherStateICO([
       getStatus(json.current.condition.code).Ikona,
       getStatus(json.forecast.forecastday[1].day.condition.code).Ikona,
       getStatus(json.forecast.forecastday[2].day.condition.code).Ikona,
-    ])
+    ]);
 
     setO2detail([
-      { value: Math.round(json.current.air_quality.co), name: 'CO' },
-      { value: Math.round(json.current.air_quality.no2), name: 'NO2' },
-      { value: Math.round(json.current.air_quality.o3), name: 'O3' },
-      { value: Math.round(json.current.air_quality.so2), name: 'SO2' },
-      { value: Math.round(json.current.air_quality.pm2_5), name: 'PM2_5' },
-      { value: Math.round(json.current.air_quality.pm10), name: 'PM10' },
-    ])
+      { value: Math.round(json.current.air_quality.co), name: "CO" },
+      { value: Math.round(json.current.air_quality.no2), name: "NO2" },
+      { value: Math.round(json.current.air_quality.o3), name: "O3" },
+      { value: Math.round(json.current.air_quality.so2), name: "SO2" },
+      { value: Math.round(json.current.air_quality.pm2_5), name: "PM2_5" },
+      { value: Math.round(json.current.air_quality.pm10), name: "PM10" },
+    ]);
 
-    switch (json.current.air_quality['us-epa-index']) {
+    switch (json.current.air_quality["us-epa-index"]) {
       // switch (1) {
       case 1:
-        setAirCond('Dobry')
-        setAirLevel(75)
-        setAirColor('green')
+        setAirCond("Dobry");
+        setAirLevel(75);
+        setAirColor("green");
 
-        break
+        break;
       case 2:
-        setAirCond('Średni')
-        setAirLevel(90)
-        setAirColor('green')
+        setAirCond("Średni");
+        setAirLevel(90);
+        setAirColor("green");
 
-        break
+        break;
       case 3:
-        setAirCond('Zły')
-        setAirLevel(100)
-        setAirColor('yellow')
+        setAirCond("Zły");
+        setAirLevel(100);
+        setAirColor("yellow");
 
-        break
+        break;
       case 4:
-        setAirCond('Zły')
-        setAirLevel(110)
-        setAirColor('orange')
+        setAirCond("Zły");
+        setAirLevel(110);
+        setAirColor("orange");
 
-        break
+        break;
       case 5:
-        setAirCond('Bardzo Zły')
-        setAirLevel(130)
-        setAirColor('red')
+        setAirCond("Bardzo Zły");
+        setAirLevel(130);
+        setAirColor("red");
 
-        break
+        break;
       case 6:
-        setAirCond('Ekstremalnie Zły')
-        setAirLevel(145)
-        setAirColor('red')
+        setAirCond("Ekstremalnie Zły");
+        setAirLevel(145);
+        setAirColor("red");
 
-        break
+        break;
       default:
-        setAirCond('***pobieranie***')
+        setAirCond("***pobieranie***");
         setTimeout(function () {
-          setAirCond('***ERROR***')
-        }, 2000)
-        break
+          setAirCond("***ERROR***");
+        }, 2000);
+        break;
     }
 
-    setReady(true)
+    setReady(true);
     // console.log(json.main.temp)
-  }
+  };
 
   useEffect(() => {
-    CallApi()
-  }, [props.Lang])
+    CallApi();
+  }, [props.Lang]);
   // setAirLevel(1 * 10 + 35)
 
-  let [daysState, setDaysState] = useState(true)
-  let [O2State, setO2State] = useState(true)
+  let [daysState, setDaysState] = useState(true);
+  let [O2State, setO2State] = useState(true);
 
-  const wysuwanie = useRef(new Animated.Value(-80)).current
-  const opacity = useRef(new Animated.Value(0)).current
-  const wysuwanieO2 = useRef(new Animated.Value(-80)).current
-  const opacityO2 = useRef(new Animated.Value(0)).current
-  const ziIndexO2 = useRef(new Animated.Value(-50)).current
+  const wysuwanie = useRef(new Animated.Value(-80)).current;
+  const opacity = useRef(new Animated.Value(0)).current;
+  const wysuwanieO2 = useRef(new Animated.Value(-80)).current;
+  const opacityO2 = useRef(new Animated.Value(0)).current;
+  const ziIndexO2 = useRef(new Animated.Value(-50)).current;
 
   const fadeZIndex = (value, duration, useref) => {
     Animated.timing(useref, {
       toValue: value,
       duration: duration,
       useNativeDriver: false,
-    }).start()
-  }
+    }).start();
+  };
 
   const fade = (value, duration, useref) => {
     Animated.timing(useref, {
       toValue: value,
       duration: duration,
       useNativeDriver: false,
-    }).start()
-  }
+    }).start();
+  };
 
   const fade1 = (value, duration, useref) => {
     Animated.timing(useref, {
       toValue: value,
       duration: duration,
       useNativeDriver: false,
-    }).start()
-  }
+    }).start();
+  };
 
   const days_weather = function () {
     return {
-      position: 'absolute',
-      display: 'flex',
-      flexDirection: 'row',
-      width: '100%',
-      height: '100%',
+      position: "absolute",
+      display: "flex",
+      flexDirection: "row",
+      width: "100%",
+      height: "100%",
       top: 0,
       opacity: opacity,
       marginTop: wysuwanie,
       borderRadius: responsiveNumber(10),
-      backgroundColor: '#434040',
-      overflow: 'hidden',
-      justifyContent: 'center',
-      textAlign: 'center',
-      alignItems: 'center',
-    }
-  }
+      backgroundColor: "#434040",
+      overflow: "hidden",
+      justifyContent: "center",
+      textAlign: "center",
+      alignItems: "center",
+    };
+  };
 
   const air = function () {
     return {
-      position: 'absolute',
-      display: 'flex',
-      flexDirection: 'row',
-      width: '100%',
-      height: '100%',
+      position: "absolute",
+      display: "flex",
+      flexDirection: "row",
+      width: "100%",
+      height: "100%",
       top: 0,
       opacity: opacityO2,
       marginLeft: wysuwanieO2,
       borderRadius: responsiveNumber(10),
-      backgroundColor: '#434040',
-      overflow: 'hidden',
-      justifyContent: 'center',
-      textAlign: 'center',
-      alignItems: 'center',
+      backgroundColor: "#434040",
+      overflow: "hidden",
+      justifyContent: "center",
+      textAlign: "center",
+      alignItems: "center",
       left: 0,
       zIndex: ziIndexO2,
-    }
-  }
+    };
+  };
 
   const wys = () => {
-    fade(0, 300, wysuwanie)
-    fade1(1, 200, opacity)
-    setDaysState(!daysState)
-  }
+    fade(0, 300, wysuwanie);
+    fade1(1, 200, opacity);
+    setDaysState(!daysState);
+  };
   const wys_b = () => {
-    fade(-80, 300, wysuwanie)
-    fade1(0, 200, opacity)
-    setDaysState(!daysState)
-  }
+    fade(-80, 300, wysuwanie);
+    fade1(0, 200, opacity);
+    setDaysState(!daysState);
+  };
 
   const wys_O2 = () => {
-    fade(0, 300, wysuwanieO2)
-    fade1(1, 200, opacityO2)
-    fadeZIndex(100, 100, ziIndexO2)
+    fade(0, 300, wysuwanieO2);
+    fade1(1, 200, opacityO2);
+    fadeZIndex(100, 100, ziIndexO2);
     if (!daysState) {
-      fade(-80, 300, wysuwanie)
-      fade1(0, 200, opacity)
-      setDaysState(!daysState)
+      fade(-80, 300, wysuwanie);
+      fade1(0, 200, opacity);
+      setDaysState(!daysState);
     }
 
-    setO2State(!O2State)
-  }
+    setO2State(!O2State);
+  };
   const wys_b_O2 = () => {
-    fade(-80, 300, wysuwanieO2)
-    fade1(0, 200, opacityO2)
-    fadeZIndex(-50, 100, ziIndexO2)
-    setO2State(!O2State)
-  }
+    fade(-80, 300, wysuwanieO2);
+    fade1(0, 200, opacityO2);
+    fadeZIndex(-50, 100, ziIndexO2);
+    setO2State(!O2State);
+  };
 
   if (ready == false) {
     return (
       <View style={style.main}>
         <View style={style.O2_container}>
-          <BlurView
-            intensity={30}
-            tint="default"
-            style={style.O2_Background}
-          >
+          <BlurView intensity={30} tint="default" style={style.O2_Background}>
             {/* <View style={style.O2_level}></View> */}
             <Image
               source={poziomo2}
               style={{
                 top: responsiveNumber(70),
-                tintColor: 'green',
+                tintColor: "green",
               }}
             />
             <Image source={O2} style={style.O2img} />
@@ -376,7 +372,7 @@ const Weather = (props) => {
           </BlurView>
         </View>
       </View>
-    )
+    );
   }
 
   return (
@@ -389,7 +385,7 @@ const Weather = (props) => {
           <View>
             <View style={style.O2_top}>
               <Text style={style.O2_top_text}>
-                {props.Lang ? 'STAN POWIETRZA' : 'КОНДИЦІОНЕР'}
+                {props.Lang ? "STAN POWIETRZA" : "КОНДИЦІОНЕР"}
               </Text>
             </View>
             <View style={style.O2_bottom}>
@@ -413,11 +409,7 @@ const Weather = (props) => {
         style={style.O2_container}
         onPress={O2State ? wys_O2 : wys_b_O2}
       >
-        <BlurView
-          intensity={30}
-          tint="default"
-          style={style.O2_Background}
-        >
+        <BlurView intensity={30} tint="default" style={style.O2_Background}>
           <Image
             source={poziomo2}
             style={{
@@ -434,44 +426,29 @@ const Weather = (props) => {
           style={style.weather_Background3}
           onPress={daysState ? wys : wys_b}
         >
-          <Animated.View
-            intensity={30}
-            tint="default"
-            style={days_weather()}
-          >
+          <Animated.View intensity={30} tint="default" style={days_weather()}>
             {/* dzien 1 */}
             <View style={days.left}>
               <Text style={days.dzien}>
-                {props.Lang ? 'DZISIAJ' : 'СЬОГОДНІ'}
+                {props.Lang ? "DZISIAJ" : "СЬОГОДНІ"}
               </Text>
-              <Image
-                source={weatherStateICO[0]}
-                style={style.weather_icon}
-              />
+              <Image source={weatherStateICO[0]} style={style.weather_icon} />
               <Text style={days.stan}>{weatherState[0]}</Text>
               <Text style={days.stopnie}>{temp[0]}°C</Text>
             </View>
             {/* dzien 2 */}
             <View style={days.center}>
-              <Text style={days.dzien}>
-                {props.Lang ? 'JUTRO' : '3ABTPA'}
-              </Text>
-              <Image
-                source={weatherStateICO[1]}
-                style={style.weather_icon}
-              />
+              <Text style={days.dzien}>{props.Lang ? "JUTRO" : "3ABTPA"}</Text>
+              <Image source={weatherStateICO[1]} style={style.weather_icon} />
               <Text style={days.stan}>{weatherState[1]}</Text>
               <Text style={days.stopnie}>{temp[1]}°C</Text>
             </View>
             {/* dzien 3 */}
             <View style={days.right}>
               <Text style={days.dzien}>
-                {props.Lang ? 'POJUTRZE' : 'ПІСЛЯЗАВТРА'}
+                {props.Lang ? "POJUTRZE" : "ПІСЛЯЗАВТРА"}
               </Text>
-              <Image
-                source={weatherStateICO[2]}
-                style={style.weather_icon}
-              />
+              <Image source={weatherStateICO[2]} style={style.weather_icon} />
               <Text style={days.stan}>{weatherState[2]}</Text>
               <Text style={days.stopnie}>{temp[2]}°C</Text>
             </View>
@@ -487,10 +464,7 @@ const Weather = (props) => {
         >
           <View style={style.weather_left}>
             <View style={style.weather_left_top}>
-              <Image
-                source={weatherStateICO[0]}
-                style={style.weather_icon}
-              />
+              <Image source={weatherStateICO[0]} style={style.weather_icon} />
             </View>
             <View style={style.weather_left_bottom}>
               <Text style={style.stopnie}>{temp[0]}°C</Text>
@@ -499,7 +473,7 @@ const Weather = (props) => {
           <View style={style.weather_right}>
             <View style={style.weather_right_top}>
               <Text style={style.kalisz}>
-                {props.Lang ? 'KALISZ' : 'Каліш'}
+                {props.Lang ? "KALISZ" : "Каліш"}
               </Text>
             </View>
             <View style={style.weather_right_center}>
@@ -508,206 +482,206 @@ const Weather = (props) => {
             <View style={style.weather_right_bottom}>
               <Image source={wykres} style={style.weather_wykres} />
               <Text style={style.powietrze}>
-                {props.Lang ? 'Stan Powietrza' : 'Кондиціонер '}
-                {props.Lang ? airCond : 'добре'}
+                {props.Lang ? "Stan Powietrza " : "Кондиціонер "}
+                {props.Lang ? airCond : "добре"}
               </Text>
             </View>
           </View>
         </BlurView>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const style = StyleSheet.create({
   main: {
-    width: '100%',
+    width: "100%",
 
     height: responsiveNumber(115),
     // backgroundColor: "gray",
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   O2_container: {
     flex: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
   O2_TouchableOpacity: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   O2_Background: {
     flex: 0.8,
-    width: '95%',
-    height: '100%',
+    width: "95%",
+    height: "100%",
     borderRadius: responsiveNumber(17),
-    overflow: 'hidden',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    overflow: "hidden",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
   O2_level: {
-    backgroundColor: 'green',
-    width: '100%',
-    height: '20%',
+    backgroundColor: "green",
+    width: "100%",
+    height: "20%",
     borderRadius: responsiveNumber(17),
-    bottom: '0%',
+    bottom: "0%",
   },
   // od 45 do 145
   poziomo2: { opacity: 0.8 },
 
   O2img: {
-    height: '19%',
+    height: "19%",
     aspectRatio: 1,
     marginBottom: responsiveNumber(10),
   },
   O2_top: {
     marginTop: responsiveNumber(9),
     marginBottom: responsiveNumber(5),
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
   },
   O2_top_text: {
-    color: 'white',
+    color: "white",
     fontSize: responsiveNumber(10),
   },
   O2_bottom: {
-    display: 'flex',
-    flexDirection: 'row',
-    height: '100%',
+    display: "flex",
+    flexDirection: "row",
+    height: "100%",
 
     marginLeft: responsiveNumber(1),
     marginRight: responsiveNumber(1),
   },
   O2_bottom_elem: {
-    display: 'flex',
+    display: "flex",
     margin: responsiveNumber(3),
     borderRadius: responsiveNumber(8),
     flex: 1,
-    backgroundColor: '#313131',
+    backgroundColor: "#313131",
     // borderColor: "#777",
     borderWidth: responsiveNumber(0),
-    borderTopColor: '#494',
+    borderTopColor: "#494",
     borderTopWidth: responsiveNumber(4),
-    borderRightColor: '#494',
-    borderRightWidth: responsiveNumber(1),
+    borderRightColor: "#494",
+    borderRightWidth: responsiveNumber(0),
   },
   O2_wartosc: {
     flex: 0.32,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
   },
 
   O2_poziom: {
     // flex: 0.35,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
 
     marginTop: responsiveNumber(-5),
     // backgroundColor: "#125",
   },
   // O2_poziom_text: { color: "#ccc", fontWeight: "bold" },
   O2_wartosc_text: {
-    color: 'white',
+    color: "white",
     fontSize: PixelRatio.getPixelSizeForLayoutSize(5.3),
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   O2_poziom_text1: {
-    color: '#ccc',
+    color: "#ccc",
     fontSize: PixelRatio.getPixelSizeForLayoutSize(8),
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   O2_poziom_text2: {
-    color: '#aaa',
+    color: "#aaa",
     // backgroundColor: "red",
     marginTop: responsiveNumber(5),
     fontSize: PixelRatio.getPixelSizeForLayoutSize(4),
   },
   weather_container: {
-    display: 'flex',
+    display: "flex",
     flex: 4,
-    position: 'relative',
+    position: "relative",
     // backgroundColor: "yellow",
-    flexDirection: 'row',
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
   },
   weather_Background: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '95%',
-    height: '100%',
+    display: "flex",
+    flexDirection: "row",
+    width: "95%",
+    height: "100%",
     borderRadius: responsiveNumber(10),
 
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    alignItems: "center",
   },
   weather_Background2: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '95%',
-    height: '100%',
+    display: "flex",
+    flexDirection: "row",
+    width: "95%",
+    height: "100%",
     borderRadius: responsiveNumber(10),
 
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
 
-    alignItems: 'center',
+    alignItems: "center",
   },
   weather_Background3: {
-    position: 'absolute',
-    display: 'flex',
-    flexDirection: 'row',
+    position: "absolute",
+    display: "flex",
+    flexDirection: "row",
     top: 0,
-    width: '95%',
-    height: '120%',
+    width: "95%",
+    height: "120%",
     borderRadius: responsiveNumber(10),
 
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
 
-    alignItems: 'center',
+    alignItems: "center",
   },
   weather_Background2: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '95%',
-    height: '100%',
+    display: "flex",
+    flexDirection: "row",
+    width: "95%",
+    height: "100%",
     borderRadius: responsiveNumber(10),
 
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
 
-    alignItems: 'center',
+    alignItems: "center",
   },
   weather_Background3: {
-    position: 'absolute',
-    display: 'flex',
-    flexDirection: 'row',
+    position: "absolute",
+    display: "flex",
+    flexDirection: "row",
     top: 0,
-    width: '95%',
-    height: '120%',
+    width: "95%",
+    height: "120%",
     borderRadius: responsiveNumber(10),
-    overflow: 'hidden',
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
+    overflow: "hidden",
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
     zIndex: 2,
-    alignItems: 'center',
+    alignItems: "center",
   },
   weather_left: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
 
     flex: 1,
     marginTop: responsiveNumber(10),
@@ -716,52 +690,52 @@ const style = StyleSheet.create({
   weather_left_top: { flex: 1 },
   weather_left_bottom: {
     flex: 0.5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: responsiveNumber(6),
   },
   weather_right: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
 
     flex: 3.3,
   },
   weather_right_top: {
     flex: 0.05,
     marginTop: responsiveNumber(10),
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   weather_right_center: {
     flex: 1,
     marginBottom: responsiveNumber(22),
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   weather_right_bottom: {
-    position: 'relative',
+    position: "relative",
     flex: 0.5,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   kalisz: {
-    color: 'white',
+    color: "white",
     fontSize: responsiveNumber(10),
     letterSpacing: responsiveLetterSpacing(50, 27),
     marginTop: responsiveNumber(12),
   },
   slonecznie: {
-    color: 'white',
+    color: "white",
     fontSize: RFValue(28),
     letterSpacing: responsiveLetterSpacing(53, 27),
   },
   stopnie: {
-    color: 'white',
+    color: "white",
     fontSize: RFValue(20),
     letterSpacing: responsiveLetterSpacing(0, 20),
   },
   powietrze: {
-    color: 'white',
+    color: "white",
     fontSize: RFValue(10),
     letterSpacing: responsiveLetterSpacing(53, 12),
     marginBottom: responsiveNumber(37),
@@ -771,50 +745,52 @@ const style = StyleSheet.create({
     height: responsiveNumber(65),
   },
   weather_wykres: {
-    position: 'absolute',
+    position: "absolute",
     bottom: responsiveNumber(-6),
     opacity: 0.4,
   },
-})
+});
 
 const days = StyleSheet.create({
   left: {
     flex: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
-    display: 'flex',
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    display: "flex",
   },
   center: {
     flex: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
-    display: 'flex',
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    display: "flex",
   },
   right: {
     flex: 1,
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
-    display: 'flex',
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
+    display: "flex",
   },
   dzien: {
-    color: 'white',
+    color: "white",
     fontSize: RFValue(9),
     letterSpacing: responsiveLetterSpacing(0, 9),
     opacity: 0.8,
   },
   stan: {
-    color: 'white',
-    fontSize: RFValue(15),
+    color: "#ccc",
+    fontWeight: "bold",
+    fontSize: RFValue(13),
     letterSpacing: responsiveLetterSpacing(0, 15),
   },
   stopnie: {
-    color: 'white',
-    fontSize: RFValue(15),
+    color: "white",
+    marginTop: responsiveNumber(6),
+    fontSize: RFValue(20),
     letterSpacing: responsiveLetterSpacing(0, 15),
   },
-})
+});
 
-export default Weather
+export default Weather;

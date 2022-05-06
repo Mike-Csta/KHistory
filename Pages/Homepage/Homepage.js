@@ -25,7 +25,7 @@ import {
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
 
-let cytatNr = Math.floor(Math.random() * 5);
+let cytatNr = Math.floor(Math.random() * 15);
 
 const Homepage = (props) => {
   const [lang, setLang] = useState(true);
@@ -40,7 +40,7 @@ const Homepage = (props) => {
   const [forceLock, setForceLock] = useState("false");
   const getJson = async () => {
     let response = await fetch("http://khistory.pl/miketest.json", {
-      cashe: "no-store",
+      cache: "no-store",
     });
     let json = await response.json();
     setForceLock(json.dostep.lock);
