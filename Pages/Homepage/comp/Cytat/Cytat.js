@@ -7,7 +7,7 @@ import {
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
 const Cytat = (props) => {
-  let cytatNr = Math.floor(Math.random() * 5 + 1);
+  console.log(props);
   // console.log(props.lang);
   return (
     <View style={style.main}>

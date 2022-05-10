@@ -56,6 +56,12 @@ const Admin_panel = (props) => {
       >
         <Text style={style.text}>Cytaty</Text>
       </TouchableOpacity>
+      {/* <TouchableOpacity
+        style={style.button}
+        onPress={() => props.navigation.push("Kody_editor", [Math.random()])}
+      >
+        <Text style={style.text}>Kody</Text>
+      </TouchableOpacity> */}
     </View>
   );
 };

@@ -15,10 +15,12 @@ import Admin_login from "./Pages/Homepage/comp/Settings/Admin/Admin_login";
 import Admin_panel from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Admin_panel";
 import Cytat_editor from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Cytat_editor";
 import Osoby_editor from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Osoby_editor";
+import Kody_editor from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Kody_editor";
 import Zabytki_editor from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Zabytki_editor";
 import Osoby_editor_page from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Osoby_editor_page";
 import Zabytki_editor_page from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Zabytki_editor_page";
 import Cytaty_editor_page from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Cytaty_editor_page";
+import Kody_editor_page from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Kody_editor_page";
 import ScrollZabytki_Page from "./Pages/PeopleAndHis/ScrollZabytki_Page";
 import Link_edit from "./Pages/Homepage/comp/Settings/Admin/Admin_panel/Link_edit";
 import Osoby_Page from "./Pages/PeopleAndHis/Osoby_Page";
@@ -95,6 +97,8 @@ export default function App() {
           <Stack.Screen name="Cytat_editor" component={Cytat_editor} />
           <Stack.Screen name="Osoby_editor" component={Osoby_editor} />
           <Stack.Screen name="Zabytki_editor" component={Zabytki_editor} />
+          <Stack.Screen name="Kody_editor" component={Kody_editor} />
+          <Stack.Screen name="Kody_editor_page" component={Kody_editor_page} />
           <Stack.Screen
             name="Osoby_editor_page"
             component={Osoby_editor_page}

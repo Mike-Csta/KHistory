@@ -25,7 +25,7 @@ const CytatHis = (props) => {
     );
     if (undefined != test[0]) setDane(test[0]);
   });
-  console.log(props.data);
+  console.log(props.numer);
   return (
     <TouchableOpacity
       style={style.container}

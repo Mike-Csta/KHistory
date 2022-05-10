@@ -42,7 +42,7 @@ const PeopleAndHis = (props) => {
           cache: "no-store",
         });
     let json = await request.json();
-    setAutor(json.osoby[1].nazwisko);
+    setAutor(json.osoby[props.route.params[0]].nazwisko);
   };
 
   const [osoby, setOsoby] = useState([
