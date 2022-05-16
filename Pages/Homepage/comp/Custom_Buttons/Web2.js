@@ -6,11 +6,13 @@ import tlobus from "../../../../src/tlowiadom.png";
 import search from "../../../../src/search.png";
 import leftArrow from "../../../../src/left-arrow.png";
 import rightArrow from "../../../../src/right-arrow.png";
+import LinkPreview from "react-native-link-preview";
 import { WebView } from "react-native-webview";
 import {
   responsiveNumber,
   responsiveLetterSpacing,
 } from "react-native-responsive-number";
+
 import {
   View,
   Text,
@@ -21,8 +23,10 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+// import { ScrollView } from "react-native-gesture-handler";
 const Web = () => {
   const jsCode = ``;
 
@@ -57,7 +61,7 @@ const Web = () => {
     return {
       marginTop: getStatusBarHeight(),
       width: "100%",
-      height: Dimensions.get("window").height - responsiveNumber(55),
+      height: Dimensions.get("window").height - responsiveNumber(70),
       backgroundColor: "black",
       display: "flex",
       justifyContent: "space-between",
@@ -72,7 +76,7 @@ const Web = () => {
     return {
       position: "absolute",
       width: "100%",
-      height: responsiveNumber(55),
+      height: responsiveNumber(70),
 
       bottom: 0,
       zIndex: 1001,
@@ -241,7 +245,11 @@ const Web = () => {
               "https://calisia.pl/",
             ]
       );
-      setLink(linki[0]);
+      setLink(
+        jsonValue != null
+          ? JSON.parse(jsonValue)[0]
+          : "https://kalisz.naszemiasto.pl/"
+      );
     } catch (e) {
       // error reading value
     }
@@ -271,67 +279,97 @@ const Web = () => {
           userAgent="Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3714.0 Mobile Safari/537.36"
         />
       </Animated.View>
+      <TouchableOpacity style={styles.bar_back} onPress={goback}>
+        <View style={styles.bar_back2}>
+          <Image
+            source={leftArrow}
+            style={{
+              height: responsiveNumber(25),
+              aspectRatio: 1,
+              opacity: 0.4,
+            }}
+          />
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.bar_forwards} onPress={goforward}>
+        <View style={styles.bar_forwards2}>
+          <Image
+            source={rightArrow}
+            style={{
+              height: responsiveNumber(25),
+              aspectRatio: 1,
+              opacity: 0.4,
+            }}
+          />
+        </View>
+      </TouchableOpacity>
       <Animated.View style={bar_container()}>
-        <View style={styles.bar_top}>
+        <View style={styles.bar_top2}>
           <Text style={{ color: "#888" }}>{link}</Text>
         </View>
         <View style={styles.bar_top}>
-          <TouchableOpacity style={styles.bar_back} onPress={goback}>
-            <View style={styles.bar_back}>
-              <Image
-                source={leftArrow}
-                style={{
-                  height: responsiveNumber(25),
-                  aspectRatio: 1,
-                  opacity: 0.4,
+          <View
+            style={styles.ScrollView}
+            // horizontal={true}
+            // // pagingEnabled={true}
+            // showsHorizontalScrollIndicator={false}
+            // decelerationRate="fast"
+          >
+            {linki.map((e, index) => (
+              <TouchableOpacity
+                style={styles.bar_search}
+                onPress={() => {
+                  setLink(e);
                 }}
-              />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.bar_search}
-            onPress={() => setLink(linki[0])}
-          >
-            <View style={styles.bar_Icon}>
-              <Text style={{ color: "white" }}>1</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.bar_search}
-            onPress={() => setLink(linki[1])}
-          >
-            <View style={styles.bar_Icon}>
-              <Text style={{ color: "white" }}>2</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.bar_search}
-            onPress={() => setLink(linki[2])}
-          >
-            <View style={styles.bar_Icon}>
-              <Text style={{ color: "white" }}>3</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.bar_search}
-            onPress={() => setLink(linki[3])}
-          >
-            <View style={styles.bar_Icon}>
-              <Text style={{ color: "white" }}>4</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.bar_forwards} onPress={goforward}>
-            <View style={styles.bar_forwards}>
-              <Image
-                source={rightArrow}
-                style={{
-                  height: responsiveNumber(25),
-                  aspectRatio: 1,
-                  opacity: 0.4,
-                }}
-              />
-            </View>
-          </TouchableOpacity>
+              >
+                <View style={styles.bar_Icon}>
+                  <View
+                    style={{
+                      position: "absolute",
+                      overflow: "hidden",
+                      height: responsiveNumber(7),
+                      width: "100%",
+                      bottom: 0,
+                    }}
+                  >
+                    <Image
+                      style={{
+                        // position: "absolute",
+                        zIndex: -300,
+                        height: 5000,
+                        aspectRatio: 1,
+                        right: 3000,
+                        top: -2000,
+                        opacity: 0.5,
+                      }}
+                      source={{
+                        uri:
+                          "https://s2.googleusercontent.com/s2/favicons?domain_url=" +
+                          e,
+                      }}
+                    />
+                  </View>
+
+                  <Text
+                    style={{
+                      color: "#bbb",
+                      zIndex: 1000,
+                      fontSize: responsiveNumber(20),
+                      position: "absolute",
+
+                      marginLeft: responsiveNumber(20),
+                      marginRight: responsiveNumber(20),
+                      justifyContent: "center",
+                      textAlign: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {index + 1}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
       </Animated.View>
     </View>
@@ -340,15 +378,31 @@ const Web = () => {
 
 const styles = StyleSheet.create({
   bar_back: {
-    backgroundColor: "#151515",
-    flex: 1,
+    backgroundColor: "#15151590",
+    // flex: 0.15,
+    borderRadius: responsiveNumber(10),
+    height: responsiveNumber(40),
+    aspectRatio: 1,
+    left: responsiveNumber(4),
+    bottom: responsiveNumber(73),
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    position: "absolute",
+    zIndex: 200,
   },
   bar: {
     backgroundColor: "#151515",
     flex: 5,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  bar_top2: {
+    backgroundColor: "#151515",
+    flex: 0.4,
+    flexDirection: "row",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -377,16 +431,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   bar_forwards: {
-    backgroundColor: "#151515",
-    flex: 1,
+    backgroundColor: "#15151590",
+    // flex: 0.15,
+    borderRadius: responsiveNumber(10),
+    height: responsiveNumber(40),
+    aspectRatio: 1,
+    right: responsiveNumber(4),
+    bottom: responsiveNumber(73),
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    position: "absolute",
+    zIndex: 200,
   },
   loading_icon: {
     height: responsiveNumber(150),
     aspectRatio: 1,
     marginTop: 0,
+  },
+  ScrollView: {
+    flex: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    flexDirection: "row",
   },
   loading_tlo_container: {
     position: "absolute",
@@ -410,15 +478,18 @@ const styles = StyleSheet.create({
     // aspectRatio: 1,
   },
   bar_Icon: {
+    position: "relative",
     backgroundColor: "#242424",
-
-    borderRadius: responsiveNumber(10),
+    overflow: "hidden",
+    borderRadius: responsiveNumber(6),
     aspectRatio: 2,
     height: "90%",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
     marginBottom: responsiveNumber(5),
+    marginLeft: responsiveNumber(1.2),
+    marginRight: responsiveNumber(1.2),
   },
 });
 

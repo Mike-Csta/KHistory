@@ -52,7 +52,7 @@ const style = StyleSheet.create({
   },
   logo: {
     height: RFValue(65, 1000),
-    aspectRatio: 1,
+    aspectRatio: 0.675,
     opacity: 0.6,
 
     // backgroundColor: "#040",

@@ -13,7 +13,7 @@ import { responsiveNumber } from "react-native-responsive-number";
 import { responsiveLetterSpacing } from "react-native-responsive-number";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Link_edit = () => {
+const Link_edit = (props) => {
   const [lang, setLang] = useState(true);
   const getLang = async () => {
     try {
@@ -83,7 +83,10 @@ const Link_edit = () => {
       <Text style={{ marginTop: responsiveNumber(30) }}>
         <TouchableOpacity
           style={style.button}
-          onPress={() => storeData("linki", [link0, link1, link2, link3])}
+          onPress={() => {
+            storeData("linki", [link0, link1, link2, link3]);
+            props.navigation.navigate("Setting_page");
+          }}
         >
           <Text style={style.text}>{lang ? "Zapisz" : "Зберегти"}</Text>
         </TouchableOpacity>
@@ -91,14 +94,15 @@ const Link_edit = () => {
       <Text style={{ marginTop: responsiveNumber(30) }}>
         <TouchableOpacity
           style={style.button}
-          onPress={() =>
+          onPress={() => {
             storeData("linki", [
               "https://kalisz.naszemiasto.pl/",
               "https://www.faktykaliskie.info/",
               "https://zyciekalisza.pl/wiadomosci",
               "https://calisia.pl/",
-            ])
-          }
+            ]);
+            props.navigation.navigate("Setting_page");
+          }}
         >
           <Text style={style.text}>{lang ? "Resetuj" : "Скинути"}</Text>
         </TouchableOpacity>

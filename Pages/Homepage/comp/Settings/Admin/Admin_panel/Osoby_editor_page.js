@@ -56,7 +56,7 @@ const Osoby_editor_page = (props) => {
       obraz: obraz,
       opis: opis,
     });
-    setOsoby(test);
+    setOsoby(test);``
     return test;
   };
   const getJson = () => {};
