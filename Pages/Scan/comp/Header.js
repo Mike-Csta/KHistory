@@ -81,8 +81,9 @@ const styles = StyleSheet.create({
   },
 
   image4: {
-    aspectRatio: 1,
+    aspectRatio: 0.675,
     flex: 0.65,
+    opacity: 0.8,
   },
 });
 
