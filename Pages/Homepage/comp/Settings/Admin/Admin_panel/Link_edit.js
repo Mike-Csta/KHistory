@@ -8,6 +8,7 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { responsiveNumber } from "react-native-responsive-number";
 import { responsiveLetterSpacing } from "react-native-responsive-number";
@@ -27,19 +28,18 @@ const Link_edit = (props) => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("linki");
-      setLink0(jsonValue != null ? JSON.parse(jsonValue)[0] : "");
-      setLink1(jsonValue != null ? JSON.parse(jsonValue)[1] : "");
-      setLink2(jsonValue != null ? JSON.parse(jsonValue)[2] : "");
-      setLink3(jsonValue != null ? JSON.parse(jsonValue)[3] : "");
+      setLink(jsonValue != null ? JSON.parse(jsonValue) : []);
     } catch (e) {
       // error reading value
     }
   };
 
-  const [link0, setLink0] = useState("");
-  const [link1, setLink1] = useState("");
-  const [link2, setLink2] = useState("");
-  const [link3, setLink3] = useState("");
+  const [link, setLink] = useState([
+    "https://www.kalisz.pl/",
+    "https://www.google.pl/",
+    "https://www.google.pl/",
+    "https://www.google.pl/",
+  ]);
 
   useEffect(() => {
     getLang();
@@ -54,59 +54,74 @@ const Link_edit = (props) => {
       // saving error
     }
   };
+
+  const update = (text, index) => {
+    setLink((state) => {
+      const newObject = [...state];
+      newObject[`${index}`] = text;
+      return newObject;
+    });
+  };
+
   return (
     <SafeAreaView style={style.main}>
-      <Text style={style.textInput2}>{lang ? "Zakładka 1" : "Вкладка 1"}</Text>
-      <TextInput
-        style={style.textInput}
-        value={link0}
-        editable={false}
-      ></TextInput>
-      <Text style={style.textInput2}>{lang ? "Zakładka 2" : "Вкладка 2"}</Text>
-      <TextInput
-        style={style.textInput}
-        value={link1}
-        onChangeText={(text) => setLink1(text)}
-      ></TextInput>
-      <Text style={style.textInput2}>{lang ? "Zakładka 3" : "Вкладка 3"}</Text>
-      <TextInput
-        style={style.textInput}
-        value={link2}
-        onChangeText={(text) => setLink2(text)}
-      ></TextInput>
-      <Text style={style.textInput2}>{lang ? "Zakładka 4" : "Вкладка 4"}</Text>
-      <TextInput
-        style={style.textInput}
-        value={link3}
-        onChangeText={(text) => setLink3(text)}
-      ></TextInput>
-      <Text style={{ marginTop: responsiveNumber(30) }}>
-        <TouchableOpacity
-          style={style.button}
-          onPress={() => {
-            storeData("linki", [link0, link1, link2, link3]);
-            props.navigation.navigate("Setting_page");
-          }}
-        >
-          <Text style={style.text}>{lang ? "Zapisz" : "Зберегти"}</Text>
-        </TouchableOpacity>
-      </Text>
-      <Text style={{ marginTop: responsiveNumber(30) }}>
-        <TouchableOpacity
-          style={style.button}
-          onPress={() => {
-            storeData("linki", [
-              "https://www.kalisz.pl/",
-              "https://www.google.pl/",
-              "https://www.google.pl/",
-              "https://www.google.pl/",
-            ]);
-            props.navigation.navigate("Setting_page");
-          }}
-        >
-          <Text style={style.text}>{lang ? "Resetuj" : "Скинути"}</Text>
-        </TouchableOpacity>
-      </Text>
+      <ScrollView style={style.ScrollView}>
+        <View style={{ width: "100%", alignItems: "center" }}>
+          <Text style={style.textInput2}>
+            {lang ? "Zakładka 1" : "Вкладка 1"}
+          </Text>
+          <TextInput
+            style={style.textInput}
+            value={link[0]}
+            editable={false}
+          ></TextInput>
+        </View>
+        {link.map((e, index) =>
+          index > 0 ? (
+            <View style={{ width: "100%", alignItems: "center" }}>
+              <Text style={style.textInput2}>
+                {lang ? "Zakładka " + (index + 1) : "Вкладка " + (index + 1)}
+              </Text>
+              <TextInput
+                style={style.textInput}
+                value={link[`${index}`]}
+                onChangeText={(text) => update(text, index)}
+              ></TextInput>
+            </View>
+          ) : (
+            <Text></Text>
+          )
+        )}
+      </ScrollView>
+      <View style={{ marginBottom: responsiveNumber(30) }}>
+        <Text style={{ marginTop: responsiveNumber(30) }}>
+          <TouchableOpacity
+            style={style.button}
+            onPress={() => {
+              storeData("linki", link);
+              props.navigation.navigate("Setting_page");
+            }}
+          >
+            <Text style={style.text}>{lang ? "Zapisz" : "Зберегти"}</Text>
+          </TouchableOpacity>
+        </Text>
+        <Text style={{ marginTop: responsiveNumber(30) }}>
+          <TouchableOpacity
+            style={style.button}
+            onPress={() => {
+              storeData("linki", [
+                "https://www.kalisz.pl/",
+                "https://www.google.pl/",
+                "https://www.google.pl/",
+                "https://www.google.pl/",
+              ]);
+              props.navigation.navigate("Setting_page");
+            }}
+          >
+            <Text style={style.text}>{lang ? "Resetuj" : "Скинути"}</Text>
+          </TouchableOpacity>
+        </Text>
+      </View>
     </SafeAreaView>
   );
 };
@@ -119,6 +134,10 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+  },
+  ScrollView: {
+    textAlign: "center",
+    width: "100%",
   },
   textInput: {
     backgroundColor: "#334",

@@ -290,6 +290,15 @@ const Web = () => {
     }
   };
 
+  const nowaKarta = (nowyLink) => {
+    let tab = linki;
+    tab.push("https://www.google.pl/");
+    setLinki(tab);
+    storeData("linki", tab);
+    setLink("https://www.google.pl/");
+    setIndex(tab.length - 1);
+  };
+
   const storeData = async (key, value) => {
     try {
       const jsonValue = JSON.stringify(value);
@@ -404,12 +413,12 @@ const Web = () => {
           <Text style={{ color: "#888" }}>{link}</Text>
         </View>
         <View style={styles.bar_top}>
-          <View
+          <ScrollView
             style={styles.ScrollView}
-            // horizontal={true}
-            // // pagingEnabled={true}
-            // showsHorizontalScrollIndicator={false}
-            // decelerationRate="fast"
+            horizontal={true}
+            // pagingEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            decelerationRate="fast"
           >
             {linki.map((e, index) => (
               <TouchableOpacity
@@ -466,7 +475,32 @@ const Web = () => {
                 </View>
               </TouchableOpacity>
             ))}
-          </View>
+            <TouchableOpacity
+              style={styles.bar_search}
+              onPress={() => {
+                nowaKarta();
+              }}
+            >
+              <View style={styles.bar_Icon}>
+                <Text
+                  style={{
+                    color: "#bbb",
+                    zIndex: 1000,
+                    fontSize: responsiveNumber(20),
+                    position: "absolute",
+
+                    marginLeft: responsiveNumber(20),
+                    marginRight: responsiveNumber(20),
+                    justifyContent: "center",
+                    textAlign: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  +
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </ScrollView>
         </View>
       </Animated.View>
     </View>
@@ -642,7 +676,9 @@ const styles = StyleSheet.create({
   },
   bar_search: {
     backgroundColor: "#151515",
-    flex: 1,
+    // flex: 1,
+    height: responsiveNumber(48),
+    marginLeft: responsiveNumber(0.3),
     justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
@@ -667,10 +703,12 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   ScrollView: {
-    flex: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
+    // flex: 5,
+    width: "100%",
+    // justifyContent: "center",
+    // alignItems: "center",
+    // textAlign: "center",
+    display: "flex",
     flexDirection: "row",
   },
   loading_tlo_container: {
