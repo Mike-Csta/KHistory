@@ -1,66 +1,91 @@
-import React, { useState, useEffect } from "react"
-import { View, Text, StyleSheet, Image, SafeAreaView, TextInput, Button, TouchableOpacity } from "react-native"
-import { responsiveNumber } from "react-native-responsive-number"
-import { responsiveLetterSpacing } from "react-native-responsive-number"
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from "react-native";
+import { responsiveNumber } from "react-native-responsive-number";
+import { responsiveLetterSpacing } from "react-native-responsive-number";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Link_edit = (props) => {
-  const [lang, setLang] = useState(true)
+  const [lang, setLang] = useState(true);
   const getLang = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("Lang")
-      setLang(jsonValue != null ? JSON.parse(jsonValue) : true)
+      const jsonValue = await AsyncStorage.getItem("Lang");
+      setLang(jsonValue != null ? JSON.parse(jsonValue) : true);
     } catch (e) {
       // error reading value
     }
-  }
+  };
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("linki")
-      setLink0(jsonValue != null ? JSON.parse(jsonValue)[0] : "")
-      setLink1(jsonValue != null ? JSON.parse(jsonValue)[1] : "")
-      setLink2(jsonValue != null ? JSON.parse(jsonValue)[2] : "")
-      setLink3(jsonValue != null ? JSON.parse(jsonValue)[3] : "")
+      const jsonValue = await AsyncStorage.getItem("linki");
+      setLink0(jsonValue != null ? JSON.parse(jsonValue)[0] : "");
+      setLink1(jsonValue != null ? JSON.parse(jsonValue)[1] : "");
+      setLink2(jsonValue != null ? JSON.parse(jsonValue)[2] : "");
+      setLink3(jsonValue != null ? JSON.parse(jsonValue)[3] : "");
     } catch (e) {
       // error reading value
     }
-  }
+  };
 
-  const [link0, setLink0] = useState("")
-  const [link1, setLink1] = useState("")
-  const [link2, setLink2] = useState("")
-  const [link3, setLink3] = useState("")
+  const [link0, setLink0] = useState("");
+  const [link1, setLink1] = useState("");
+  const [link2, setLink2] = useState("");
+  const [link3, setLink3] = useState("");
 
   useEffect(() => {
-    getLang()
-    getData()
-  }, [])
+    getLang();
+    getData();
+  }, []);
 
   const storeData = async (key, value) => {
     try {
-      const jsonValue = JSON.stringify(value)
-      await AsyncStorage.setItem(`${key}`, jsonValue)
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem(`${key}`, jsonValue);
     } catch (e) {
       // saving error
     }
-  }
+  };
   return (
     <SafeAreaView style={style.main}>
       <Text style={style.textInput2}>{lang ? "Zakładka 1" : "Вкладка 1"}</Text>
-      <TextInput style={style.textInput} value={link0}></TextInput>
+      <TextInput
+        style={style.textInput}
+        value={link0}
+        editable={false}
+      ></TextInput>
       <Text style={style.textInput2}>{lang ? "Zakładka 2" : "Вкладка 2"}</Text>
-      <TextInput style={style.textInput} value={link1} onChangeText={(text) => setLink1(text)}></TextInput>
+      <TextInput
+        style={style.textInput}
+        value={link1}
+        onChangeText={(text) => setLink1(text)}
+      ></TextInput>
       <Text style={style.textInput2}>{lang ? "Zakładka 3" : "Вкладка 3"}</Text>
-      <TextInput style={style.textInput} value={link2} onChangeText={(text) => setLink2(text)}></TextInput>
+      <TextInput
+        style={style.textInput}
+        value={link2}
+        onChangeText={(text) => setLink2(text)}
+      ></TextInput>
       <Text style={style.textInput2}>{lang ? "Zakładka 4" : "Вкладка 4"}</Text>
-      <TextInput style={style.textInput} value={link3} onChangeText={(text) => setLink3(text)}></TextInput>
+      <TextInput
+        style={style.textInput}
+        value={link3}
+        onChangeText={(text) => setLink3(text)}
+      ></TextInput>
       <Text style={{ marginTop: responsiveNumber(30) }}>
         <TouchableOpacity
           style={style.button}
           onPress={() => {
-            storeData("linki", [link0, link1, link2, link3])
-            props.navigation.navigate("Setting_page")
+            storeData("linki", [link0, link1, link2, link3]);
+            props.navigation.navigate("Setting_page");
           }}
         >
           <Text style={style.text}>{lang ? "Zapisz" : "Зберегти"}</Text>
@@ -70,16 +95,21 @@ const Link_edit = (props) => {
         <TouchableOpacity
           style={style.button}
           onPress={() => {
-            storeData("linki", ["https://www.kalisz.pl/", "https://www.google.pl/", "https://www.google.pl/", "https://www.google.pl/"])
-            props.navigation.navigate("Setting_page")
+            storeData("linki", [
+              "https://www.kalisz.pl/",
+              "https://www.google.pl/",
+              "https://www.google.pl/",
+              "https://www.google.pl/",
+            ]);
+            props.navigation.navigate("Setting_page");
           }}
         >
           <Text style={style.text}>{lang ? "Resetuj" : "Скинути"}</Text>
         </TouchableOpacity>
       </Text>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const style = StyleSheet.create({
   main: {
@@ -122,6 +152,6 @@ const style = StyleSheet.create({
     textAlign: "center",
   },
   text: { color: "#fff" },
-})
+});
 
-export default Link_edit
+export default Link_edit;
