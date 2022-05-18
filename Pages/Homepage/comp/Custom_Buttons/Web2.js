@@ -1,62 +1,48 @@
-import React, { useEffect, useState, useRef } from "react";
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import { getStatusBarHeight } from "react-native-status-bar-height";
-import icon from "../../../../src/news.png";
-import tlobus from "../../../../src/tlowiadom.png";
-import search from "../../../../src/search.png";
-import leftArrow from "../../../../src/left-arrow.png";
-import rightArrow from "../../../../src/right-arrow.png";
-import LinkPreview from "react-native-link-preview";
-import { WebView } from "react-native-webview";
-import {
-  responsiveNumber,
-  responsiveLetterSpacing,
-} from "react-native-responsive-number";
+import React, { useEffect, useState, useRef } from "react"
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize"
+import { getStatusBarHeight } from "react-native-status-bar-height"
+import icon from "../../../../src/news.png"
+import tlobus from "../../../../src/tlowiadom.png"
+import search from "../../../../src/search.png"
+import leftArrow from "../../../../src/left-arrow.png"
+import rightArrow from "../../../../src/right-arrow.png"
+import LinkPreview from "react-native-link-preview"
+import { WebView } from "react-native-webview"
+import { responsiveNumber, responsiveLetterSpacing } from "react-native-responsive-number"
 
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Animated,
-  Easing,
-  Dimensions,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, Text, StyleSheet, Image, Animated, Easing, Dimensions, TextInput, TouchableOpacity, ScrollView } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 // import { ScrollView } from "react-native-gesture-handler";
 const Web = () => {
-  const jsCode = ``;
+  const jsCode = ``
 
   //<loading
-  const wysuwanie = useRef(new Animated.Value(0)).current;
+  const wysuwanie = useRef(new Animated.Value(0)).current
   const fade = (value = 1) => {
     Animated.timing(wysuwanie, {
       toValue: value,
       duration: 2000,
       useNativeDriver: false,
-    }).start();
-  };
+    }).start()
+  }
 
-  const wysuwanie2 = useRef(new Animated.Value(0)).current;
+  const wysuwanie2 = useRef(new Animated.Value(0)).current
   const fade8 = (value = 1) => {
     Animated.timing(wysuwanie2, {
       toValue: value,
       duration: 70,
       useNativeDriver: false,
-    }).start();
-  };
+    }).start()
+  }
 
-  const indeks = useRef(new Animated.Value(-100)).current;
+  const indeks = useRef(new Animated.Value(-100)).current
   const fade7 = (value = 49) => {
     Animated.timing(indeks, {
       toValue: value,
       duration: 2,
       useNativeDriver: false,
-    }).start();
-  };
+    }).start()
+  }
   const contentStyle = function () {
     return {
       marginTop: getStatusBarHeight(),
@@ -69,8 +55,8 @@ const Web = () => {
       flexDirection: "column",
       opacity: wysuwanie,
       zIndex: indeks,
-    };
-  };
+    }
+  }
 
   const bar_container = function () {
     return {
@@ -84,42 +70,42 @@ const Web = () => {
       flexDirection: "column",
       opacity: wysuwanie2,
       zIndex: indeks,
-    };
-  };
+    }
+  }
   //>loading
 
   //<pojawianie logo
-  const pojawianie = useRef(new Animated.Value(100)).current;
+  const pojawianie = useRef(new Animated.Value(100)).current
   const fade2 = (value = 0) => {
     Animated.timing(pojawianie, {
       toValue: value,
       duration: 500,
       useNativeDriver: false,
-    }).start();
-  };
+    }).start()
+  }
   const fade5 = (value = -100) => {
     Animated.timing(pojawianie, {
       toValue: value,
       duration: 300,
       useNativeDriver: false,
-    }).start();
-  };
-  const opacity = useRef(new Animated.Value(0)).current;
+    }).start()
+  }
+  const opacity = useRef(new Animated.Value(0)).current
   const fade3 = (value = 0.7) => {
     Animated.timing(opacity, {
       toValue: value,
       duration: 800,
       useNativeDriver: false,
-    }).start();
-  };
+    }).start()
+  }
 
   const fade6 = (value = 0) => {
     Animated.timing(opacity, {
       toValue: value,
       duration: 200,
       useNativeDriver: false,
-    }).start();
-  };
+    }).start()
+  }
 
   const contentStyle2 = function () {
     return {
@@ -131,133 +117,108 @@ const Web = () => {
       height: "100%",
       opacity: opacity,
       marginTop: pojawianie,
-    };
-  };
+    }
+  }
 
   //>pojawianie logo
 
   //<background_Rotate
-  const rotate = new Animated.Value(0);
+  const rotate = new Animated.Value(0)
 
   Animated.timing(rotate, {
     toValue: 1,
     duration: 1000,
     Easing,
     useNativeDriver: false,
-  }).start();
+  }).start()
 
   const spin = rotate.interpolate({
     inputRange: [0, 1],
     outputRange: ["165deg", "240deg"],
-  });
+  })
 
-  const opacity2 = useRef(new Animated.Value(1)).current;
+  const opacity2 = useRef(new Animated.Value(1)).current
   const fade4 = (value = 0) => {
     Animated.timing(opacity2, {
       toValue: value,
       duration: 200,
       useNativeDriver: false,
-    }).start();
-  };
+    }).start()
+  }
 
   const contentStyle3 = function () {
     return {
       // rotation: rotate,
-      transform: [
-        { translateX: -1000 },
-        { translateY: -850 },
-        { scale: 0.7 },
-        { rotate: spin },
-      ],
+      transform: [{ translateX: -1000 }, { translateY: -850 }, { scale: 0.7 }, { rotate: spin }],
       opacity: opacity2,
       zIndex: 52,
-    };
-  };
+    }
+  }
   //>background_Rotate
 
   useEffect(() => {
     setTimeout(() => {
-      fade();
-    }, 1120);
+      fade()
+    }, 1120)
     setTimeout(() => {
-      fade3();
-    }, 200);
+      fade3()
+    }, 200)
     setTimeout(() => {
-      fade4();
-    }, 1100);
+      fade4()
+    }, 1100)
     setTimeout(() => {
-      fade5();
-    }, 1000);
+      fade5()
+    }, 1000)
     setTimeout(() => {
-      fade6();
-    }, 1000);
+      fade6()
+    }, 1000)
     setTimeout(() => {
-      fade7();
-    }, 1500);
+      fade7()
+    }, 1500)
     setTimeout(() => {
-      fade8();
-    }, 600);
-    fade2();
+      fade8()
+    }, 600)
+    fade2()
     // fade4();
-  }, []);
-  const webViewRef = useRef(null);
-  let godzina = new Date().getHours();
-  let minuta = new Date().getMinutes();
-  const [tajm, setTajm] = useState(
-    `${godzina}:${minuta < 10 ? "0" + minuta : minuta}`
-  );
+  }, [])
+  const webViewRef = useRef(null)
+  let godzina = new Date().getHours()
+  let minuta = new Date().getMinutes()
+  const [tajm, setTajm] = useState(`${godzina}:${minuta < 10 ? "0" + minuta : minuta}`)
 
   const goback = () => {
-    webViewRef.current.goBack();
-  };
+    webViewRef.current.goBack()
+  }
 
   const goforward = () => {
-    webViewRef.current.goForward();
-  };
+    webViewRef.current.goForward()
+  }
 
   setInterval(() => {
-    setTajm(`${godzina}:${minuta < 10 ? "0" + minuta : minuta}`);
-  }, 5000);
-  const [linkText, setLinkText] = useState("https://kalisz.naszemiasto.pl/");
-  const [changeText, onChangeText] = useState("https://kalisz.naszemiasto.pl/");
-  const [link, setLink] = useState("https://kalisz.naszemiasto.pl/");
-  const [linki, setLinki] = useState([
-    "https://kalisz.naszemiasto.pl/",
-    "https://www.faktykaliskie.info/",
-    "https://zyciekalisza.pl/wiadomosci",
-    "https://calisia.pl/",
-  ]);
+    setTajm(`${godzina}:${minuta < 10 ? "0" + minuta : minuta}`)
+  }, 5000)
+  const [linkText, setLinkText] = useState("https://www.kalisz.pl")
+  const [changeText, onChangeText] = useState("https://www.kalisz.pl")
+  const [link, setLink] = useState("https://www.kalisz.pl/")
+  const [linki, setLinki] = useState(["https://www.kalisz.pl/", "https://www.google.pl/", "https://www.google.pl/", "https://www.google.pl/"])
 
   const onSearch = () => {
-    setLink(changeText);
-  };
+    setLink(changeText)
+  }
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("linki");
-      setLinki(
-        jsonValue != null
-          ? JSON.parse(jsonValue)
-          : [
-              "https://kalisz.naszemiasto.pl/",
-              "https://www.faktykaliskie.info/",
-              "https://zyciekalisza.pl/wiadomosci",
-              "https://calisia.pl/",
-            ]
-      );
-      setLink(
-        jsonValue != null
-          ? JSON.parse(jsonValue)[0]
-          : "https://kalisz.naszemiasto.pl/"
-      );
+      const jsonValue = await AsyncStorage.getItem("linki")
+      setLinki(jsonValue != null ? JSON.parse(jsonValue) : ["https://www.kalisz.pl", "https://www.google.pl/", "https://www.google.pl/", "https://www.google.pl/"])
+      setLink(jsonValue != null ? JSON.parse(jsonValue)[0] : "https://www.kalisz.pl")
     } catch (e) {
       // error reading value
     }
-  };
+  }
 
   useEffect(() => {
-    getData();
-  }, []);
+    getData()
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -319,7 +280,7 @@ const Web = () => {
               <TouchableOpacity
                 style={styles.bar_search}
                 onPress={() => {
-                  setLink(e);
+                  setLink(e)
                 }}
               >
                 <View style={styles.bar_Icon}>
@@ -343,9 +304,7 @@ const Web = () => {
                         opacity: 0.5,
                       }}
                       source={{
-                        uri:
-                          "https://s2.googleusercontent.com/s2/favicons?domain_url=" +
-                          e,
+                        uri: "https://s2.googleusercontent.com/s2/favicons?domain_url=" + e,
                       }}
                     />
                   </View>
@@ -373,8 +332,8 @@ const Web = () => {
         </View>
       </Animated.View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   bar_back: {
@@ -491,7 +450,7 @@ const styles = StyleSheet.create({
     marginLeft: responsiveNumber(1.2),
     marginRight: responsiveNumber(1.2),
   },
-});
+})
 
 // if (windowHeight / windowWidth > 1.8) {
 //   styles = styles1;
@@ -499,4 +458,4 @@ const styles = StyleSheet.create({
 //   styles = styles1;
 // }
 
-export default Web;
+export default Web

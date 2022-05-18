@@ -1,90 +1,67 @@
-import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Button,
-  PixelRatio,
-  TextInput,
-} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-  responsiveNumber,
-  responsiveLetterSpacing,
-} from "react-native-responsive-number";
-import flagaPl from "./src/pl.png";
-import flagaUk from "./src/uk.png";
+import React, { useEffect, useState } from "react"
+import { View, Text, StyleSheet, Image, TouchableOpacity, Button, PixelRatio, TextInput } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { responsiveNumber, responsiveLetterSpacing } from "react-native-responsive-number"
+import flagaPl from "./src/pl.png"
+import flagaUk from "./src/uk.png"
 const App_Welcome = (props) => {
-  const [lock, setLock] = useState("false");
+  const [lock, setLock] = useState("false")
 
   const JsonDostep = async () => {
     let request = await fetch("http://khistory.pl/dostep.json", {
       cache: "no-store",
-    });
-    let json = await request.json();
+    })
+    let json = await request.json()
     // setLock(json.dostep.lock);
-  };
+  }
   const storeData = async (key, value) => {
     try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem(`${key}`, jsonValue);
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem(`${key}`, jsonValue)
     } catch (e) {
       // saving error
     }
-  };
+  }
   useEffect(() => {
-    storeData("Lang", true);
-    storeData("linki", [
-      "https://kalisz.naszemiasto.pl/",
-      "https://www.faktykaliskie.info/",
-      "https://zyciekalisza.pl/wiadomosci",
-      "https://calisia.pl/",
-    ]);
-  }, []);
-  const [lang, setLang] = useState(true);
+    storeData("Lang", true)
+    storeData("linki", ["https://www.kalisz.pl/", "https://www.google.pl/", "https://www.google.pl/", "https://www.google.pl/"])
+  }, [])
+  const [lang, setLang] = useState(true)
 
   //lock
 
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
-  const [zleHaslo, setZleHaslo] = useState("");
-  const [data, setData] = useState(["falalala", "falalala"]);
+  const [login, setLogin] = useState("")
+  const [password, setPassword] = useState("")
+  const [zleHaslo, setZleHaslo] = useState("")
+  const [data, setData] = useState(["falalala", "falalala"])
 
   const Json = async () => {
     let request = await fetch("http://khistory.pl/login.json", {
       cache: "no-store",
-    });
-    let json = await request.json();
-    setData([json.login.login, json.login.haslo]);
-  };
+    })
+    let json = await request.json()
+    setData([json.login.login, json.login.haslo])
+  }
 
   useEffect(() => {
-    JsonDostep();
-    Json();
-  }, []);
+    JsonDostep()
+    Json()
+  }, [])
 
   const Autch = () => {
     if (login == data[0] && password == data[1]) {
-      return props.navigation.navigate("Lock");
+      return props.navigation.navigate("Lock")
     } else {
-      setZleHaslo("ZŁY LOGIN LUB HASLO");
+      setZleHaslo("ZŁY LOGIN LUB HASLO")
     }
-  };
+  }
 
   //lock end
   if (lock == "false") {
     return (
       <View style={style.container}>
-        <Text style={style.text}>
-          {lang ? "WITAJ W KHISTORY, WYBIERZ JĘZYK:" : "Привіт, виберіть мову:"}
-        </Text>
-        <Text style={{ color: "#aaa", fontSize: 10, marginBottom: 20 }}>
-          {!lang
-            ? "WITAJ W KHISTORY, WYBIERZ JĘZYK:"
-            : "Привіт, виберіть мову:"}
-        </Text>
+        <Text style={style.text}>{lang ? "WITAJ W KHISTORY, WYBIERZ JĘZYK:" : "Привіт, виберіть мову:"}</Text>
+        <Text style={{ color: "#aaa", fontSize: 10, marginBottom: 20 }}>{!lang ? "WITAJ W KHISTORY, WYBIERZ JĘZYK:" : "Привіт, виберіть мову:"}</Text>
         <View style={style.flagi}>
           <TouchableOpacity
             style={{
@@ -114,38 +91,24 @@ const App_Welcome = (props) => {
           </TouchableOpacity>
         </View>
         <Text style={style.text}></Text>
-        <TouchableOpacity
-          onPress={() =>
-            storeData("Welcome", true) && props.navigation.navigate("Home")
-          }
-          style={style.button}
-        >
+        <TouchableOpacity onPress={() => storeData("Welcome", true) && props.navigation.navigate("Home")} style={style.button}>
           <Text style={style.text5}>{lang ? "zapisz" : "зберегти"}</Text>
         </TouchableOpacity>
       </View>
-    );
+    )
   } else {
     return (
       <View style={loginStyle.container}>
         <Text style={loginStyle.text}>Zablokowano zdalnie</Text>
         <Text style={loginStyle.text2}>Poproś admina o dostęp</Text>
         <Text style={loginStyle.text}>LOGIN</Text>
-        <TextInput
-          style={loginStyle.textInput}
-          value={login}
-          onChangeText={(e) => setLogin(e)}
-        />
+        <TextInput style={loginStyle.textInput} value={login} onChangeText={(e) => setLogin(e)} />
         <Text style={loginStyle.text}>HASŁO</Text>
-        <TextInput
-          style={loginStyle.textInput}
-          value={password}
-          secureTextEntry={true}
-          onChangeText={(e) => setPassword(e)}
-        />
+        <TextInput style={loginStyle.textInput} value={password} secureTextEntry={true} onChangeText={(e) => setPassword(e)} />
         <TouchableOpacity
           style={loginStyle.button}
           onPress={() => {
-            Autch();
+            Autch()
           }}
         >
           <Text
@@ -165,9 +128,9 @@ const App_Welcome = (props) => {
         </TouchableOpacity>
         <Text style={loginStyle.error}>{zleHaslo}</Text>
       </View>
-    );
+    )
   }
-};
+}
 
 const style = StyleSheet.create({
   container: {
@@ -206,7 +169,7 @@ const style = StyleSheet.create({
     letterSpacing: responsiveLetterSpacing(300, 4.3),
     marginBottom: responsiveNumber(3),
   },
-});
+})
 
 const loginStyle = StyleSheet.create({
   container: {
@@ -263,6 +226,6 @@ const loginStyle = StyleSheet.create({
     fontWeight: "bold",
     fontSize: responsiveNumber(20),
   },
-});
+})
 
-export default App_Welcome;
+export default App_Welcome
