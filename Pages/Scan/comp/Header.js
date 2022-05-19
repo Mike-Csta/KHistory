@@ -22,7 +22,7 @@ const Header = (props) => {
           <View style={styles.header_right_wrap}>
             <Text style={styles.header_text}>
               {props.Lang
-                ? "POZNAJ HISTORIE KALISZA"
+                ? "POZNAJ HISTORIĘ KALISZA"
                 : "Дізнайтеся історії Каліша"}
             </Text>
           </View>

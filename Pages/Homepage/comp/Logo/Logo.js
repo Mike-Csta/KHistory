@@ -20,7 +20,7 @@ const Logo = (props) => {
 
       <View style={style.text_container}>
         <Text style={style.text}>
-          {props.Lang ? "POZNAJ HISTORIE KALISZA" : "Дізнайтеся історії Каліша"}
+          {props.Lang ? "POZNAJ HISTORIĘ KALISZA" : "Дізнайтеся історії Каліша"}
         </Text>
       </View>
     </View>
