@@ -9,7 +9,7 @@ const Footer = (props) => {
   return (
     <View style={style.container}>
       <Text style={style.text}>
-        {props.Lang ? "POZNAJ HISTORIE KALISZA" : "Дізнайтеся історії Каліша"}
+        {props.Lang ? "POZNAJ HISTORIĘ KALISZA" : "Дізнайтеся історії Каліша"}
       </Text>
     </View>
   );
