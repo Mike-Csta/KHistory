@@ -3,8 +3,8 @@
 
 https://play.google.com/store/apps/details?id=apka.apk
 
-
-https://play-lh.googleusercontent.com/0jmF8ZpIAh3178Y6gLwr41vPYKqXwpJ5R1GV1HTg61_VAwLoCBZFSsBPpETDGfIuu_Q=w2560-h1440-rw
+![unnamed (2)](https://github.com/Mike-Csta/KHistory/assets/92047998/7c51e18d-7493-49fa-bcdf-33887f3e3baf)
+![unnamed (1)](https://github.com/Mike-Csta/KHistory/assets/92047998/c71e5c09-805b-49ef-888d-cab1878666d3)
 
 Napisana w technologii React Native przy okazji nauki.
 
