@@ -4,6 +4,8 @@
 https://play.google.com/store/apps/details?id=apka.apk
 
 
+https://play-lh.googleusercontent.com/0jmF8ZpIAh3178Y6gLwr41vPYKqXwpJ5R1GV1HTg61_VAwLoCBZFSsBPpETDGfIuu_Q=w2560-h1440-rw
+
 Napisana w technologii React Native przy okazji nauki.
 
 jeśli szukasz kodu to Całość zawarta w "master2", nie pytaj czemu...
