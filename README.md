@@ -34,4 +34,4 @@ Więcej informacji o rozstrzygnięciu konkursu można znaleźć [tutaj](https://
 |---|---|
 
 
-> a tak po ludzku to sprawdzisz tu pogode, stan powietrza, wiadomości a także rozkład autobusów wraz ze śledzeniem ich na żywo, poznasz cytaty okolicznych poetów, zobazczysz ludzi, którzy coś osiągnęli, przyczynili się dla miasta. Dowiesz się jakie miejsca, zabytki  możesz zwiedzić, możesz skanować kody QR znajdujące się np na przystankach aby poznać historię okolicy oraz zobaczyć jak wyglądała kiedyś, dostępne języki Polski i Ukraiński. Aplikacja Khistory dostępna jest na Sklep Play 
+> Po za samą aplikacją napisaliśmy cały panel zarządzania nią, możliwość dodawanai edycji oraz usuwania Osób w zakładce "Historia kalisza", tak samo miejsc w kaliszu oraz cytatów, panel jest dostępny dla administratora zarządzającego aplikacją 
