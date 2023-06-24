@@ -2,8 +2,9 @@
 
 **KHistory** to zwycięska aplikacja mobilna stworzona na konkurs dla miasta Kalisz. 
 
-![Obraz 1](https://github.com/Mike-Csta/KHistory/assets/92047998/7c51e18d-7493-49fa-bcdf-33887f3e3baf)
-![Obraz 2](https://github.com/Mike-Csta/KHistory/assets/92047998/c71e5c09-805b-49ef-888d-cab1878666d3)
+| ![Obraz 1](https://github.com/Mike-Csta/KHistory/assets/92047998/7c51e18d-7493-49fa-bcdf-33887f3e3baf) | ![Obraz 2](https://github.com/Mike-Csta/KHistory/assets/92047998/c71e5c09-805b-49ef-888d-cab1878666d3) |
+|---|---|
+
 
 ## Funkcjonalności
 
