@@ -34,4 +34,4 @@ Więcej informacji o rozstrzygnięciu konkursu można znaleźć [tutaj](https://
 |---|---|
 
 
-> Po za samą aplikacją napisaliśmy cały panel zarządzania nią, możliwość dodawanai edycji oraz usuwania Osób w zakładce "Historia kalisza", tak samo miejsc w kaliszu oraz cytatów, panel jest dostępny dla administratora zarządzającego aplikacją 
+> Po za samą aplikacją napisaliśmy cały panel zarządzania nią, możliwość dodawanai edycji oraz usuwania Osób w zakładce "Ludzie i Historia", tak samo miejsc w kaliszu oraz cytatów, panel jest dostępny dla administratora zarządzającego aplikacją 
