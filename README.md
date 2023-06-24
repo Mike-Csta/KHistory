@@ -13,7 +13,7 @@
 5. Codzienne cytaty okolicznych poetów
 6. Informacje o znanych osobach związanych z miastem
 7. Informacje o miejscach i zabytkach do zwiedzenia
-8. Możliwość skanowania kodów QR na przystankach, aby poznać historię okolicy i zobaczyć, jak wyglądała kiedyś
+8. Możliwość skanowania kodów QR w mieście, aby poznać historię okolicy i zobaczyć, jak wyglądała kiedyś
 
 Aplikacja dostępna jest w języku polskim i ukraińskim. Można ją pobrać z [Google Play](https://play.google.com/store/apps/details?id=apka.apk).
 
@@ -34,4 +34,4 @@ Więcej informacji o rozstrzygnięciu konkursu można znaleźć [tutaj](https://
 |---|---|
 
 
-> a tak po ludzku to sprawdzisz tu pogode, stan powietrza, wiadomości a także rozkład autobusów wraz ze śledzeniem ich na żywo, poznasz cytaty okolicznych poetów, zobazczysz ludzi, którzy coś osiągnęli, przyczynili się dla miasta. Dowiesz się jakie miejsca, zabytki  możesz zwiedzić, możesz skanować kody QR znajdujące się na przystankach aby poznać historię okolicy oraz zobaczyć jak wyglądała kiedyś, dostępne języki Polski i Ukraiński. Aplikacja Khistory dostępna jest na Sklep Play 
+> a tak po ludzku to sprawdzisz tu pogode, stan powietrza, wiadomości a także rozkład autobusów wraz ze śledzeniem ich na żywo, poznasz cytaty okolicznych poetów, zobazczysz ludzi, którzy coś osiągnęli, przyczynili się dla miasta. Dowiesz się jakie miejsca, zabytki  możesz zwiedzić, możesz skanować kody QR znajdujące się np na przystankach aby poznać historię okolicy oraz zobaczyć jak wyglądała kiedyś, dostępne języki Polski i Ukraiński. Aplikacja Khistory dostępna jest na Sklep Play 
