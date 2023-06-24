@@ -10,7 +10,7 @@
 2. Stan powietrza
 3. Wiadomości
 4. Rozkład autobusów wraz ze śledzeniem na żywo
-5. Cytaty okolicznych poetów
+5. Codzienne cytaty okolicznych poetów
 6. Informacje o znanych osobach związanych z miastem
 7. Informacje o miejscach i zabytkach do zwiedzenia
 8. Możliwość skanowania kodów QR na przystankach, aby poznać historię okolicy i zobaczyć, jak wyglądała kiedyś
