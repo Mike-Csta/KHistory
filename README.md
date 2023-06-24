@@ -2,8 +2,6 @@
 
 **KHistory** to zwycięska aplikacja mobilna stworzona na konkurs dla miasta Kalisz. 
 
-| ![Obraz 1](https://github.com/Mike-Csta/KHistory/assets/92047998/7c51e18d-7493-49fa-bcdf-33887f3e3baf) | ![Obraz 2](https://github.com/Mike-Csta/KHistory/assets/92047998/c71e5c09-805b-49ef-888d-cab1878666d3) |
-|---|---|
 
 
 ## Funkcjonalności
@@ -33,3 +31,6 @@ Więcej informacji o rozstrzygnięciu konkursu można znaleźć [tutaj](https://
 > a tak po ludzku to sprawdzisz tu pogode, stan powietrza, wiadomości a także rozkład autobusów wraz ze śledzeniem ich na żywo, poznasz cytaty okolicznych poetów, zobazczysz ludzi, którzy coś osiągnęli, przyczynili się dla miasta. Dowiesz się jakie miejsca, zabytki  możesz zwiedzić, możesz skanować kody QR znajdujące się na przystankach aby poznać historię okolicy oraz zobaczyć jak wyglądała kiedyś, dostępne języki Polski i Ukraiński. Aplikacja Khistory dostępna jest na Sklep Play 
 
 > Jeśli szukasz kodu, całość zawarta jest w gałęzi "master2". Nie pytaj czemu...
+
+| ![Obraz 1](https://github.com/Mike-Csta/KHistory/assets/92047998/7c51e18d-7493-49fa-bcdf-33887f3e3baf) | ![Obraz 2](https://github.com/Mike-Csta/KHistory/assets/92047998/c71e5c09-805b-49ef-888d-cab1878666d3) |
+|---|---|
