@@ -30,8 +30,10 @@ Więcej informacji o rozstrzygnięciu konkursu można znaleźć [tutaj](https://
 
 > Jeśli szukasz kodu, całość zawarta jest w gałęzi "master2". Nie pytaj czemu...
 
-| ![Obraz 1](https://github.com/Mike-Csta/KHistory/assets/92047998/7c51e18d-7493-49fa-bcdf-33887f3e3baf) | ![Obraz 2](https://github.com/Mike-Csta/KHistory/assets/92047998/c71e5c09-805b-49ef-888d-cab1878666d3) |
-|---|---|
+| Obraz 1                                                                               | Obraz 2                                                                               |
+|---------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| ![Opis obrazu 1](https://github.com/Mike-Csta/KHistory/raw/master/assets/92047998/7c51e18d-7493-49fa-bcdf-33887f3e3baf.jpg) | ![Opis obrazu 2](https://github.com/Mike-Csta/KHistory/raw/master/assets/92047998/c71e5c09-805b-49ef-888d-cab1878666d3.jpg) |
+
 
 
 > Po za samą aplikacją napisaliśmy cały panel zarządzania nią, możliwość dodawanai edycji oraz usuwania Osób w zakładce "Ludzie i Historia", tak samo miejsc w kaliszu oraz cytatów, panel jest dostępny dla administratora zarządzającego aplikacją 
